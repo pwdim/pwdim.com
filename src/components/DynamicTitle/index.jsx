@@ -12,7 +12,7 @@ const DynamicTitle = () => {
       case '/':
         newTitle = 'pwdim.com - Início';
         break;
-      case '/:profileRoutePrefix/:nickname':
+      case '/perfil/*':
         newTitle = 'pwdim.com - Perfil'; // Ou personalize com o nickname se necessário
         break;
       case '/legal/terms':

@@ -72,7 +72,7 @@ const NavigationBar = () => {
               </Link>
             </NavItem>
             <NavItem>
-              <Link to="/contato" onClick={() => setIsMobileMenuOpen(false)} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link to="/links" onClick={() => setIsMobileMenuOpen(false)} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <StyledNavLink>
                   <FontAwesomeIcon icon={faEnvelope} /> Contato
                 </StyledNavLink>

@@ -1,38 +1,53 @@
-// src/containers/Home/index.jsx
-import React from 'react';
-import * as S from './styles';
+import React, { useState } from 'react';
+import * as S from '../../styles/globalStyles';
 import SmokeBackground from '/src/components/SmokeBackground';
+import { FaGithub } from 'react-icons/fa'; // Ícone do Github
+import { FiLink } from 'react-icons/fi';   // Ícone de Link (para Website)
+import { MdEmail } from 'react-icons/md';  // Ícone de Email
 // Remova esta linha: import NavigationBar from '../../components/nav';
 
 const HomePage = () => {
   const linksData = [
-    { name: 'Github', url: 'https://github.com/pwdim' },
-    { name: 'Website', url: 'https://www.pwdim.com' },
-    { name: 'Email', url: '#copy-email' },
-    { name: 'Twitter', url: 'https://twitter.com/pwdim' },
+    { name: 'Github', url: 'https://github.com/pwdim', icon: FaGithub },
+    { name: 'Website', url: 'https://www.pwdim.com', icon: FiLink },
+    { name: 'Email', url: '#copy-email', icon: MdEmail },
     // Adicione mais links conforme necessário
   ];
+
+  const [copyMessage, setCopyMessage] = useState('');
+  const [isCopyMessageVisible, setIsCopyMessageVisible] = useState(false);
 
   const handleEmailClick = (event) => {
     event.preventDefault();
     const email = 'contato@pwdim.com';
     navigator.clipboard.writeText(email)
       .then(() => {
-        alert(`Email copiado para a área de transferência: ${email}`);
+        setCopyMessage('Email copiado para a área de transferência!');
+        setIsCopyMessageVisible(true);
+        setTimeout(() => {
+          setIsCopyMessageVisible(false);
+          setCopyMessage('');
+        }, 10000); // 10000 milliseconds = 10 seconds
       })
       .catch(err => {
         console.error('Falha ao copiar o email: ', err);
-        alert('Não foi possível copiar o email.');
+        setCopyMessage('Não foi possível copiar o email.');
+        setIsCopyMessageVisible(true);
+        setTimeout(() => {
+          setIsCopyMessageVisible(false);
+          setCopyMessage('');
+        }, 10000);
       });
   };
 
   return (
-    
-    
+
+
     <S.Container>
       {/* Remova esta linha: <NavigationBar /> */}
       <SmokeBackground />
-      <S.ProfileImage src='src/assets/logos/logobackground.png'/>
+      {isCopyMessageVisible && <S.CopyMessageTop>{copyMessage}</S.CopyMessageTop>}
+      <S.ProfileImage src='src/assets/logos/logobackground.png' />
       <S.Username>@pwdim</S.Username>
       <S.LinksWrapper>
         {linksData.map((link, index) => (
@@ -45,14 +60,11 @@ const HomePage = () => {
               style={{ '--r': (index - Math.floor(linksData.length / 2)) * 15 + 'deg' }}
               onClick={link.name === 'Email' ? handleEmailClick : undefined}
             >
-              {/* ... seu conteúdo do link aqui */}
+              <link.icon /> {/* Renderiza o ícone aqui */}
             </S.Glass>
           </S.GlassContainer>
         ))}
       </S.LinksWrapper>
-      <S.Footer>
-        Feito com ✨ por Você
-      </S.Footer>
     </S.Container>
   );
 };

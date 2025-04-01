@@ -1,29 +1,29 @@
 // src/containers/Home/styles.js
 import styled, { keyframes } from 'styled-components';
 
-const gradientAnimation = keyframes`
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-`;
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 40px;
-  background: linear-gradient(45deg, #121314, #181a1b, #121314);
-  background-size: 200% 200%;
-  animation: ${gradientAnimation} 10s ease infinite;
-  position: relative;
-`;
+// const gradientAnimation = keyframes`
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   50% {
+//     background-position: 100% 50%;
+//   }
+//   100% {
+//     background-position: 0% 50%;
+//   }
+// `;
+// export const Container = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: flex-start;
+//   min-height: 100vh;
+//   padding: 40px;
+//   background: linear-gradient(45deg, #121314, #181a1b, #121314);
+//   background-size: 200% 200%;
+//   animation: ${gradientAnimation} 10s ease infinite;
+//   position: relative;
+// `;
 export const Navigation = styled.nav`
   display: flex;
   gap: 20px;
@@ -162,7 +162,7 @@ export const SearchContainerHome = styled.div`
     padding: 8px 12px;
     border: none;
     border-radius: 0 4px 4px 0;
-    background-color: #00FFFF;
+    background-color: rgb(0, 26, 54);
     color: #121314;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -171,4 +171,11 @@ export const SearchContainerHome = styled.div`
       background-color: rgba(0, 255, 255, 0.8);
     }
   }
+`;
+
+export const WelcomeMessage = styled.p`
+  font-size: 1.8em; /* Ajuste o tamanho conforme necessário */
+  color: #fff; /* Cor do texto, ajuste conforme necessário */
+  text-align: center; /* Centraliza o texto */
+  /* Adicione outros estilos conforme necessário, como margem, padding, etc. */
 `;

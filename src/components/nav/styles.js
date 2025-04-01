@@ -88,7 +88,7 @@ export const NavItem = styled.li`
   }
 `;
 
-export const NavLink = styled.a`
+export const NavLink = styled.div`
   color: #a0a0a0;
   text-decoration: none;
   font-size: 1.2rem;
@@ -145,7 +145,7 @@ export const SearchContainerNav = styled.form`
   }
 
   button {
-    padding: 8px 12px;
+    padding: 10px 10px;
     border: none;
     border-radius: 30px;
     background-color: #00FFFF;
@@ -153,6 +153,7 @@ export const SearchContainerNav = styled.form`
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 0.9rem;
+    margin-right: 1%;
 
     &:hover {
       background-color: rgba(0, 255, 255, 0.8);
