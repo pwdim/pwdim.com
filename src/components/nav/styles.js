@@ -1,4 +1,3 @@
-// styles.js
 import styled, { keyframes } from 'styled-components';
 
 const gradientAnimation = keyframes`
@@ -15,17 +14,17 @@ const gradientAnimation = keyframes`
 
 export const Navbar = styled.nav`
   color: #a0a0a0;
-  width: 100%; /* Ocupa toda a largura horizontal */
+  width: 100%; 
   background: #121314; 
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Adiciona uma sombra ciano */
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); 
   position: relative;
 `;
 
 export const NavContent = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribui os itens em três blocos */
-  padding: 10px 20px; /* Adicionei padding ao NavContent */
+  justify-content: space-between; 
+  padding: 10px 20px; 
 `;
 
 export const LogoContainer = styled.div`
@@ -34,12 +33,12 @@ export const LogoContainer = styled.div`
 `;
 
 export const Logo = styled.img`
-  height: 80px; /* Aumentei a altura da logo */
+  height: 80px; 
   width: auto;
   animation: breathe 3s ease-in-out infinite;
 
   @media (max-width: 768px) {
-    height: 60px; /* Ajustei também para mobile */
+    height: 60px; 
   }
 
   @keyframes breathe {
@@ -57,13 +56,13 @@ export const Logo = styled.img`
 
 export const CenterNavLinks = styled.div`
   display: flex;
-  justify-content: center; /* Centraliza o conteúdo dentro desta div */
+  justify-content: center; 
   align-items: center;
-  width: 30%; /* Ajuste a largura conforme necessário */
+  width: 30%; 
 
   @media (max-width: 768px) {
     width: 100%;
-    justify-content: center; /* Centraliza também em mobile */
+    justify-content: center; 
   }
 `;
 
@@ -73,13 +72,13 @@ export const NavLinks = styled.ul`
   margin: 0;
   padding: 0;
   align-items: center;
-  /* width: auto; Removido, a largura será controlada pelo CenterNavLinks */
-  justify-content: space-around; /* Distribui o espaço entre Sobre e Contato */
-  width: 60%; /* Reduzi a largura para diminuir o espaço entre os links */
+  
+  justify-content: space-around; 
+  width: 100%; 
 `;
 
 export const NavItem = styled.li`
-  /* margin: 0 15px; Removido, o espaço será controlado pelo justify-content do NavLinks */
+  
 
   @media (max-width: 768px) {
     margin: 10px 0;
@@ -133,7 +132,7 @@ export const HamburgerButton = styled.button`
 export const SearchContainerNav = styled.form`
   display: flex;
   align-items: center;
-  /* margin-left: auto; Removido, o space-between do NavContent cuidará disso */
+  
 
   input[type="text"] {
     padding: 8px;

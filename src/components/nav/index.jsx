@@ -1,11 +1,10 @@
-// components/nav/index.jsx
 import React, { useState, useContext } from 'react';
 import {
   Navbar,
   Logo,
   LogoContainer,
-  CenterNavLinks, // Novo container para os links centrais
-  NavLinks, // Mantemos para estilizar os links individualmente
+  CenterNavLinks, 
+  NavLinks, 
   NavItem,
   NavLink as StyledNavLink,
   HamburgerButton,
@@ -13,24 +12,24 @@ import {
   SearchContainerNav,
   EmptySearchMessage,
 } from './styles';
-import logo from "/src/assets/logos/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faInfoCircle,
   faEnvelope,
   faBars,
   faSearch,
+  faList,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { RoutePrefixContext } from '../../contexts/RoutePrefixContext'; // Importe o Context
-import ThemeToggle from '../ThemeToggle'; // Importe o ThemeToggle
+import { RoutePrefixContext } from '../../contexts/RoutePrefixContext'; 
+import ThemeToggle from '../ThemeToggle'; 
 
 const NavigationBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchNickNav, setSearchNickNav] = useState('');
   const [emptySearchMessageVisible, setEmptySearchMessageVisible] = useState(false);
   const navigate = useNavigate();
-  const { profileRoutePrefix } = useContext(RoutePrefixContext); // Acesse o valor do prefixo
+  const { profileRoutePrefix } = useContext(RoutePrefixContext); 
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -43,7 +42,7 @@ const NavigationBar = () => {
   const handleSearchSubmitNav = (event) => {
     event.preventDefault();
     if (searchNickNav.trim()) {
-      navigate(`/${profileRoutePrefix}/${searchNickNav}`); // Use a variável na navegação
+      navigate(`/${profileRoutePrefix}/${searchNickNav}`); 
       setEmptySearchMessageVisible(false);
     } else {
       setEmptySearchMessageVisible(true);
@@ -58,7 +57,7 @@ const NavigationBar = () => {
       <NavContent>
         <LogoContainer>
           <Link to="/" style={{ textDecoration: 'none' }}>
-            <Logo src={logo}></Logo>
+            <Logo src="https://imgur.com/PweVudw.png"></Logo>
           </Link>
         </LogoContainer>
 
@@ -78,8 +77,15 @@ const NavigationBar = () => {
                 </StyledNavLink>
               </Link>
             </NavItem>
+              <NavItem>
+                <Link to="/leaderboard/hg" onClick={() => setIsMobileMenuOpen(false)} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <StyledNavLink>
+                    <FontAwesomeIcon icon={faList} /> Leaderboard
+                  </StyledNavLink>
+                </Link>
+              </NavItem>
             <NavItem>
-            <ThemeToggle />
+              <ThemeToggle />
             </NavItem>
           </NavLinks>
         </CenterNavLinks>

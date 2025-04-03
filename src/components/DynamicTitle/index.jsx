@@ -5,26 +5,31 @@ const DynamicTitle = () => {
   const location = useLocation();
 
   useEffect(() => {
-    let newTitle = 'pwdim.com'; // Título padrão
+    let newTitle = 'pwdim.com';
 
-    // Defina os títulos com base no caminho da rota
-    switch (location.pathname) {
-      case '/':
+    switch (true) {
+      case location.pathname === '/':
         newTitle = 'pwdim.com - Início';
         break;
-      case '/perfil/*':
-        newTitle = 'pwdim.com - Perfil'; // Ou personalize com o nickname se necessário
+      case location.pathname.startsWith('/perfil/'):
+        newTitle = 'pwdim.com - Perfil';
         break;
-      case '/legal/terms':
+      case location.pathname === '/legal/terms':
         newTitle = 'pwdim.com - Termos de Serviço';
         break;
-      case '/legal/privacy':
+      case location.pathname === '/legal/privacy':
         newTitle = 'pwdim.com - Política de Privacidade';
         break;
-      case '/links':
+      case location.pathname === '/links':
         newTitle = 'pwdim.com - Links';
         break;
-      default: // Para qualquer outra rota que não corresponda (incluindo a NotFoundPage)
+      case location.pathname.startsWith('/leaderboard/'):
+        newTitle = 'pwdim.com - Leaderboard';
+        break;
+      case location.pathname.startsWith('/contact'):
+        newTitle = 'pwdim.com - Contato';
+        break;
+      default:
         newTitle = 'Página não encontrada';
         break;
     }
@@ -32,7 +37,7 @@ const DynamicTitle = () => {
     document.title = newTitle;
   }, [location]);
 
-  // Este componente não renderiza nada visualmente
+
   return null;
 };
 

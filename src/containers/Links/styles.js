@@ -1,4 +1,3 @@
-// src/containers/Home/styles.js
 import styled, { keyframes } from 'styled-components';
 
 const gradientAnimation = keyframes`
@@ -69,7 +68,7 @@ export const LinksWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Permite que os "vidros" quebrem para a próxima linha em telas menores */
+  flex-wrap: wrap; 
   margin-top: 20px;
 `;
 export const GlassContainer = styled.div`
@@ -77,7 +76,7 @@ export const GlassContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px; /* Adiciona um pouco de margem entre os containers */
+  margin: 20px; 
 
   &:hover > a {
     transform: rotate(0deg);
@@ -99,7 +98,7 @@ export const Glass = styled.a`
   margin: 0 -45px;
   backdrop-filter: blur(10px);
   transform: rotate(calc(var(--r) * 1deg));
-  text-decoration: none; /* Remove o sublinhado padrão de links */
+  text-decoration: none; 
 
   &::before {
     content: attr(data-text);
@@ -111,14 +110,14 @@ export const Glass = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #00FFFF; /* Texto ciano neon */
+    color: #00FFFF; 
     font-weight: bold;
     border-radius: 0 0 10px 10px;
   }
 
   svg {
     font-size: 2.5em;
-    fill: #00FFFF; /* Ícones ciano neon */
+    fill: #00FFFF; 
   }
 `;
 export const Footer = styled.footer`

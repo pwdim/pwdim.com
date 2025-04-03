@@ -4,13 +4,13 @@ import { Container, Title, SectionTitle, Paragraph, Section } from '../../../sty
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/logos/logo.png';
 import Footer from '../../../components/Footer';
-import NavigationBar from '../../../components/nav'; // Importe o NavigationBar
+import NavigationBar from '../../../components/nav'; 
 
 const DiscordButton = styled.a`
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #7289da; /* Cor padrão do Discord */
+  background-color: #7289da; 
   color: #fff;
   padding: 10px 15px;
   border-radius: 8px;
@@ -122,7 +122,7 @@ function TermsOfServicePage() {
         </Paragraph>
       </Section>
 
-      {/* Removi o botão do Discord, você pode adicionar novamente se precisar */}
+      
     </Container>
   );
 }

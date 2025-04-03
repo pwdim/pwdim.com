@@ -12,16 +12,17 @@ import PrivacyPolicyPage from './containers/Legal/Privacy';
 import NotFoundPage from './containers/NotFoundPage/index.jsx';
 import { ThemeProvider } from './contexts/ThemeContext.jsx';
 import LinksPage from './containers/Links/index.jsx';
-import DynamicTitle from './components/DynamicTitle'; // Importe o DynamicTitle
+import DynamicTitle from './components/DynamicTitle'; 
 import AboutPage from './containers/Sobre/index.jsx';
 import HomePage from './containers/Home/index.jsx';
+import Leaderboard from './containers/Leaderboard/index.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <DynamicTitle /> {/* Renderize o DynamicTitle aqui */}
+      <DynamicTitle /> 
       <RoutePrefixProvider>
-        <ThemeProvider> {/* Envolva com o ThemeProvider */}
+        <ThemeProvider> 
           <GlobalStyle />
           <NavigationBar />
           <Routes>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="/legal/terms" element={<TermsOfServicePage />} />
             <Route path="/legal/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/sobre" element={<AboutPage />} />
+            <Route path="/leaderboard/:modo" element={<Leaderboard />} />
             <Route path="/links" element={<LinksPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

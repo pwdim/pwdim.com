@@ -3,7 +3,7 @@ import * as S from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTwitter,
-  faGithub, // Importe o ícone do GitHub
+  faGithub, 
   faDiscord,
   faTiktok,
 } from '@fortawesome/free-brands-svg-icons';
@@ -19,36 +19,36 @@ const Footer = () => {
           <S.Title>ENTRE EM CONTATO:</S.Title>
           <S.SocialIcons>
             <a href="https://github.com/pwdim" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faGithub} /> {/* Troquei pelo GitHub */}
+              <FontAwesomeIcon icon={faGithub} /> 
             </a>
-            <a href="https://discord.gg/SEUS_LINK_DO_DISCORD" target="_blank" rel="noopener noreferrer">
+            <a href="https://dc.pwdim.com/" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faDiscord} />
             </a>
             <a href="mailto:contato@pwdim.com" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faEnvelope} />
             </a>
-            {/* Removi o ícone do TikTok, adicione se precisar */}
+            
           </S.SocialIcons>
           <S.LanguageSelector>
           </S.LanguageSelector>
         </S.ContactInfo>
 
-        <S.LegalSection> {/* LEGAL agora vem antes */}
+        <S.LegalSection> 
           <S.Title>LEGAL</S.Title>
           <S.Copyright>
             © {currentYear} Copyright pwdim.com<br />
             Todos os direitos reservados.
           </S.Copyright>
           <S.LegalLinks>
-            <a href="/legal/terms">Termos de Serviço</a> {/* Adicione o link correto */}
-            <a href="/legal/privacy">Políticas de Privacidade</a> {/* Adicione o link correto */}
+            <a href="/legal/terms">Termos de Serviço</a> 
+            <a href="/legal/privacy">Políticas de Privacidade</a> 
           </S.LegalLinks>
           <S.BottomSection>
-            <S.BottomText><img src='/src/assets/logos/logofull.png'></img></S.BottomText> {/* Troquei para PWDIM */}
+            <S.BottomText><img src='https://imgur.com/lxe5y7o.png'></img></S.BottomText> 
           </S.BottomSection>
         </S.LegalSection>
 
-        <S.LabyrinthSection> {/* pwdim.com agora vem depois */}
+        <S.LabyrinthSection> 
           <S.Title>pwdim.com</S.Title>
           <S.LinkList>
             <li><a href="/">Inicio</a></li>

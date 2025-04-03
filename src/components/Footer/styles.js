@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.footer`
-  background-color: #121314; /* Cor de fundo preta */
+  background-color: #121314; 
   color: #a0a0a0;
   padding: 40px 20px;
   font-size: 0.9rem;
@@ -32,7 +32,7 @@ export const LabyrinthSection = styled.div`
   flex: 1;
   min-width: 150px;
   margin-bottom: 20px;
-  text-align: right; /* Alinha "pwdim.com" à direita */
+  text-align: right; 
 `;
 
 export const EmpresaSection = styled.div`
@@ -45,7 +45,7 @@ export const LegalSection = styled.div`
   flex: 1;
   min-width: 250px;
   margin-bottom: 20px;
-  text-align: center; /* Alinha "LEGAL" ao centro */
+  text-align: center; 
 
   @media (max-width: 768px) {
     text-align: center;
@@ -122,7 +122,7 @@ export const LogoPlaceholder = styled.span`
 export const LegalLinks = styled.div`
   display: flex;
   gap: 15px;
-  justify-content: center; /* Garante que os links legais fiquem no centro */
+  justify-content: center; 
 
   a {
     color: #a0a0a0;

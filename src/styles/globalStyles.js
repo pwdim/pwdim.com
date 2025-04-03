@@ -1,5 +1,5 @@
-// src/styles/globalStyles.js
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
+const _rgbToHex_ = (r, g, b) => "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).padStart(6, '0');
 
 const gradientAnimation = keyframes`
   0% {
@@ -15,7 +15,6 @@ const gradientAnimation = keyframes`
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    /* Cores do Tema Escuro (padrão) */
     --dark-bg-color: linear-gradient(45deg, #121314, #181a1b, #121314);
     --dark-text-color: #fff;
     --dark-link-color: #0ff;
@@ -30,22 +29,20 @@ export const GlobalStyle = createGlobalStyle`
     --dark-section-bg: #1c1d21;
     --dark-project-bg: #25262a;
 
-    /* Cores do Tema Claro */
-    --light-bg-color: linear-gradient(45deg,rgb(215, 255, 236),rgb(239, 255, 249),rgb(255, 255, 255)); /* Azul claro acinzentado */
-    --light-text-color:rgb(109, 109, 109); /* Cinza escuro */
-    --light-link-color: rgb(28, 141, 145); /* Azul claro */
-    --light-button-bg: rgb(0, 26, 54); /* Azul escuro */
-    --light-button-text: #fff; /* Branco */
-    --light-nav-bg: #e9ecef; /* Cinza bem claro */
-    --light-nav-text: #495057; /* Cinza médio */
-    --light-nav-hover: rgb(0, 26, 54); /* Azul escuro */
-    --light-dropdown-bg: #e9ecef; /* Cinza bem claro */
-    --light-dropdown-text: #495057; /* Cinza médio */
-    --light-dropdown-hover: rgba(0, 86, 179, 0.2); /* Azul escuro com transparência */
+    --light-bg-color: linear-gradient(45deg,rgb(215, 255, 236),rgb(239, 255, 249),rgb(255, 255, 255));
+    --light-text-color:rgb(109, 109, 109);
+    --light-link-color: rgb(28, 141, 145);
+    --light-button-bg: rgb(0, 26, 54);
+    --light-button-text: #fff;
+    --light-nav-bg: #e9ecef;
+    --light-nav-text: #495057;
+    --light-nav-hover: rgb(0, 26, 54);
+    --light-dropdown-bg: #e9ecef;
+    --light-dropdown-text: #495057;
+    --light-dropdown-hover: rgba(0, 86, 179, 0.2);
     --light-section-bg:rgb(211, 241, 229);
     --light-project-bg:rgb(248, 255, 252);
 
-    /* Cor de fundo padrão (escuro) */
     background: var(--dark-bg-color);
   }
 
@@ -53,10 +50,10 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--dark-text-color);
     margin: 0;
     padding: 0;
-    font-family: 'Belanosima', sans-serif; /* Aplica a fonte */
+    font-family: 'Belanosima', sans-serif;
     overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
-    background: var(--dark-bg-color); /* Define o background no body também */
+    background: var(--dark-bg-color);
   }
 
   body.light-mode {
@@ -72,9 +69,9 @@ export const Container = styled.div`
   background-color: var(--dark-project-bg);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex; /* Adiciona display flex para centralizar os itens */
-  flex-direction: column; /* Organiza os itens em coluna (um abaixo do outro) */
-  align-items: center; /* Centraliza os itens horizontalmente */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   body.light-mode & {
     background-color: var(--light-project-bg);
@@ -83,11 +80,11 @@ export const Container = styled.div`
 `;
 
 export const PContainer = styled.div`
-  background-color: var(--dark-bg-color); /* Cor de fundo padrão para o tema escuro */
+  background-color: var(--dark-bg-color);
   width: 100vw;
 
   body.light-mode & {
-    background-color: var(--light-bg-color); /* Cor de fundo para o tema claro */
+    background-color: var(--light-bg-color);
   }
 `;
 export const Title = styled.h1`
@@ -121,7 +118,6 @@ export const Paragraph = styled.p`
   line-height: 1.6;
 `;
 
-// Estilos do Perfil
 export const SearchContainer = styled.div`
   position: absolute;
   top: 20px;
@@ -173,8 +169,7 @@ export const ProfileSidebar = styled.div`
   flex-direction: column;
   align-items: center;
   border: 2px solid transparent;
-  margin-left: 2.5vw;
-  background-color: var(--dark-project-bg); /* Cor de fundo do projeto no tema escuro */
+  background-color: var(--dark-project-bg);
 `;
 
 export const SidebarHeader = styled.div`
@@ -183,24 +178,25 @@ export const SidebarHeader = styled.div`
   border-radius: 30px;
   flex-direction: column-reverse;
   align-items: center;
-  margin-bottom: 25px; /* Aumentei a margem inferior */
+  margin-bottom: 25px;
 `;
 
 export const ProfileImageMC = styled.img`
   border-radius: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  width: 140px; /* Aumentei a largura da imagem */
-  height: 140px; /* Aumentei a altura da imagem */
-  margin-bottom: 15px; /* Aumentei a margem inferior */
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  width: 140px;
+  height: 140px;
+  margin-bottom: 15px;
   object-fit: cover;
 `;
 
 export const PlayerNameSidebar = styled.h2`
-  color: var(--dark-link-color);
   display: flex;
-  font-size: 1.8rem; /* Aumentei o tamanho da fonte do nome */
+  font-size: 1.2rem;
   margin-bottom: 10px;
-  padding: 30px;
+  padding: 8px;
+  border-radius: 20px;
   text-align: center;
 
   body.light-mode & {
@@ -208,18 +204,19 @@ export const PlayerNameSidebar = styled.h2`
   }
 `;
 
-  export const SidebarInfo = styled.div`
+export const SidebarInfo = styled.div`
     width: 100%;
-    margin-bottom: 25px; /* Aumentei a margem inferior */
+    margin-bottom: 25px;
     color: #ddd;
-    font-size: 1rem; /* Aumentei o tamanho da fonte das informações */
+    font-size: 1rem;
     background-color:rgb(54, 54, 54);
     border-radius: 15px;
     padding: 10px;
+    border: 2px solid ${props => props.$borderColor || 'transparent'};
 
 
     p {
-      margin-bottom: 8px; /* Aumentei a margem inferior dos parágrafos */
+      margin-bottom: 8px;
     }
   `;
 
@@ -229,8 +226,8 @@ border-radius: 30px;
   h3 {
     color: var(--dark-link-color);
     margin-top: 0;
-    margin-bottom: 15px; /* Aumentei a margem inferior do título */
-    font-size: 1.3rem; /* Aumentei o tamanho da fonte do título */
+    margin-bottom: 15px;
+    font-size: 1.3rem;
     text-align: center;
 
     body.light-mode & {
@@ -240,8 +237,8 @@ border-radius: 30px;
 
   p {
     color: #ddd;
-    margin-bottom: 8px; /* Aumentei a margem inferior dos parágrafos */
-    font-size: 1rem; /* Aumentei o tamanho da fonte dos parágrafos */
+    margin-bottom: 8px;
+    font-size: 1rem;
   }
 `;
 
@@ -275,16 +272,16 @@ function lightenDarkenColor(color, amount) {
 
 export const PlayerStatsContainer = styled.div`
   background: linear-gradient(to right,
-    ${props => lightenDarkenColor(props.rankColor, -30)}, /* Cor mais escura */
-    ${props => props.rankColor} /* Cor original */
+    ${props => lightenDarkenColor(props.rankColor, -30)},
+    ${props => props.rankColor}
   );
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 
   body.light-mode & {
-    /* Se precisar de um gradiente diferente para o tema claro, adicione aqui */
+
     background: linear-gradient(to right,
-      ${props => lightenDarkenColor(props.rankColor, 30)}, /* Cor mais clara */
-      ${props => lightenDarkenColor(props.rankColor, 0)} /* Cor original */
+      ${props => lightenDarkenColor(props.rankColor, 30)},
+      ${props => lightenDarkenColor(props.rankColor, 0)}
     );
     box-shadow: 0 0 5px rgba(0, 26, 54, 0.3);
   }
@@ -310,7 +307,7 @@ export const PlayerName = styled.h2`
 `;
 
 export const GeneralStatus = styled.div`
-  background-color: #444; /* Cor um pouco mais escura */
+  background-color: #444;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -350,7 +347,7 @@ export const MinigameButton = styled.button`
   padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-size: 1rem; /* Aumentei o tamanho da fonte dos botões */
+  font-size: 1rem;
 
   &:hover {
     background-color: #555;
@@ -371,7 +368,7 @@ export const StatsCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1.5rem; /* Aumentei o padding interno do card de stats */
+  padding: 1.5rem;
   background-color: ${props => props.rankColor};
   border-radius: 1rem;
   box-shadow: 0px -16px 24px 0px rgba(255, 255, 255, 0.25) inset;
@@ -429,11 +426,11 @@ export const CardBorder = styled.div`
 `;
 
 export const CardTitleContainer = styled.div`
-  /* Estilos para card_title__container */
+
 `;
 
 export const CardTitle = styled.span`
-  font-size: 1.4rem; /* Aumentei o tamanho da fonte do título do card */
+  font-size: 1.4rem;
   color: var(--white);
   display: block;
   text-align: center;
@@ -451,18 +448,18 @@ export const Line = styled.hr`
   height: 0.1rem;
   background-color: var(--line);
   border: none;
-  margin-bottom: 1.2rem; /* Aumentei a margem inferior da linha */
+  margin-bottom: 1.2rem;
 `;
 
 export const StatsList = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 15px; /* Aumentei a margem superior da lista */
+  margin-top: 15px;
 
   li {
     color: var(--white);
-    margin-bottom: 0.8rem; /* Aumentei a margem inferior dos itens da lista */
-    font-size: 1.1rem; /* Aumentei o tamanho da fonte dos itens da lista */
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
     display: flex;
     justify-content: space-between;
   }
@@ -471,28 +468,27 @@ export const StatsList = styled.ul`
 export const StatValue = styled.span`
   color: ${props => props.rankColor};
   font-weight: bold;
-  margin-left: 10px; /* Aumentei a margem esquerda do valor do stat */
+  margin-left: 10px;
 `;
 
 export const RankInfo = styled.span`
   display: inline-flex;
   align-items: center;
-  margin-left: 15px; /* Aumentei a margem esquerda da informação do rank */
+  margin-left: 15px;
 `;
 
 export const RankSymbol = styled.span`
-  font-size: 1.2em; /* Aumentei o tamanho do símbolo do rank */
-  margin-right: 8px; /* Aumentei a margem direita do símbolo do rank */
+  font-size: 1.2em;
+  margin-right: 8px;
   color: ${props => props.color};
 `;
 
 export const RankName = styled.span`
   font-weight: bold;
-  font-size: 1.1rem; /* Aumentei o tamanho da fonte do nome do rank */
+  font-size: 1.1rem;
   color: ${props => props.color};
 `;
 
-// Estilos da Home (LinksPage)
 export const Navigation = styled.nav`
   display: flex;
   gap: 20px;
@@ -554,7 +550,7 @@ export const LinksWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Permite que os "vidros" quebrem para a próxima linha em telas menores */
+  flex-wrap: wrap;
   margin-top: 20px;
 `;
 export const GlassContainer = styled.div`
@@ -562,7 +558,7 @@ export const GlassContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px; /* Adiciona um pouco de margem entre os containers */
+  margin: 20px;
 
   &:hover > a {
     transform: rotate(0deg);
@@ -584,7 +580,7 @@ export const Glass = styled.a`
   margin: 0 -45px;
   backdrop-filter: blur(10px);
   transform: rotate(calc(var(--r) * 1deg));
-  text-decoration: none; /* Remove o sublinhado padrão de links */
+  text-decoration: none;
   color: var(--dark-link-color);
 
   body.light-mode & {
@@ -685,15 +681,15 @@ export const SearchContainerHome = styled.div`
 `;
 
 export const RankBadge = styled.span`
-  background-color: ${props => props.$backgroundColor}; // Use $backgroundColor
+  background-color: ${props => props.$backgroundColor};
   border-radius: 10px;
   padding: 2px 5px;
   font-weight: bold;
   font-size: 0.9em;
-  color: var(--dark-text-color); /* Cor padrão para o tema escuro */
+  color: var(--dark-text-color);
 
   body.light-mode & {
-    color: var(--light-text-color); /* Cor para o tema claro */
+    color: var(--light-text-color);
   }
 `;
 
@@ -704,7 +700,8 @@ export const GeneralInfoContainer = styled.div`
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: var(--dark-project-bg); /* Cor de fundo do projeto no tema escuro */
+  background-color: var(--dark-project-bg);
+  border: 2px solid ${props => props.$borderColor || 'transparent'};
 `;
 
 export const LeftContainer = styled.div`
@@ -715,11 +712,11 @@ export const LeftContainer = styled.div`
   border-radius: 30px;
   margin-top: 2%;
   width: 512px;
-  height: 768px /* Largura para a sidebar e informações gerais */
+  height: 768px
 `;
 
 export const RightContainer = styled.div`
-  background-color: var(--dark-project-bg); /* Cor de fundo do projeto no tema escuro */
+  background-color: var(--dark-project-bg);
   width: 100%;
   margin-right: 8%;
   margin-left: 8%;
@@ -727,7 +724,7 @@ export const RightContainer = styled.div`
 `;
 
 export const MinigamesContainer = styled.div`
-  /* Removi pois agora RightContainer faz o trabalho */
+
 `;
 
 export const MinigameStats = styled.div`
@@ -738,7 +735,7 @@ export const MinigameStats = styled.div`
   background-image: ${props => props.$backgroundImage};
   background-size: cover;
   background-position: center;
-  background-color: var(--dark-project-bg); /* Cor de fundo do projeto no tema escuro */
+  background-color: var(--dark-project-bg);
   margin: 10px;
   border-radius: 10px;
   border: 1px solid #121314;
@@ -776,18 +773,15 @@ export const MinigameStats = styled.div`
   }
 `;
 
-
-// Novas styled components para melhor organização
-export const ProfilePageContainer = styled(PContainer)` // Corrigido para usar PContainer diretamente
+export const ProfilePageContainer = styled(PContainer)`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding: 20px;
 `;
 
-
 export const RightColumn = styled.div`
-  background-color: var(--dark-project-bg); /* Cor de fundo do projeto no tema escuro */
+  background-color: var(--dark-project-bg);
   width: 100%;
   margin-right: 8%;
   margin-left: 8%;
@@ -803,21 +797,24 @@ export const LeftColumn = styled.div`
   border-radius: 30px;
   margin-top: 2%;
   padding: 20px;
+  ;
 `;
 
 export const BasicInfo = styled.div`
-  /* Estilos para o container das informações básicas (sidebar) */
+
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente o conteúdo */
-  align-items: flex-start; /* Alinha os itens ao topo verticalmente */
-  width: 100%; /* Garante que o BasicInfo ocupe toda a largura disponível para o alinhamento */
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  border: 2px solid ${props => props.$borderColor || 'transparent'};
+  border-radius: 30px;
 `;
 export const GeneralInfoSection = styled.div`
-  /* Estilos para a seção de informações gerais */
+
 `;
 
 export const InfoCard = styled.div`
-  background-color: var(--dark-project-bg); /* Cor de fundo do projeto no tema escuro */
+  background-color: var(--dark-project-bg);
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -825,6 +822,7 @@ export const InfoCard = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 2px solid ${props => props.$borderColor || 'transparent'};
 `;
 
 export const InfoTitle = styled.span`
@@ -839,16 +837,16 @@ export const InfoValue = styled.span`
 export const MinigamesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 246px; /* Espaçamento entre os cards */
+  gap: 246px;
   border-radius: 10px;
   background-color: var(--dark-section-bg);
-  /* Remova qualquer propriedade de altura fixa ou mínima aqui */
+
 `;
 export const MinigameTitle = styled.div`
   text-align: center;
   padding: 10px;
   border-radius: 10px 10px 0 0;
-  background-color: var(--dark-nav-bg); /* Cor de fundo da navegação no tema escuro */
+  background-color: var(--dark-nav-bg);
   color: white;
 `;
 
@@ -880,33 +878,36 @@ export const StatName = styled.span`
 
 export const CategoryButtonContainer = styled.div`
   display: flex;
-  justify-content: center; /* Centraliza os botões horizontalmente */
-  gap: 15px; /* Espaçamento entre os botões */
-  margin-bottom: 20px; /* Espaço abaixo dos botões */
-  flex-direction: row; /* Garante que os botões fiquem em linha */
-  width: fit-content; /* Faz o container ter a largura do conteúdo */
-  margin: 0 auto 20px auto; /* Centraliza o container dos botões na RightColumn */
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  width: fit-content;
+  margin: 0 auto 20px auto;
 `;
 
 export const CategoryButton = styled.button`
-  background-color: var(--dark-button-bg); /* Cor de fundo do botão no tema escuro */
-  color: var(--dark-button-text); /* Cor do texto do botão no tema escuro */
-  border: 1px solid var(--dark-link-color); /* Cor da borda do link no tema escuro */
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+    background-color: white;
+    color: black;
+    border-radius: 10em;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 1em 2em;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid black;
+    box-shadow: 0 0 0 0 black;
 
-  &:hover {
-    background-color: rgba(0, 255, 255, 0.2); /* Cor de fundo mais clara no hover (use rgba para transparência) */
-  }
+    &:hover {
+      transform: translateY(-4px) translateX(-2px);
+      box-shadow: 2px 5px 0 0 black;
+    };
 
-  &:focus {
-    outline: none;
-    border-color: var(--dark-link-color);
-  }
-`;
+    &:active {
+      transform: translateY(2px) translateX(1px);
+      box-shadow: 0 0 0 0 black;
+    };
+  `;
 
 export const AboutText = styled.p`
   color: var(--dark-text-color);
@@ -921,5 +922,170 @@ export const AboutText = styled.p`
   }
 `;
 
+export const BannedText = styled.div`
+ color: #AA0000;
+ font-size: 20px;
+ box-shadow: #AA0000;
+ box-sizing: 30px;
+ border-radius: 30px;
+ font-style: italic;
+ font-weight: bold;
+ padding: 5px;
+`
+
+export const LeaderboardPageContainer = styled.div`
+  display: flex;
+  gap: 25px;
+  max-width: 1600px;
+  margin: 30px auto;
+  padding: 0 20px;
+  align-items: flex-start;
+  color: var(--dark-text-color);
+  body.light-mode & { color: var(--light-text-color); }
+`;
+
+export const ModeSidebar = styled.div`
+  width: 220px;
+  flex-shrink: 0;
+  background-color: var(--dark-project-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+  h3 {
+    color: var(--dark-link-color);
+    margin-top: 0; margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--dark-nav-bg);
+    font-size: 1.1em;
+  }
+
+  body.light-mode & {
+      background-color: var(--light-project-bg);
+      border: 1px solid #ddd;
+       h3 { color: var(--light-link-color); border-bottom-color: #eee; }
+  }
+`;
+
+export const ModeList = styled.ul`
+  list-style: none; padding: 0; margin: 0;
+`;
+
+export const ModeListItem = styled.li`
+  margin-bottom: 8px;
+`;
+
+export const LeaderboardDisplayContainer = styled.div`
+  flex-grow: 1; min-width: 0;
+  background-color: var(--dark-project-bg);
+  padding: 25px; border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+  h2 {
+      text-align: center; color: var(--dark-link-color);
+      margin-top: 0; margin-bottom: 25px;
+  }
+
+  body.light-mode & {
+      background-color: var(--light-project-bg);
+      border: 1px solid #ddd;
+      h2 { color: var(--light-link-color); }
+  }
+`;
+
+export const LeaderboardTable = styled.table`
+  width: 100%; border-collapse: collapse; margin-top: 20px;
+  color: var(--dark-text-color); table-layout: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  th, td {
+    padding: 10px 8px; text-align: left;
+    border-bottom: 1px solid #3a3a3a;
+    vertical-align: middle;
+  }
+
+  th {
+    color: #b0b0b0; font-size: 0.85em; font-weight: bold;
+    text-transform: uppercase; border-bottom-width: 2px;
+    border-color: #555;
+  }
+
+
+  th:first-child, td:first-child { text-align: center; width: 6%; color: #ccc; }
+  th:nth-child(2), td:nth-child(2) { width: 40%; }
+  th:not(:first-child):not(:nth-child(2)),
+  td:not(:first-child):not(:nth-child(2)) { text-align: right; width: 13%; }
+
+  tbody tr {
+      &:nth-child(even) { background-color: rgba(0,0,0,0.1); }
+      &:hover { background-color: rgba(255,255,255,0.04); }
+
+      body.light-mode & {
+          color: var(--light-text-color); border-color: #eee;
+          &:nth-child(even) { background-color: rgba(0,0,0,0.03); }
+          &:hover { background-color: rgba(0, 86, 179, 0.05); }
+           td { color: var(--light-text-color); }
+           th { color: var(--light-nav-text); border-color: var(--light-nav-text); }
+           td:first-child { color: var(--light-nav-text); }
+      }
+  }
+
+  td { font-size: 0.95em; color: #ddd; body.light-mode & { color: var(--light-text-color); } }
+
+  .no-players-cell {
+      text-align: center; padding: 20px; color: var(--dark-nav-text);
+       body.light-mode & { color: var(--light-nav-text); }
+  }
+`;
+
+export const TableAvatar = styled.img`
+  width: 32px; height: 32px; border-radius: 4px;
+  vertical-align: middle; margin-right: 10px;
+`;
+
+export const ClanText = styled.span`
+  margin-left: 8px;
+  color: gray;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+
+`;
+
+export const BanIndicator = styled.span`
+    color: #ff4d4d; margin-left: 8px; font-size: 0.85em;
+    font-weight: bold; font-style: italic; vertical-align: middle;
+`;
+
+export const SortButtonContainer = styled.div`
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px;
+`;
+
+export const SortButton = styled.button`
+  padding: 8px 15px; font-size: 0.9em; font-weight: bold; border-radius: 6px;
+  border: 1px solid var(--dark-nav-bg); cursor: pointer;
+  background-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-project-bg)'};
+  color: ${props => props.$isActive ? 'var(--dark-button-text)' : 'var(--dark-nav-text)'};
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    border-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-nav-text)'};
+    background-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-section-bg)'};
+    color: ${props => props.$isActive ? 'var(--dark-button-text)' : 'var(--dark-text-color)'};
+  }
+
+   body.light-mode & {
+       border-color: var(--light-nav-bg);
+       background-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-project-bg)'};
+       color: ${props => props.$isActive ? 'var(--light-button-text)' : 'var(--light-nav-text)'};
+       &:hover {
+            border-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-nav-text)'};
+            background-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-section-bg)'};
+            color: ${props => props.$isActive ? 'var(--light-button-text)' : 'var(--light-text-color)'};
+       }
+   }
+`;
 
 export default GlobalStyle;

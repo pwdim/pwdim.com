@@ -1,4 +1,3 @@
-// src/styles/globalStyles.js
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 const gradientAnimation = keyframes`
@@ -15,7 +14,7 @@ const gradientAnimation = keyframes`
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    /* Cores do Tema Escuro (padrão) */
+    
     --dark-bg-color: linear-gradient(45deg, #121314, #181a1b, #121314);
     --dark-text-color: #fff;
     --dark-link-color: #0ff;
@@ -30,22 +29,22 @@ export const GlobalStyle = createGlobalStyle`
     --dark-section-bg: #1c1d21;
     --dark-project-bg: #25262a;
 
-    /* Cores do Tema Claro */
-    --light-bg-color: #B0C4DE; /* Azul claro acinzentado */
-    --light-text-color: #000; /* Cinza escuro */
-    --light-link-color: rgb(0, 162, 255); /* Azul claro */
-    --light-button-bg: rgb(0, 26, 54); /* Azul escuro */
-    --light-button-text: #fff; /* Branco */
-    --light-nav-bg: #e9ecef; /* Cinza bem claro */
-    --light-nav-text: #495057; /* Cinza médio */
-    --light-nav-hover: rgb(0, 26, 54); /* Azul escuro */
-    --light-dropdown-bg: #e9ecef; /* Cinza bem claro */
-    --light-dropdown-text: #495057; /* Cinza médio */
-    --light-dropdown-hover: rgba(0, 86, 179, 0.2); /* Azul escuro com transparência */
-    --light-section-bg: #fff; /* Branco */
-    --light-project-bg: #f0f0f0; /* Cinza claro */
+    
+    --light-bg-color: #B0C4DE; 
+    --light-text-color: #000; 
+    --light-link-color: rgb(0, 162, 255); 
+    --light-button-bg: rgb(0, 26, 54); 
+    --light-button-text: #fff; 
+    --light-nav-bg: #e9ecef; 
+    --light-nav-text: #495057; 
+    --light-nav-hover: rgb(0, 26, 54); 
+    --light-dropdown-bg: #e9ecef; 
+    --light-dropdown-text: #495057; 
+    --light-dropdown-hover: rgba(0, 86, 179, 0.2); 
+    --light-section-bg: #fff; 
+    --light-project-bg: #f0f0f0; 
 
-    /* Cor de fundo padrão (escuro) */
+    
     background: var(--dark-bg-color);
   }
 
@@ -53,10 +52,10 @@ export const GlobalStyle = createGlobalStyle`
     color: var(--dark-text-color);
     margin: 0;
     padding: 0;
-    font-family: 'Belanosima', sans-serif; /* Aplica a fonte */
+    font-family: 'Belanosima', sans-serif; 
     overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
-    background: var(--dark-bg-color); /* Define o background no body também */
+    background: var(--dark-bg-color); 
   }
 
   body.light-mode {
@@ -110,7 +109,7 @@ export const Paragraph = styled.p`
   line-height: 1.6;
 `;
 
-// Estilos do Perfil
+
 export const SearchContainer = styled.div`
   position: absolute;
   top: 20px;
@@ -155,23 +154,23 @@ export const SearchContainer = styled.div`
 export const ProfileLayout = styled.div`
   display: flex;
   gap: 20px;
-  width: 95%; /* Aumentei um pouco a largura para preencher mais */
-  max-width: 1400px; /* Aumentei a largura máxima */
+  width: 95%; 
+  max-width: 1400px; 
   align-items: flex-start;
-  justify-content: flex-start; /* Alinha os itens à esquerda */
-  margin-top: 20px; /* Adiciona margem superior para separar da barra de pesquisa */
+  justify-content: flex-start; 
+  margin-top: 20px; 
 `;
 
 export const ProfileSidebar = styled.div`
-  width: 300px; /* Aumentei a largura da barra lateral */
-  border-radius: 15px; /* Borda mais arredondada para o efeito de cilindro */
-  padding: 25px; /* Aumentei o padding interno */
+  width: 300px; 
+  border-radius: 15px; 
+  padding: 25px; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid transparent; /* Borda inicial transparente */
-  /* Estilos de borda e background dinâmicos baseados no rank */
+  border: 2px solid transparent; 
+  
   body.light-mode & {
     background-color: var(--light-project-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -182,21 +181,21 @@ export const SidebarHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 25px; /* Aumentei a margem inferior */
+  margin-bottom: 25px; 
 `;
 
 export const ProfileImageMC = styled.img`
   border-radius: 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  width: 140px; /* Aumentei a largura da imagem */
-  height: 140px; /* Aumentei a altura da imagem */
-  margin-bottom: 15px; /* Aumentei a margem inferior */
+  width: 140px; 
+  height: 140px; 
+  margin-bottom: 15px; 
   object-fit: cover;
 `;
 
 export const PlayerNameSidebar = styled.h2`
   color: var(--dark-link-color);
-  font-size: 1.8rem; /* Aumentei o tamanho da fonte do nome */
+  font-size: 1.8rem; 
   margin: 0;
   margin-bottom: 10px;
   text-align: center;
@@ -208,12 +207,12 @@ export const PlayerNameSidebar = styled.h2`
 
 export const SidebarInfo = styled.div`
   width: 100%;
-  margin-bottom: 25px; /* Aumentei a margem inferior */
+  margin-bottom: 25px; 
   color: #ddd;
-  font-size: 1rem; /* Aumentei o tamanho da fonte das informações */
+  font-size: 1rem; 
 
   p {
-    margin-bottom: 8px; /* Aumentei a margem inferior dos parágrafos */
+    margin-bottom: 8px; 
   }
 `;
 
@@ -223,8 +222,8 @@ export const SidebarStats = styled.div`
   h3 {
     color: var(--dark-link-color);
     margin-top: 0;
-    margin-bottom: 15px; /* Aumentei a margem inferior do título */
-    font-size: 1.3rem; /* Aumentei o tamanho da fonte do título */
+    margin-bottom: 15px; 
+    font-size: 1.3rem; 
     text-align: center;
 
     body.light-mode & {
@@ -234,8 +233,8 @@ export const SidebarStats = styled.div`
 
   p {
     color: #ddd;
-    margin-bottom: 8px; /* Aumentei a margem inferior dos parágrafos */
-    font-size: 1rem; /* Aumentei o tamanho da fonte dos parágrafos */
+    margin-bottom: 8px; 
+    font-size: 1rem; 
   }
 `;
 
@@ -268,23 +267,23 @@ function lightenDarkenColor(color, amount) {
 }
 
 export const PlayerStatsContainer = styled.div`
-  padding: 25px; /* Aumentei o padding interno */
-  width: calc(70% - 20px); /* Ajustei a largura para ocupar mais espaço */
-  max-width: 1100px; /* Aumentei a largura máxima */
+  padding: 25px; 
+  width: calc(70% - 20px); 
+  max-width: 1100px; 
   background: linear-gradient(to right,
-    ${props => lightenDarkenColor(props.rankColor, -30)}, /* Cor mais escura */
-    ${props => props.rankColor} /* Cor original */
+    ${props => lightenDarkenColor(props.rankColor, -30)}, 
+    ${props => props.rankColor} 
   );
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
   margin-bottom: 20px;
-  margin-left: 20px; /* Adicionei uma margem esquerda para separar */
-  border-radius: 8px; /* Adicionei um border-radius para combinar com outros elementos */
+  margin-left: 20px; 
+  border-radius: 8px; 
 
   body.light-mode & {
-    /* Se precisar de um gradiente diferente para o tema claro, adicione aqui */
+    
     background: linear-gradient(to right,
-      ${props => lightenDarkenColor(props.rankColor, 30)}, /* Cor mais clara */
-      ${props => lightenDarkenColor(props.rankColor, 0)} /* Cor original */
+      ${props => lightenDarkenColor(props.rankColor, 30)}, 
+      ${props => lightenDarkenColor(props.rankColor, 0)} 
     );
     box-shadow: 0 0 5px rgba(0, 26, 54, 0.3);
   }
@@ -310,7 +309,7 @@ export const PlayerName = styled.h2`
 `;
 
 export const GeneralStatus = styled.div`
-  background-color: #444; /* Cor um pouco mais escura */
+  background-color: #444; 
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -335,7 +334,7 @@ export const GeneralStatus = styled.div`
   }
 `;
 export const GameModeStatsContainer = styled.div`
-  /* Estilos removidos */
+  
 `;
 
 export const MinigameList = styled.div`
@@ -353,7 +352,7 @@ export const MinigameButton = styled.button`
   padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-size: 1rem; /* Aumentei o tamanho da fonte dos botões */
+  font-size: 1rem; 
 
   &:hover {
     background-color: #555;
@@ -374,7 +373,7 @@ export const StatsCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1.5rem; /* Aumentei o padding interno do card de stats */
+  padding: 1.5rem; 
   background-color: var(--dark-project-bg);
   background-image: radial-gradient(
       at 88% 40%,
@@ -442,11 +441,11 @@ export const CardBorder = styled.div`
 `;
 
 export const CardTitleContainer = styled.div`
-  /* Estilos para card_title__container */
+  
 `;
 
 export const CardTitle = styled.span`
-  font-size: 1.4rem; /* Aumentei o tamanho da fonte do título do card */
+  font-size: 1.4rem; 
   color: var(--white);
   display: block;
   text-align: center;
@@ -464,18 +463,18 @@ export const Line = styled.hr`
   height: 0.1rem;
   background-color: var(--line);
   border: none;
-  margin-bottom: 1.2rem; /* Aumentei a margem inferior da linha */
+  margin-bottom: 1.2rem; 
 `;
 
 export const StatsList = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 15px; /* Aumentei a margem superior da lista */
+  margin-top: 15px; 
 
   li {
     color: var(--white);
-    margin-bottom: 0.8rem; /* Aumentei a margem inferior dos itens da lista */
-    font-size: 1.1rem; /* Aumentei o tamanho da fonte dos itens da lista */
+    margin-bottom: 0.8rem; 
+    font-size: 1.1rem; 
     display: flex;
     justify-content: space-between;
   }
@@ -484,28 +483,28 @@ export const StatsList = styled.ul`
 export const StatValue = styled.span`
   color: var(--primary);
   font-weight: bold;
-  margin-left: 10px; /* Aumentei a margem esquerda do valor do stat */
+  margin-left: 10px; 
 `;
 
 export const RankInfo = styled.span`
   display: inline-flex;
   align-items: center;
-  margin-left: 15px; /* Aumentei a margem esquerda da informação do rank */
+  margin-left: 15px; 
 `;
 
 export const RankSymbol = styled.span`
-  font-size: 1.2em; /* Aumentei o tamanho do símbolo do rank */
-  margin-right: 8px; /* Aumentei a margem direita do símbolo do rank */
+  font-size: 1.2em; 
+  margin-right: 8px; 
   color: ${props => props.color};
 `;
 
 export const RankName = styled.span`
   font-weight: bold;
-  font-size: 1.1rem; /* Aumentei o tamanho da fonte do nome do rank */
+  font-size: 1.1rem; 
   color: ${props => props.color};
 `;
 
-// Estilos da Home (LinksPage)
+
 export const Navigation = styled.nav`
   display: flex;
   gap: 20px;
@@ -567,7 +566,7 @@ export const LinksWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Permite que os "vidros" quebrem para a próxima linha em telas menores */
+  flex-wrap: wrap; 
   margin-top: 20px;
 `;
 export const GlassContainer = styled.div`
@@ -575,7 +574,7 @@ export const GlassContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px; /* Adiciona um pouco de margem entre os containers */
+  margin: 20px; 
 
   &:hover > a {
     transform: rotate(0deg);
@@ -597,7 +596,7 @@ export const Glass = styled.a`
   margin: 0 -45px;
   backdrop-filter: blur(10px);
   transform: rotate(calc(var(--r) * 1deg));
-  text-decoration: none; /* Remove o sublinhado padrão de links */
+  text-decoration: none; 
   color: var(--dark-link-color);
 
   body.light-mode & {
@@ -703,22 +702,22 @@ export const RankBadge = styled.span`
   padding: 2px 5px;
   font-weight: bold;
   font-size: 0.9em;
-  color: var(--dark-text-color); /* Cor padrão para o tema escuro */
+  color: var(--dark-text-color); 
 
   body.light-mode & {
-    color: var(--light-text-color); /* Cor para o tema claro */
+    color: var(--light-text-color); 
   }
 `;
 
 export const GeneralInfoContainer = styled.div`
-  width: 300px; /* Mesma largura da sidebar para alinhar */
-  margin-top: 20px; /* Espaço entre a sidebar e as informações gerais */
+  width: 300px; 
+  margin-top: 20px; 
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Alinhar conteúdo à esquerda dentro */
+  align-items: flex-start; 
   body.light-mode & {
     background-color: var(--light-project-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);

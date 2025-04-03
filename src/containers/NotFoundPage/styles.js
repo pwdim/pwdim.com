@@ -5,7 +5,7 @@ export const TvContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh; /* Garante que ocupa a tela */
+  min-height: 80vh; 
 `;
 
 export const TvScreen = styled.div`

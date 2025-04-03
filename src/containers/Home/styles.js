@@ -1,29 +1,31 @@
-// src/containers/Home/styles.js
 import styled, { keyframes } from 'styled-components';
 
-// const gradientAnimation = keyframes`
-//   0% {
-//     background-position: 0% 50%;
-//   }
-//   50% {
-//     background-position: 100% 50%;
-//   }
-//   100% {
-//     background-position: 0% 50%;
-//   }
-// `;
-// export const Container = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: flex-start;
-//   min-height: 100vh;
-//   padding: 40px;
-//   background: linear-gradient(45deg, #121314, #181a1b, #121314);
-//   background-size: 200% 200%;
-//   animation: ${gradientAnimation} 10s ease infinite;
-//   position: relative;
-// `;
+
+const gradientAnimation = keyframes`
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+`;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 40px;
+  background: linear-gradient(45deg, #121314, #181a1b, #121314);
+  background-size: 200% 200%;
+  animation: ${gradientAnimation} 10s ease infinite;
+  position: relative;
+`;
+
+
 export const Navigation = styled.nav`
   display: flex;
   gap: 20px;
@@ -69,7 +71,7 @@ export const LinksWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap; /* Permite que os "vidros" quebrem para a próxima linha em telas menores */
+  flex-wrap: wrap; 
   margin-top: 20px;
 `;
 export const GlassContainer = styled.div`
@@ -77,7 +79,7 @@ export const GlassContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px; /* Adiciona um pouco de margem entre os containers */
+  margin: 20px; 
 
   &:hover > a {
     transform: rotate(0deg);
@@ -99,7 +101,7 @@ export const Glass = styled.a`
   margin: 0 -45px;
   backdrop-filter: blur(10px);
   transform: rotate(calc(var(--r) * 1deg));
-  text-decoration: none; /* Remove o sublinhado padrão de links */
+  text-decoration: none; 
 
   &::before {
     content: attr(data-text);
@@ -111,14 +113,14 @@ export const Glass = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #00FFFF; /* Texto ciano neon */
+    color: #00FFFF; 
     font-weight: bold;
     border-radius: 0 0 10px 10px;
   }
 
   svg {
     font-size: 2.5em;
-    fill: #00FFFF; /* Ícones ciano neon */
+    fill: #00FFFF; 
   }
 `;
 export const Footer = styled.footer`
@@ -174,8 +176,8 @@ export const SearchContainerHome = styled.div`
 `;
 
 export const WelcomeMessage = styled.p`
-  font-size: 1.8em; /* Ajuste o tamanho conforme necessário */
-  color: #fff; /* Cor do texto, ajuste conforme necessário */
-  text-align: center; /* Centraliza o texto */
-  /* Adicione outros estilos conforme necessário, como margem, padding, etc. */
-`;
+  font-size: 1.8em; 
+  color: #fff; 
+  text-align: center; 
+  
+`;Zz

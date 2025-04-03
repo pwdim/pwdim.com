@@ -7,7 +7,7 @@ const Canvas = styled.canvas`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Garante que a fumaça fique atrás do conteúdo */
+  z-index: -1; 
 `;
 
 const SmokeBackground = () => {
@@ -34,15 +34,15 @@ const SmokeBackground = () => {
         this.opacity = Math.random() * 0.6 + 0.1;
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
-        this.color = `rgba(20, 21, 22, ${this.opacity})`; // Cor da fumaça, ajustada para o seu fundo
+        this.color = `rgba(20, 21, 22, ${this.opacity})`; 
       }
 
       update() {
-        this.x += this.speedX + (mouseX - this.x) * 0.001; // Interação com o mouse
+        this.x += this.speedX + (mouseX - this.x) * 0.001; 
         this.y += this.speedY + (mouseY - this.y) * 0.001;
 
-        this.opacity *= 0.99; // Fade out da fumaça
-        this.size *= 0.995; // Diminuir o tamanho
+        this.opacity *= 0.99; 
+        this.size *= 0.995; 
 
         if (this.opacity < 0.01 || this.size < 0.1) {
           this.reset();
@@ -58,11 +58,11 @@ const SmokeBackground = () => {
 
       reset() {
         this.x = Math.random() * width;
-        this.y = height + Math.random() * 50; // Começa de baixo
+        this.y = height + Math.random() * 50; 
         this.size = Math.random() * 5 + 5;
         this.opacity = Math.random() * 0.6 + 0.1;
         this.speedX = Math.random() * 3 - 1.5;
-        this.speedY = -(Math.random() * 2 + 1); // Move para cima
+        this.speedY = -(Math.random() * 2 + 1); 
       }
     }
 
