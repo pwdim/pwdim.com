@@ -242,7 +242,7 @@ const LeaderboardPage = () => {
         </S.ModeSidebar>
 
         <S.LeaderboardDisplayContainer>
-            <h2>{modeName} - Top 100</h2>
+            <h2>Temporada {modeName} - Top 100</h2>
             <S.SortButtonContainer>
                  <S.SortButton onClick={() => setSortCriteria('xp')} $isActive={sortCriteria === 'xp'}>XP (Posição)</S.SortButton>
                  

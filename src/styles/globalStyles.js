@@ -816,7 +816,7 @@ export const GeneralInfoSection = styled.div`
 export const InfoCard = styled.div`
   background-color: var(--dark-project-bg);
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 30px;
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -837,9 +837,10 @@ export const InfoValue = styled.span`
 export const MinigamesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 246px;
-  border-radius: 10px;
-  background-color: var(--dark-section-bg);
+  width: 246px;
+  margin-left: 35%;
+  border-radius: 30px;
+  
 
 `;
 export const MinigameTitle = styled.div`
@@ -853,7 +854,7 @@ export const MinigameTitle = styled.div`
 export const StatsWrapper = styled.div`
   padding: 15px;
   background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 0 0 10px 10px;
+  border-radius: 1px;
   display: flex;
   flex-direction: column;
   gap: 8px;

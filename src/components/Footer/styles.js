@@ -89,7 +89,7 @@ export const LanguageOption = styled.span`
 
 export const LinkList = styled.ul`
   list-style: none;
-  padding: 0;
+  padding: 1%;
   margin: 0;
 
   li {

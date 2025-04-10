@@ -44,7 +44,7 @@ const Footer = () => {
             <a href="/legal/privacy">Políticas de Privacidade</a> 
           </S.LegalLinks>
           <S.BottomSection>
-            <S.BottomText><img src='https://imgur.com/lxe5y7o.png'></img></S.BottomText> 
+            <S.BottomText></S.BottomText> 
           </S.BottomSection>
         </S.LegalSection>
 
