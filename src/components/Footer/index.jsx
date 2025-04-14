@@ -18,7 +18,7 @@ const Footer = () => {
         <S.ContactInfo>
           <S.Title>ENTRE EM CONTATO:</S.Title>
           <S.SocialIcons>
-            <a href="https://github.com/pwdim" target="_blank" rel="noopener noreferrer">
+            <a href="https://git.pwdim.com/" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faGithub} /> 
             </a>
             <a href="https://dc.pwdim.com/" target="_blank" rel="noopener noreferrer">
@@ -36,7 +36,7 @@ const Footer = () => {
         <S.LegalSection> 
           <S.Title>LEGAL</S.Title>
           <S.Copyright>
-            © {currentYear} Copyright pwdim.com<br />
+            © {currentYear} Copyright pwdim<br />
             Todos os direitos reservados.
           </S.Copyright>
           <S.LegalLinks>

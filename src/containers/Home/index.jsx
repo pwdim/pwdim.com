@@ -1,69 +1,118 @@
-import React, { useState } from 'react';
-import * as S from '../../styles/globalStyles';
-import SmokeBackground from '/src/components/SmokeBackground';
-import { FaGithub } from 'react-icons/fa'; 
-import { FaDiscord } from 'react-icons/fa';   
-import { MdEmail } from 'react-icons/md';  
-
+import React, { useState, useEffect, useRef } from 'react';
+import * as S from './styles';
+import DiscordProfileDisplay from '../../components/DiscordProfileDisplay';
+import MusicPlayerUI from '../../components/MusicPlayerUI';
+import { FaTrophy, FaInfoCircle, FaGithub, FaDiscord } from 'react-icons/fa';
+import backgroundMusic from '/public/music/ofeliasdream.mp3'; 
 
 const HomePage = () => {
-    const linksData = [
-        { name: 'Github', url: 'https://github.com/pwdim', icon: FaGithub },
-        { name: 'Discord', url: 'https://dc.pwdim.com', icon: FaDiscord },
-        { name: 'Email', url: '#copy-email', icon: MdEmail },
-        
-    ];
+  const YOUR_DISCORD_ID = '386563422055170048';
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const [copyMessage, setCopyMessage] = useState('');
-  const [isCopyMessageVisible, setIsCopyMessageVisible] = useState(false);
+  const [discordData, setDiscordData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleEmailClick = (event) => {
-    event.preventDefault();
-    const email = 'contato@pwdim.com';
-    navigator.clipboard.writeText(email)
-      .then(() => {
-        setCopyMessage('Email copiado para a área de transferência!');
-        setIsCopyMessageVisible(true);
-        setTimeout(() => {
-          setIsCopyMessageVisible(false);
-          setCopyMessage('');
-        }, 10000); 
-      })
-      .catch(err => {
-        console.error('Falha ao copiar o email: ', err);
-        setCopyMessage('Não foi possível copiar o email.');
-        setIsCopyMessageVisible(true);
-        setTimeout(() => {
-          setIsCopyMessageVisible(false);
-          setCopyMessage('');
-        }, 10000);
-      });
+   useEffect(() => {
+     setLoading(true);
+     setError(null);
+     setDiscordData(null);
+     fetch(`https://api.lanyard.rest/v1/users/${YOUR_DISCORD_ID}`)
+       .then(response => response.ok ? response.json() : Promise.reject(new Error('Network response was not ok')))
+       .then(data => {
+         if (data.success) {
+           setDiscordData(data.data);
+         } else {
+           throw new Error('Lanyard API returned success: false');
+         }
+       })
+       .catch(err => {
+         console.error("Erro Lanyard:", err);
+         setError(err.message || 'Falha ao buscar dados');
+       })
+       .finally(() => {
+         setLoading(false);
+       });
+   }, [YOUR_DISCORD_ID]);
+
+   const profileData = {
+       links: [
+         { name: 'Leaderboards', url: '/leaderboard/hg', icon: FaTrophy, isInternal: true },
+         { name: 'Sobre', url: '/about', icon: FaInfoCircle, isInternal: true },
+         { name: 'GitHub', url: 'https://git.pwdim.com', icon: FaGithub, isInternal: false },
+         { name: 'Discord', url: 'https://dc.pwdim.com/', icon: FaDiscord, isInternal: false },
+       ]
+   };
+
+   const renderLinkButton = (link) => {
+       const IconComponent = link.icon;
+       const content = (
+         <>
+           {IconComponent && <S.IconWrapper><IconComponent /></S.IconWrapper>}
+         </>
+       );
+       if (link.isInternal) {
+          return <S.LinkButton key={link.name} href={link.url} title={link.name}>{content}</S.LinkButton>;
+       } else {
+         return (
+           <S.LinkButton key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" title={link.name}>
+             {content}
+           </S.LinkButton>
+         );
+       }
+   };
+
+   const togglePlayPause = () => {
+     if (!audioRef.current) return;
+     const audio = audioRef.current;
+     const shouldPlay = !isPlaying;
+     if (shouldPlay) {
+       audio.play().then(() => { setIsPlaying(true); }).catch(playError => { setIsPlaying(false); });
+     } else {
+       audio.pause();
+       setIsPlaying(false);
+     }
+   };
+
+   useEffect(() => {
+        if (audioRef.current) { audioRef.current.volume = 0.3; }
+    }, []);
+
+  const currentTrack = {
+      title: "Ofelia's dream",
+      artist: "Benjamin Tissot",
+      albumArt: "https://cdn.bensound.com/image/cover/ofeliasdream.webp"
   };
 
   return (
-    <S.Container>
-      
-      <SmokeBackground />
-      {isCopyMessageVisible && <S.CopyMessageTop>{copyMessage}</S.CopyMessageTop>}
-      <S.ProfileImage src='https://imgur.com/NcZvDQ1.png' />
-      <S.Username>@pwdim</S.Username>
-      <S.LinksWrapper>
-        {linksData.map((link, index) => (
-          <S.GlassContainer key={index}>
-            <S.Glass
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-text={link.name}
-              style={{ '--r': (index - Math.floor(linksData.length / 2)) * 15 + 'deg' }}
-              onClick={link.name === 'Email' ? handleEmailClick : undefined}
-            >
-              <link.icon /> 
-            </S.Glass>
-          </S.GlassContainer>
-        ))}
-      </S.LinksWrapper>
-    </S.Container>
+    <S.HomePageContainer>
+        <audio ref={audioRef} src={backgroundMusic} loop />
+
+        <MusicPlayerUI
+            isPlaying={isPlaying}
+            togglePlayPause={togglePlayPause}
+            songTitle={currentTrack.title}
+            artistName={currentTrack.artist}
+            albumArtUrl={currentTrack.albumArt}
+        />
+
+      <S.MainContent>
+        {loading && <p>Carregando...</p>}
+        {error && <S.ErrorMessage>Erro: {error}</S.ErrorMessage>}
+        {!loading && !error && discordData && (
+            <DiscordProfileDisplay userId={YOUR_DISCORD_ID} />
+        )}
+         {!loading && !error && !discordData && (
+             <p>Não foi possível carregar os dados do perfil.</p>
+         )}
+
+        <S.LinksSection>
+          {profileData.links.map(renderLinkButton)}
+        </S.LinksSection>
+
+      </S.MainContent>
+    </S.HomePageContainer>
   );
 };
 

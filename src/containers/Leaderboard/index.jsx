@@ -59,6 +59,8 @@ const availableModes = [
 ];
 
 
+
+
 const ModeLink = styled(Link)`
   display: block; padding: 10px 12px; border-radius: 5px; text-decoration: none;
   font-weight: bold;
@@ -101,7 +103,7 @@ const TableNickname = styled(Link)`
 const PlayerTableRow = ({ player, currentRank }) => {
   const { position, name = 'Erro', expValue, killsValue, deathsValue, winsValue, uuid, rankTag = 'Membro', isBanned = false, clan = null } = player || {};
   const rankColor = getRankColorHex(rankTag);
-  const avatarSrc = uuid ? `https://mc-heads.net/avatar/${uuid}/32` : "https://mc-heads.net/avatar/MHF_Steve/32";
+  const avatarSrc = uuid ? `https://mc-heads.net/avatar/${uuid}/32` : "https://mc-heads.net/avatar/1/32";
 
   return (
     
@@ -111,10 +113,15 @@ const PlayerTableRow = ({ player, currentRank }) => {
         <S.TableAvatar src={avatarSrc} alt="" />
         
         <TableNickname to={`/perfil/${name}`} $isBanned={isBanned} $rankColor={rankColor}>
-            {name}
-        </TableNickname>
+            {name} 
+        </TableNickname> 
         
-        {clan && <S.ClanText>[{clan}]</S.ClanText>}
+        {clan && (
+            <S.ClanText $clanName={clan}><a> </a>
+                [{clan}]
+            </S.ClanText>
+        )}
+
         
         {isBanned && <S.BanIndicator>(BANIDO)</S.BanIndicator>}
       </td>

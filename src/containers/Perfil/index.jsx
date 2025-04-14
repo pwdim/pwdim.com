@@ -10,7 +10,7 @@ const Perfil = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [visibleStats, setVisibleStats] = useState({});
-  const [expandedStats, setExpandedStats] = useState(null); 
+  const [expandedStats, setExpandedStats] = useState(null);
   const currentDate = new Date();
   const rawPlayerRank = playerData?.playerRanks?.[0]?.rankName;
   const playerRank = ['CEO', 'HEAD_ADMIN', 'ADMIN'].includes(rawPlayerRank) ? 'ADMIN' : rawPlayerRank || 'Membro';
@@ -29,7 +29,7 @@ const Perfil = () => {
     "BETA": [4, 4, 192],
     "FLAME": [255, 170, 0],
     "SPARK": [255, 255, 85],
-    "Membro": [221, 221, 221] 
+    "Membro": [221, 221, 221]
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Perfil = () => {
     setError(null);
     setLoading(true);
     setVisibleStats({});
-    setExpandedStats(null); 
+    setExpandedStats(null);
 
     try {
       const playerResponse = await fetch(`https://api.flamemc.com.br/players/${nick}`);
@@ -87,7 +87,7 @@ const Perfil = () => {
     if (colorRGB) {
       return rgbToHex(colorRGB[0], colorRGB[1], colorRGB[2]);
     }
-    return '#ddd'; 
+    return '#ddd';
   };
 
   const toggleStatsVisibility = (modeKey) => {
@@ -98,7 +98,7 @@ const Perfil = () => {
   };
 
   const toggleExpand = (modeKey) => {
-    setExpandedStats(expandedStats === modeKey ? null : modeKey); 
+    setExpandedStats(expandedStats === modeKey ? null : modeKey);
   };
 
   const getHGPlayerRank = (exp, position) => {
@@ -186,7 +186,7 @@ const Perfil = () => {
     BRIDGE: ["bridge_solo", "bridge_duo"],
   };
 
-  const [activeCategory, setActiveCategory] = useState("HG"); 
+  const [activeCategory, setActiveCategory] = useState("HG");
 
   const BEDWARS_STATS = {
     "geral": {
@@ -252,6 +252,7 @@ const Perfil = () => {
   };
 
   return (
+
     <S.ProfilePageContainer >
       <S.LeftColumn>
         <S.BasicInfo style={{ boxShadow: `0 0 5px ${getRankColor(playerRank)}` }}>
@@ -259,7 +260,7 @@ const Perfil = () => {
             <S.SidebarHeader >
               <S.PlayerNameSidebar style={{ color: getRankColor(playerRank) }}>{playerData?.name}</S.PlayerNameSidebar>
             </S.SidebarHeader>
-            <S.ProfileImageMC src={`https://mc-heads.net/avatar/${playerData?.uuid}/720/`} alt="Avatar do Jogador" />
+            <S.ProfileImageMC src={`https://mc-heads.net/avatar/${playerData?.uuid}/140`} alt="Avatar do Jogador" />
             {playerData?.banned && (
               <S.BannedText color="red">BANIDO</S.BannedText>
             )}
@@ -268,15 +269,22 @@ const Perfil = () => {
                 <S.InfoCard className="rank-info" style={{ boxShadow: `0 0 5px ${getRankColor(playerRank)}` }}>
                   <S.InfoTitle >Rank:</S.InfoTitle>
                   <S.InfoValue>
-                    <S.RankBadge $backgroundColor={getRankColor(playerRank)}>{playerRank}</S.RankBadge> 
+                    <S.RankBadge $backgroundColor={getRankColor(playerRank)}>{playerRank}</S.RankBadge>
                   </S.InfoValue>
                 </S.InfoCard>
               )}
               {playerData?.clan && (
                 <S.InfoCard className="clan-info" style={{ boxShadow: `0 0 5px ${getRankColor(playerRank)}` }}>
                   <S.InfoTitle>Clan:</S.InfoTitle>
-                  <S.InfoValue>{playerData.clan === null ? 'Sem clan' : playerData.clan}</S.InfoValue>
+                  <S.InfoValue>
+                   
+                    <S.ClanText $clanName={playerData.clan}>
+                      
+                      {playerData.clan}
+                    </S.ClanText>
+                  </S.InfoValue>
                 </S.InfoCard>
+              
               )}
               {playerData?.premium !== undefined && (
                 <S.InfoCard className="account-info" style={{ boxShadow: `0 0 5px ${getRankColor(playerRank)}` }}>
@@ -318,7 +326,7 @@ const Perfil = () => {
               if (modeKey.startsWith("bedwars_")) {
                 const bwMode = modeKey.split("_")[1];
                 const bwStatsConfig = BEDWARS_STATS[bwMode];
-                const bwTitle = `🛏️ BedWars (${bwMode.charAt(0).toUpperCase() + bwMode.slice(1)})`; 
+                const bwTitle = `🛏️ BedWars (${bwMode.charAt(0).toUpperCase() + bwMode.slice(1)})`;
 
                 return bwStatsConfig && (
                   <S.MinigameStats key={modeKey} $backgroundImage={gameModesConfigWithImages["bedwars"]?.backgroundImage}>
@@ -329,7 +337,7 @@ const Perfil = () => {
                         const statValue = foundStat ? foundStat.value : 0;
                         return (
                           <S.StatItem key={statKey}>
-                            <S.StatName dangerouslySetInnerHTML={{ __html: statName }} /> 
+                            <S.StatName dangerouslySetInnerHTML={{ __html: statName }} />
                             <S.StatValue>{statValue}</S.StatValue>
                           </S.StatItem>
                         );

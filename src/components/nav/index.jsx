@@ -1,4 +1,3 @@
-// src/components/NavigationBar/index.jsx (or wherever your file is)
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import {
   NavbarContainer,
@@ -16,7 +15,8 @@ import {
   SearchButton,
   EmptySearchMessage,
   RightSection,
-} from './styles'; // Assuming styles are in './styles.js' relative to index.jsx
+  StyledRouterLink,
+} from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faInfoCircle,
@@ -25,36 +25,18 @@ import {
   faTimes,
   faSearch,
   faList,
-  faMoon,
-  faSun,
 } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { RoutePrefixContext } from '../../contexts/RoutePrefixContext'; // Adjust path if needed
-// import ThemeToggle from '../ThemeToggle'; // Adjust path if needed
-
-// Dummy ThemeToggle for demonstration
-const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true);
-  return (
-    <button
-      onClick={() => setIsDark(!isDark)}
-      style={{ background: 'none', border: 'none', color: '#a0a0a0', cursor: 'pointer', fontSize: '1.5rem' }}
-      aria-label="Toggle theme"
-    >
-      <FontAwesomeIcon icon={isDark ? faSun : faMoon} />
-    </button>
-  );
-};
+import { useNavigate, useLocation } from 'react-router-dom';
+import { RoutePrefixContext } from '../../contexts/RoutePrefixContext';
+import ThemeToggle from '../ThemeToggle'; // Importar o ThemeToggle real
 
 
-// The component name remains NavigationBar, even if the file is index.jsx
 const NavigationBar = () => {
   const [searchNickNav, setSearchNickNav] = useState('');
   const [emptySearchMessageVisible, setEmptySearchMessageVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  // Make sure this context path is correct relative to your index.jsx
   const { profileRoutePrefix } = useContext(RoutePrefixContext);
   const mobileMenuRef = useRef(null);
 
@@ -109,25 +91,20 @@ const NavigationBar = () => {
 
 
   const navLinks = [
-    { to: "/sobre", icon: faInfoCircle, text: "Sobre" },
+    { to: "/about", icon: faInfoCircle, text: "Sobre" },
     { to: "/links", icon: faEnvelope, text: "Contato" },
     { to: "/leaderboard/hg", icon: faList, text: "Leaderboard" },
-    // Add other links like LOJA, EQUIPE if needed
-    // { to: "https://loja.flamemc.com.br/", icon: faStore, text: "Loja", external: true },
-    // { to: "/staff", icon: faUsers, text: "Equipe" },
   ];
 
   return (
     <NavbarContainer>
       <NavContent>
-        <Link to="/" onClick={closeMobileMenu} style={{ textDecoration: 'none', display: 'inline-block' }} title="Página Inicial">
-          {/* Use the LogoLink styled-component as a wrapper if needed, or style Logo directly */}
-          <LogoLink> {/* This styled.div wraps the Logo */}
+        <StyledRouterLink to="/" onClick={closeMobileMenu} title="Página Inicial">
+          <LogoLink>
             <Logo src="https://imgur.com/PweVudw.png" alt="Logo" />
           </LogoLink>
-        </Link>
+        </StyledRouterLink>
 
-        {/* Desktop Navigation Links */}
         <NavLinksContainerDesktop>
           <NavLinksList>
             {navLinks.map((link) => (
@@ -139,11 +116,11 @@ const NavigationBar = () => {
                     </NavLinkStyled>
                   </a>
                 ) : (
-                  <Link to={link.to}>
+                  <StyledRouterLink to={link.to}>
                     <NavLinkStyled>
                       {link.icon && <FontAwesomeIcon icon={link.icon} />} {link.text}
                     </NavLinkStyled>
-                  </Link>
+                  </StyledRouterLink>
                 )}
 
               </NavItem>
@@ -151,9 +128,7 @@ const NavigationBar = () => {
           </NavLinksList>
         </NavLinksContainerDesktop>
 
-        {/* Right Section: Search, ThemeToggle, Hamburger */}
         <RightSection>
-          {/* Search Form */}
           <SearchForm onSubmit={handleSearchSubmitNav}>
             <SearchInput
               type="text"
@@ -165,10 +140,9 @@ const NavigationBar = () => {
               <FontAwesomeIcon icon={faSearch} />
             </SearchButton>
           </SearchForm>
-          {/* Optional: Add ThemeToggle here if you want it on the right */}
-          {/* <ThemeToggle /> */}
 
-          {/* Hamburger Button (Visible only on mobile) */}
+          <ThemeToggle />
+
           <HamburgerButton onClick={toggleMobileMenu} id="hamburger-button" aria-label="Toggle menu" aria-expanded={isMobileMenuOpen}>
             <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
           </HamburgerButton>
@@ -176,7 +150,6 @@ const NavigationBar = () => {
 
       </NavContent>
 
-      {/* Mobile Menu (Conditional Rendering) */}
       {isMobileMenuOpen && (
         <MobileMenuContainer ref={mobileMenuRef}>
           <NavLinksList>
@@ -189,11 +162,11 @@ const NavigationBar = () => {
                     </NavLinkStyled>
                   </a>
                 ) : (
-                  <Link to={link.to} onClick={closeMobileMenu}>
+                  <StyledRouterLink to={link.to} onClick={closeMobileMenu}>
                     <NavLinkStyled>
                       {link.icon && <FontAwesomeIcon icon={link.icon} />} {link.text}
                     </NavLinkStyled>
-                  </Link>
+                  </StyledRouterLink>
                 )}
               </NavItem>
             ))}
@@ -202,7 +175,6 @@ const NavigationBar = () => {
         </MobileMenuContainer>
       )}
 
-      {/* Empty Search Message */}
       {emptySearchMessageVisible && (
         <EmptySearchMessage>Por favor, digite um nick.</EmptySearchMessage>
       )}
@@ -210,5 +182,4 @@ const NavigationBar = () => {
   );
 };
 
-// The export matches the component name, regardless of the filename index.jsx
 export default NavigationBar;

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
+import { Link as RouterLink } from 'react-router-dom';
 
-// Keep your animation if you like it
 const gradientAnimation = keyframes`
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -8,274 +8,345 @@ const gradientAnimation = keyframes`
 `;
 const breathe = keyframes`
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); } // Reduced scale for subtlety
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 `;
 
-// --- Main Navbar Container ---
 export const NavbarContainer = styled.nav`
   color: #a0a0a0;
   width: 100%;
-  background: #121314; // Use a dark background like the example
-  /* box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); */ // Optional shadow
-  position: relative; // Needed for absolute positioning of mobile menu
-  z-index: 100; // Ensure navbar stays on top
+  background-color: #101114; /* Cor sólida escura */
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 0; /* Padding vertical na barra */
+
+  body.light-mode & {
+     background-color: #ffffff; /* Cor sólida clara */
+     border-bottom-color: rgba(0, 0, 0, 0.1);
+     color: #333; /* Ajuste cor padrão do texto */
+  }
 `;
 
 export const NavContent = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between; // Key for spacing elements
-  padding: 10px 20px; // Adjust padding as needed
-  gap: 15px; // Add some gap between main sections
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px; /* Padding horizontal dentro do conteúdo centralizado */
+  box-sizing: border-box;
+  position: relative; /* Necessário para posicionar os links */
+  height: 60px; /* Definir altura fixa para ajudar no posicionamento absoluto dos links */
 
-  @media (min-width: 1024px) { // Match FlameMC's lg breakpoint
-    padding: 10px 48px; // lg:px-12 equivalent
-  }
-  @media (min-width: 1280px) { // Match FlameMC's desktop breakpoint
-    padding: 10px 96px; // desktop:px-24 equivalent
+  @media (min-width: 1024px) {
+    padding: 0 40px;
   }
 `;
 
 export const LogoLink = styled.div`
-  display: inline-block; /* Keeps it from expanding unnecessarily */
-  line-height: 0; /* Helps remove extra space below the image if it's display: block */
+  display: inline-block;
+  line-height: 0;
 `;
 
 export const Logo = styled.img`
   height: 50px;
   width: auto;
-  display: block; /* Good practice for images to avoid extra bottom space */
+  display: block;
   transition: transform 0.3s ease;
-
-  /* Applying hover directly to Logo now might be simpler */
-  /* &:hover {
-    transform: scale(1.1);
-  } */
 
   @media (max-width: 768px) {
     height: 40px;
   }
 `;
 
-// --- Desktop Navigation Links ---
-// This container is hidden on mobile
 export const NavLinksContainerDesktop = styled.div`
-  display: none; // Hidden by default
+  display: none; /* Escondido em mobile */
 
-  @media (min-width: 769px) { // Show only on larger screens (adjust breakpoint if needed)
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1; // Allow links to take up space but centered
+  @media (min-width: 769px) {
+    display: block; /* Mudar para block ou flex dependendo do conteúdo interno */
+    position: absolute; /* Posicionamento absoluto */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Técnica de centralização */
+    width: auto; /* Para não ocupar 100% */
   }
 `;
 
-// --- Right Section (Search, Hamburger, etc.) ---
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px; // Space between items in the right section
-  flex-shrink: 0; // Prevent this section from shrinking too much
+  gap: 15px;
+  flex-shrink: 0;
 `;
 
-// --- Navigation Links List (Used in both Desktop and Mobile) ---
 export const NavLinksList = styled.ul`
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
   align-items: center;
-  gap: 20px; // Space between desktop links
+  gap: 20px;
 
-  // Styles specific to when inside the Desktop container
-  ${NavLinksContainerDesktop} & {
-     // Desktop specific styles for UL if needed
-     justify-content: center; // Center links within the desktop container
+  ${NavLinksContainerDesktop} & { /* Estilos para lista dentro do container desktop */
+     justify-content: center; /* Centraliza os itens se houver espaço extra */
   }
 
-  // Styles specific to when inside the Mobile container
-  ${'' /* This will be styled within MobileMenuContainer */}
-  flex-direction: column; // Default stack vertically for mobile
-  width: 100%;
-  padding: 20px 0; // Padding inside mobile menu
-
   @media (min-width: 769px) {
-    flex-direction: row; // Row layout on desktop
+    flex-direction: row;
     padding: 0;
     width: auto;
   }
 `;
 
 export const NavItem = styled.li`
-  // Styles for individual list items
-  width: 100%; // Take full width in mobile menu column layout
+
+  a {
+    text-decoration: none;
+  }
 
   @media (min-width: 769px) {
-    width: auto; // Auto width on desktop
+    width: auto;
   }
 `;
 
-export const NavLinkStyled = styled.div` // Using div as it's wrapped by Link or <a>
-  color: #a0a0a0; // Default color
+export const StyledRouterLink = styled(RouterLink)`
+    text-decoration: none;
+    display: block;
+`;
+
+
+export const NavLinkStyled = styled.div`
+  color: #a0a0a0;
   text-decoration: none;
-  font-size: 1rem; // text-base equivalent
-  font-weight: bold; // font-bold
-  transition: color 0.2s ease-in-out; // duration-200 ease-in-out
+  font-size: 1rem;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 15px; // Padding for clickable area
-  justify-content: center; // Center text/icon within the link
+  padding: 10px 15px;
+  justify-content: center;
+  border-radius: 4px;
+  white-space: nowrap; /* Evita quebra de linha nos links */
 
   &:hover {
-    color: #0ff; // hover:text-primary (adjust #0ff if your primary is different)
+    color: #0ff;
+    background-color: rgba(255, 255, 255, 0.05);
   }
 
   svg {
-    font-size: 1.1rem; // Adjust icon size if needed
+    font-size: 1.1rem;
   }
 
   @media (min-width: 769px) {
-    padding: 5px 0; // Less vertical padding on desktop
-    justify-content: flex-start; // Align left on desktop
+    padding: 5px 10px;
+    justify-content: flex-start;
   }
+
+   body.light-mode & {
+     color: #555; /* Cor padrão texto light */
+      &:hover {
+        color: #0056b3; /* Cor hover light */
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+   }
 `;
 
-// --- Hamburger Button ---
-// Displayed only on mobile
 export const HamburgerButton = styled.button`
   background: none;
   border: none;
-  color: #a0a0a0; // Icon color
-  font-size: 1.8rem; // Adjust size
+  color: #a0a0a0;
+  font-size: 1.8rem;
   cursor: pointer;
-  display: block; // Visible by default (for mobile-first approach)
+  display: block;
   padding: 5px;
-  z-index: 101; // Ensure it's above NavContent if needed
+  z-index: 101;
 
   &:hover {
-    color: #0ff; // Hover color
+    color: #0ff;
   }
 
   @media (min-width: 769px) {
-    display: none; // Hide on desktop
+    display: none;
   }
+
+   body.light-mode & {
+     color: #333;
+      &:hover {
+        color: #0056b3;
+      }
+   }
 `;
 
-// --- Mobile Menu Container ---
-// Appears when hamburger is clicked
 export const MobileMenuContainer = styled.div`
   position: absolute;
-  top: 100%; // Position below the navbar
+  top: 100%;
   left: 0;
   width: 100%;
-  background-color: #18191b; // Slightly different dark background
-  border-top: 1px solid #333; // Separator line
-  display: flex; // Use flex for the list inside
+  background-color: #101114; /* Fundo sólido igual navbar */
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px 0;
+  padding: 0; /* Remover padding para itens ocuparem tudo */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 99; // Below navbar but above page content
+  z-index: 999;
+  animation: slideDown 0.3s ease-out;
 
-  // Hide by default, shown by JS state, but keep structure for clarity
-  // Actual visibility is controlled by conditional rendering in the component
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-   /* Add animations for appearing/disappearing */
-   animation: slideDown 0.3s ease-out;
-
-   @keyframes slideDown {
-     from {
-       opacity: 0;
-       transform: translateY(-10px);
-     }
-     to {
-       opacity: 1;
-       transform: translateY(0);
-     }
+   ${NavLinksList} {
+     flex-direction: column;
+     gap: 0px;
+     width: 100%;
+     padding: 0;
+     background-color: transparent; /* Remover fundo da lista no mobile */
+       body.light-mode & {
+           background-color: transparent;
+       }
    }
 
-   ${NavLinksList} { // Target the UL inside the mobile menu
-     flex-direction: column; // Ensure column layout
-     gap: 5px; // Adjust gap for mobile links
-   }
+    ${NavItem} {
+        width: 100%;
+         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+         &:last-child {
+             border-bottom: none;
+         }
+         body.light-mode & {
+             border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+
 
    ${NavLinkStyled} {
-     justify-content: center; // Center mobile links
+     justify-content: center;
      font-size: 1.1rem;
-     padding: 12px 20px; // Larger clickable area for mobile
-     width: 100%; // Make link take full width of NavItem
+     padding: 15px 20px;
+     width: 100%;
      text-align: center;
+     border-radius: 0;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+      }
+      body.light-mode & {
+         &:hover {
+             background-color: rgba(0, 0, 0, 0.08);
+          }
+      }
    }
+
+    body.light-mode & {
+     background-color: #ffffff; /* Fundo sólido claro */
+     border-top-color: rgba(0, 0, 0, 0.1);
+    }
 `;
 
 
-// --- Search ---
 export const SearchForm = styled.form`
   display: flex;
   align-items: center;
-  position: relative; // For potential message positioning
-  background-color: #25262a; // bg-secondary-black
-  border: 1px solid #444; // border-primary-gray (adjust color)
-  border-radius: 6px; // rounded-md
-  padding-left: 10px; // To make space for icon inside if needed
+  position: relative;
+  background-color: #25262a; /* Mantém o fundo escuro */
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding-left: 10px;
+  height: 38px;
+   transition: background-color 0.2s ease;
+
+   &:focus-within {
+      background-color: #303136;
+      border-color: #555;
+   }
+
+
+  body.light-mode & {
+    background-color: #e9ecef; /* Fundo claro para search */
+    border-color: #ced4da;
+     &:focus-within {
+        background-color: #dee2e6;
+        border-color: #adb5bd;
+     }
+  }
 `;
 
 export const SearchInput = styled.input`
-  padding: 8px 12px 8px 8px; // py-2 pl-4 pr-5/12 (adjust pr as needed)
-  border: none; // Remove default border
-  background-color: transparent; // Use parent background
-  color: #fff; // text-white
-  font-size: 0.8rem; // text-xs
-  width: 150px; // Adjust width as needed
+  padding: 8px 10px 8px 4px;
+  border: none;
+  background-color: transparent;
+  color: #e8eaed;
+  font-size: 0.85rem;
+  width: 150px;
   outline: none;
+  transition: width 0.3s ease;
 
   &::placeholder {
-    color: #888; // placeholder:text-secondary-gray
-    font-size: 0.8rem; // placeholder:text-xs
+    color: #888;
+    font-size: 0.85rem;
   }
 
-  @media (max-width: 480px) {
-     width: 100px; // Shorter on very small screens
+  &:focus {
+    width: 200px;
+  }
+
+  body.light-mode & {
+     color: #212529; /* Texto escuro no input claro */
+      &::placeholder {
+         color: #6c757d;
+      }
   }
 `;
 
 export const SearchButton = styled.button`
-  padding: 8px 10px; // Match input vertical padding
+  padding: 8px 10px;
   border: none;
-  background-color: transparent; // Transparent background
-  color: #888; // text-secondary-gray
+  background-color: transparent;
+  color: #888;
   cursor: pointer;
-  display: flex; // Align icon properly
+  display: flex;
   align-items: center;
   justify-content: center;
+  transition: color 0.2s ease;
+
 
   &:hover {
-    color: #ccc; // Slight hover effect
+    color: #ccc;
   }
 
   svg {
     font-size: 1rem;
   }
+
+   body.light-mode & {
+     color: #6c757d;
+     &:hover {
+         color: #343a40;
+     }
+   }
 `;
 
-// --- Empty Search Message ---
-// Position adjusted slightly
 export const EmptySearchMessage = styled.div`
   position: absolute;
-  top: calc(100% + 5px); // Position below the navbar
-  right: 20px; // Align near the search input area
-  background-color: rgba(255, 0, 0, 0.8);
+  top: calc(100% + 8px);
+  right: 20px;
+  background-color: rgba(240, 71, 71, 0.9);
   color: white;
-  padding: 5px 10px;
+  padding: 6px 10px;
   border-radius: 4px;
   font-size: 0.8rem;
-  z-index: 10; // Ensure visibility
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+   pointer-events: none;
+
 
   @media (max-width: 768px) {
-    // Keep similar positioning or adjust as needed for mobile
      right: 10px;
-     width: auto; // Don't force width
   }
 `;

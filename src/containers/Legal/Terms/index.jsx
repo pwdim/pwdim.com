@@ -41,7 +41,7 @@ function TermsOfServicePage() {
       <Section>
         <SectionTitle>1. Aceitação dos Termos</SectionTitle>
         <Paragraph>
-          Ao acessar e utilizar este website (doravante denominado "o Site"), o usuário declara sua irrestrita concordância com os presentes Termos de Serviço. Caso não haja concordância com quaisquer das disposições aqui apresentadas, a utilização do Site não deverá ser efetuada.
+          Ao acessar e utilizar este website, o usuário declara sua irrestrita concordância com os presentes Termos de Serviço. Caso não haja concordância com quaisquer das disposições aqui apresentadas, a utilização do Site não deverá ser efetuada.
         </Paragraph>
       </Section>
 
@@ -118,7 +118,8 @@ function TermsOfServicePage() {
       <Section>
         <SectionTitle>9. Do Contato</SectionTitle>
         <Paragraph>
-        Em caso de dúvidas ou quaisquer preocupações relacionadas aos presentes Termos de Serviço, o usuário poderá entrar em contato através do formulário de contato disponível no site.
+        Em caso de dúvidas ou quaisquer preocupações relacionadas à presente Política de Privacidade, 
+        o usuário poderá entrar em contato através das opções exibidas <strong><a href="/links">aqui</a></strong>.
         </Paragraph>
       </Section>
 

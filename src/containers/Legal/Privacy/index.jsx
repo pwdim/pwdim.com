@@ -84,7 +84,8 @@ function PrivacyPolicyPage() {
       <Section>
         <SectionTitle>7. Contato</SectionTitle>
         <Paragraph>
-          Em caso de dúvidas ou quaisquer preocupações relacionadas à presente Política de Privacidade, o usuário poderá entrar em contato através do formulário de contato disponível no site.
+          Em caso de dúvidas ou quaisquer preocupações relacionadas à presente Política de Privacidade, 
+          o usuário poderá entrar em contato através das opções exibidas <strong><a href="/links">aqui</a></strong>.
         </Paragraph>
       </Section>
       
