@@ -21,14 +21,14 @@ const MusicPlayerUI = ({
             <S.SongTitle>{songTitle}</S.SongTitle>
             <S.ArtistName>{artistName}</S.ArtistName>
           </div>
-          <S.LikeButton disabled>
+          {/* <S.LikeButton disabled>
             <FaHeart />
-          </S.LikeButton>
+          </S.LikeButton> */}
         </S.SongDetails>
 
-        <S.ProgressBarContainer>
+        {/* <S.ProgressBarContainer>
           <S.ProgressBarFill style={{ width: '0%' }} />
-        </S.ProgressBarContainer>
+        </S.ProgressBarContainer> */}
 
         <S.ControlsRow>
           <S.ControlButton disabled title="Aleatório">

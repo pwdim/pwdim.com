@@ -17,11 +17,11 @@ export const HomePageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* Centraliza MainContent verticalmente */
+  justify-content: center;
   padding: 40px 20px;
   text-align: center;
-  background-color: #101114;
-  background-image: url('/src/assets/background/image_bbdd42.jpg'); /* VERIFIQUE CAMINHO */
+  background-color: transparent;
+  background-image: none;
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
@@ -32,6 +32,18 @@ export const HomePageContainer = styled.div`
   }
 `;
 
+export const BackgroundVideo = styled.video`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 1;
+`;
+
+
 export const MainContent = styled.div`
   position: relative;
   z-index: 1;
@@ -39,8 +51,15 @@ export const MainContent = styled.div`
   max-width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza itens filhos horizontalmente */
+  align-items: center;
   color: #e8eaed;
+  background-color: rgba(25, 26, 30, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
 
   body.light-mode & {
     color: #202124;
@@ -53,6 +72,12 @@ export const ProfileSection = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 450px;
+
+  body.light-mode & {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.1);
+  }
 `;
 
 export const AvatarContainer = styled.div`
@@ -98,7 +123,7 @@ export const StatusIndicator = styled.span`
    width: 22px;
    height: 22px;
    border-radius: 50%;
-   border: 4px solid rgba(16, 17, 20, 0.8);
+   border: 4px solid rgba(25, 26, 30, 0.8);
    background-color: ${props => getStatusColor(props.$status)};
    z-index: 3;
    box-sizing: border-box;
@@ -115,6 +140,7 @@ export const UsernameDisplay = styled.h1`
   color: #ffffff;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
 
+
   body.light-mode & {
     color: #111;
     text-shadow: none;
@@ -129,6 +155,7 @@ export const FullUsername = styled.span`
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 
 
+
   body.light-mode & {
      color: #5f6368;
      text-shadow: none;
@@ -140,6 +167,7 @@ export const StatusSection = styled.div`
    display: flex;
    align-items: center;
    justify-content: center;
+
 `;
  export const StatusEmoji = styled.span`
      margin-right: 6px;
@@ -152,6 +180,7 @@ export const StatusSection = styled.div`
     margin: 0;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     line-height: 1.4;
+
 
     body.light-mode & {
        color: #6c757d;
@@ -166,7 +195,8 @@ export const ActivitySection = styled.div`
     gap: 10px;
     margin-bottom: 15px;
     width: 100%;
-    max-width: 350px;
+
+    background-color: transparent;
 `;
 
 export const ActivityItem = styled.div`
@@ -175,14 +205,14 @@ export const ActivityItem = styled.div`
     justify-content: flex-start;
     gap: 10px;
     padding: 8px 12px;
-    background-color: rgba(16, 17, 20, 0.6);
+    background-color: rgba(0, 0, 0, 0.15);
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
     box-sizing: border-box;
 
     body.light-mode & {
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: rgba(255, 255, 255, 0.3);
       border-color: rgba(0, 0, 0, 0.08);
     }
 `;
@@ -210,12 +240,14 @@ export const ActivityText = styled.div`
     flex-grow: 1;
     color: #dcddde;
 
+
     div {
         font-size: 0.8rem;
         color: #b9bbbe;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+
         body.light-mode & { color: #4f5660; }
     }
     strong {
@@ -225,6 +257,7 @@ export const ActivityText = styled.div`
          white-space: nowrap;
          text-overflow: ellipsis;
          overflow: hidden;
+
          body.light-mode & { color: #060607; }
     }
 
@@ -234,6 +267,7 @@ export const ActivityText = styled.div`
 `;
 
  export const SpotifySection = styled(ActivityItem)`
+
  `;
 
 export const AlbumArt = styled.img`
@@ -245,9 +279,11 @@ export const AlbumArt = styled.img`
 `;
 
 export const SongInfo = styled(ActivityText)`
+
     strong {
         font-size: 0.9rem;
         margin-bottom: 1px;
+
     }
     span {
         display: block;
@@ -256,6 +292,7 @@ export const SongInfo = styled(ActivityText)`
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+
          body.light-mode & { color: #4f5660; }
     }
      div { display: none; }
@@ -263,26 +300,26 @@ export const SongInfo = styled(ActivityText)`
 
  export const LinksSection = styled.div`
    display: flex;
-   flex-direction: row; /* Muda para linha */
-   justify-content: center; /* Centraliza os ícones na linha */
-   gap: 20px; /* Espaço entre os ícones */
+   flex-direction: row;
+   justify-content: center;
+   gap: 20px;
    width: 100%;
    max-width: 500px;
-   margin-top: 35px; /* Ajuste a margem conforme necessário */
+   margin-top: 35px;
+   background-color: transparent;
  `;
 
- /* Removido linkButtonStyles pois será diferente */
 
  export const LinkButton = styled.a`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px; /* Tamanho do botão circular */
+    width: 48px;
     height: 48px;
-    background-color: rgba(30, 31, 34, 0.7); /* Fundo similar ao UIVerse */
-    color: #b0b3b8; /* Cor do ícone padrão */
+    background-color: rgba(30, 31, 34, 0.4);
+    color: #b0b3b8;
     text-decoration: none;
-    border-radius: 50%; /* Círculo */
+    border-radius: 50%;
     transition: all 0.2s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -290,9 +327,9 @@ export const SongInfo = styled(ActivityText)`
     -webkit-backdrop-filter: blur(5px);
 
     &:hover {
-      background-color: rgba(45, 46, 49, 0.9);
-      color: #ffffff; /* Ícone branco no hover */
-      transform: scale(1.1); /* Efeito de zoom */
+      background-color: rgba(45, 46, 49, 0.6);
+      color: #ffffff;
+      transform: scale(1.1);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
@@ -301,13 +338,13 @@ export const SongInfo = styled(ActivityText)`
     }
 
     body.light-mode & {
-      background-color: rgba(255, 255, 255, 0.8);
+      background-color: rgba(255, 255, 255, 0.5);
       color: #5f6368;
       border-color: rgba(0, 0, 0, 0.1);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 
       &:hover {
-        background-color: rgba(248, 249, 250, 1);
+        background-color: rgba(248, 249, 250, 0.7);
         color: #202124;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
@@ -315,90 +352,66 @@ export const SongInfo = styled(ActivityText)`
  `;
 
  export const IconWrapper = styled.span`
-    margin: 0; /* Remove margem extra */
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6em; /* Tamanho do ícone dentro do círculo */
-    /* A cor é herdada do LinkButton */
+    font-size: 1.6em;
     transition: color 0.2s ease;
  `;
 
- /* export const LinkText = styled.span` ... Removido */
 
  export const ErrorMessage = styled.p`
    margin-top: 10px;
    color: #f8d7da;
-   background-color: rgba(220, 53, 69, 0.6);
+   background-color: rgba(220, 53, 69, 0.4);
+   backdrop-filter: blur(5px);
+   -webkit-backdrop-filter: blur(5px);
    padding: 8px 12px;
    border-radius: 5px;
    font-size: 0.9rem;
    font-weight: 500;
    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+   border: 1px solid rgba(220, 53, 69, 0.6);
 
    body.light-mode & {
        color: #721c24;
-       background-color: rgba(248, 215, 218, 0.8);
+       background-color: rgba(248, 215, 218, 0.6);
        text-shadow: none;
+       border-color: rgba(114, 28, 36, 0.8);
    }
  `;
 
- export const MusicControlButton = styled.button`
-    position: fixed;
-    bottom: 20px; /* Movido para baixo conforme última instrução */
-    left: 20px;
-    background-color: rgba(30, 31, 34, 0.7);
-    color: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    transition: all 0.2s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
-
-    &:hover {
-      background-color: rgba(45, 46, 49, 0.8);
-      color: #ffffff;
-      transform: scale(1.05);
-    }
-
-    &:active {
-      transform: scale(0.98);
-    }
-
-    svg {
-      font-size: 1.2rem;
-      display: block;
-    }
+ export const MusicPlayerWrapper = styled.div`
+    position: relative;
+    z-index: 2;
+    padding: 15px;
+    margin-bottom: 30px;
+    background-color: rgba(40, 40, 40, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    max-width: 350px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 
     body.light-mode & {
-       background-color: rgba(255, 255, 255, 0.75);
-       color: rgba(0, 0, 0, 0.7);
-       border: 1px solid rgba(0, 0, 0, 0.1);
-       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
-       &:hover {
-         background-color: rgba(248, 249, 250, 0.9);
-         color: #000000;
-       }
-       &:active {
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-      }
+      background-color: rgba(255, 255, 255, 0.65);
+      border-color: rgba(0, 0, 0, 0.1);
+       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
+ `;
+
+
+ export const MusicControlButton = styled.button`
+
  `;
 
  export const NowPlayingDisplay = styled.div`
     position: fixed;
-    bottom: 20px; /* Mantido no canto inferior esquerdo */
-    left: 20px;  /* Sobrescreve a posição do MusicControlButton se ambos estiverem ativos */
-    /* Ajuste a posição de um deles se precisar de ambos visíveis */
-    background-color: rgba(40, 40, 40, 0.85);
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(40, 40, 40, 0.7);
     color: #ffffff;
     padding: 10px 12px;
     border-radius: 6px;
@@ -413,7 +426,7 @@ export const SongInfo = styled(ActivityText)`
     border: 1px solid rgba(255, 255, 255, 0.1);
 
     body.light-mode & {
-        background-color: rgba(240, 240, 240, 0.9);
+        background-color: rgba(240, 240, 240, 0.75);
         color: #111111;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(0, 0, 0, 0.05);
@@ -434,6 +447,7 @@ export const SongInfoWrapper = styled.div`
     align-items: flex-start;
     line-height: 1.3;
     overflow: hidden;
+
 `;
 
 export const SongTitle = styled.span`
@@ -445,6 +459,7 @@ export const SongTitle = styled.span`
     width: 100%;
     max-width: 180px;
     font-size: 0.9em;
+
 
     body.light-mode & {
        color: #111111;
@@ -460,7 +475,15 @@ export const ArtistName = styled.span`
     width: 100%;
     max-width: 180px;
 
+
     body.light-mode & {
        color: #555555;
     }
+`;
+
+export const IconImage = styled.img`
+  width: 65%;
+  height: auto;
+  max-height: 65%;
+  display: block;
 `;

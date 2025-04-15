@@ -46,41 +46,39 @@ const getClanStyles = (clanName) => {
 
 
 export const GlobalStyle = createGlobalStyle`
-  // ... (keep :root variables and body styles) ...
+
   :root {
-    // --- Dark Mode Colors ---
     --dark-bg-color: linear-gradient(45deg, #121314, #181a1b, #121314);
     --dark-text-color: #fff;
-    --dark-link-color: #0ff; // Cyan
-    --dark-button-bg: #0ff; // Cyan
+    --dark-link-color: #0ff;
+    --dark-button-bg: #0ff;
     --dark-button-text: #000;
     --dark-nav-bg: #101114;
     --dark-nav-text: #a0a0a0;
-    --dark-nav-hover: #0ff; // Cyan
+    --dark-nav-hover: #0ff;
     --dark-dropdown-bg: #333;
     --dark-dropdown-text: #a0a0a0;
-    --dark-dropdown-hover: rgba(0, 255, 255, 0.2); // Cyan Transparent
+    --dark-dropdown-hover: rgba(0, 255, 255, 0.2);
     --dark-section-bg: #1c1d21;
     --dark-project-bg: #25262a;
     --dark-clan-color: #aaa;
 
-    // --- Light Mode Colors ---
-    --light-bg-color: linear-gradient(45deg,rgb(248, 235, 247),rgb(255, 239, 249),rgb(255, 255, 255)); // Adjusted gradient slightly pinkish
-    --light-text-color:rgb(80, 80, 80); // Darker gray for better contrast
-    --light-link-color: #FF1493; // Deep Pink
-    --light-button-bg: rgb(139, 0, 139); // Dark Magenta
+    --light-bg-color: linear-gradient(45deg,rgb(248, 235, 247),rgb(255, 239, 249),rgb(255, 255, 255));
+    --light-text-color:rgb(80, 80, 80);
+    --light-link-color: #FF1493;
+    --light-button-bg: rgb(139, 0, 139);
     --light-button-text: #fff;
-    --light-nav-bg: #f8f0f8; // Lighter pinkish gray
-    --light-nav-text: #504050; // Darker pinkish gray text
-    --light-nav-hover: #C71585; // Medium Violet Red (Darker Pink)
-    --light-dropdown-bg: #f8f0f8; // Lighter pinkish gray
-    --light-dropdown-text: #504050; // Darker pinkish gray text
-    --light-dropdown-hover: rgba(255, 20, 147, 0.2); // Deep Pink Transparent
-    --light-section-bg:rgb(241, 211, 229); // Lighter pinkish section
-    --light-project-bg:rgb(255, 248, 252); // Very light pink project bg
-    --light-clan-color: #8B008B; // Dark Magenta for clan names
+    --light-nav-bg: #f8f0f8;
+    --light-nav-text: #504050;
+    --light-nav-hover: #C71585;
+    --light-dropdown-bg: #f8f0f8;
+    --light-dropdown-text: #504050;
+    --light-dropdown-hover: rgba(255, 20, 147, 0.2);
+    --light-section-bg:rgb(241, 211, 229);
+    --light-project-bg:rgb(255, 248, 252);
+    --light-clan-color: #8B008B;
 
-    background: var(--dark-bg-color);
+   
   }
 
   body {
@@ -90,8 +88,12 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Belanosima', sans-serif;
     overflow-x: hidden;
     transition: background-color 0.5s ease, color 0.5s ease;
-    background: var(--dark-bg-color);
+    background: var(--dark-bg-color); 
     font-size: 16px;
+
+    &.is-homepage {
+      background: none; 
+    }
 
     @media (max-width: 768px) {
       font-size: 15px;
@@ -100,7 +102,12 @@ export const GlobalStyle = createGlobalStyle`
 
   body.light-mode {
     color: var(--light-text-color);
-    background: var(--light-bg-color);
+    background: var(--light-bg-color); 
+
+    &.is-homepage {
+       background: none; 
+
+    }
   }
 
   .mobile-table-scroll {
@@ -127,7 +134,7 @@ export const Container = styled.div`
 
   body.light-mode & {
     background-color: var(--light-project-bg);
-    box-shadow: 0 0 10px rgba(255, 20, 147, 0.1); // Pinkish shadow
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.1);
   }
 
   @media (max-width: 768px) {
@@ -182,7 +189,7 @@ export const SectionTitle = styled.h2`
 
   body.light-mode & {
     color: var(--light-nav-text);
-    border-bottom: 1px solid #ddd; // Keep neutral border
+    border-bottom: 1px solid #ddd;
   }
 
    @media (max-width: 768px) {
@@ -243,9 +250,9 @@ export const SearchContainer = styled.div`
     }
 
     &:hover {
-      background-color: rgba(0, 255, 255, 0.8); // Dark hover cyan
+      background-color: rgba(0, 255, 255, 0.8);
       body.light-mode & {
-        background-color: var(--light-nav-hover); // Light hover pink
+        background-color: var(--light-nav-hover);
       }
     }
   }
@@ -289,7 +296,7 @@ export const ProfileSidebar = styled.div`
 
   body.light-mode & {
       background-color: var(--light-project-bg);
-      box-shadow: 0 2px 4px rgba(255, 20, 147, 0.1); // Pinkish shadow
+      box-shadow: 0 2px 4px rgba(255, 20, 147, 0.1);
   }
 
    @media (max-width: 992px) {
@@ -313,10 +320,10 @@ export const SidebarHeader = styled.div`
   align-items: center;
   margin-bottom: 25px;
   padding: 15px;
-  width: calc(100% - 30px); // Take full width minus padding
+  width: calc(100% - 30px);
 
   body.light-mode & {
-      background-color: rgba(255, 248, 252, 0.8); // Lighten bg in light mode
+      background-color: rgba(255, 248, 252, 0.8);
   }
 
   @media (max-width: 768px) {
@@ -375,17 +382,17 @@ export const SidebarInfo = styled.div`
     border: 2px solid ${props => props.$borderColor || 'transparent'};
 
     body.light-mode & {
-        background-color: rgba(255, 248, 252, 0.8); // Lighten bg in light mode
+        background-color: rgba(255, 248, 252, 0.8);
         color: var(--light-text-color);
          p {
-            color: var(--light-text-color); // Ensure p color is set too
+            color: var(--light-text-color);
          }
     }
 
     p {
       margin-bottom: 8px;
       font-size: 1rem;
-      color: #ddd; // Ensure default color
+      color: #ddd;
     }
 
   @media (max-width: 768px) {
@@ -409,7 +416,7 @@ export const SidebarStats = styled.div`
     text-align: center;
 
     body.light-mode & {
-      color: var(--light-link-color); // Use pink link color
+      color: var(--light-link-color);
     }
   }
 
@@ -433,16 +440,16 @@ export const PlayerStatsContainer = styled.div`
     ${props => lightenDarkenColor(props.rankColor || '#888888', -30)},
     ${props => props.rankColor || '#888888'}
   );
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); // Cyan shadow
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
   padding: 15px;
   border-radius: 10px;
 
   body.light-mode & {
     background: linear-gradient(to right,
-      ${props => lightenDarkenColor(props.rankColor || '#FFC0CB', 30)}, // Lighten pink base
-      ${props => lightenDarkenColor(props.rankColor || '#FFC0CB', 0)} // Pink base
+      ${props => lightenDarkenColor(props.rankColor || '#FFC0CB', 30)},
+      ${props => lightenDarkenColor(props.rankColor || '#FFC0CB', 0)}
     );
-    box-shadow: 0 0 5px rgba(255, 20, 147, 0.3); // Pinkish shadow
+    box-shadow: 0 0 5px rgba(255, 20, 147, 0.3);
   }
 
   @media (max-width: 768px) {
@@ -491,8 +498,8 @@ export const GeneralStatus = styled.div`
   width: 100%;
 
   body.light-mode & {
-      background-color: var(--light-project-bg); // Use project bg
-      box-shadow: 0 2px 4px rgba(255, 20, 147, 0.1); // Pinkish shadow
+      background-color: var(--light-project-bg);
+      box-shadow: 0 2px 4px rgba(255, 20, 147, 0.1);
   }
 
   h3 {
@@ -576,7 +583,7 @@ export const StatsCard = styled.div`
   --black: hsl(240, 15%, 9%);
   --paragraph: hsl(0, 0%, 83%);
   --line: hsl(240, 9%, 17%);
-  --primary: hsl(189, 92%, 58%); // Cyan
+  --primary: hsl(189, 92%, 58%);
 
   position: relative;
   display: flex;
@@ -589,9 +596,9 @@ export const StatsCard = styled.div`
   margin-bottom: 20px;
 
   body.light-mode & {
-    --paragraph: hsl(0, 0%, 40%); // Darker paragraph for light mode
-    --line: hsl(0, 0%, 85%); // Light line for light mode
-    background-color: ${props => lightenDarkenColor(props.rankColor || '#FFC0CB', 20)}; // Lighten pink base
+    --paragraph: hsl(0, 0%, 40%);
+    --line: hsl(0, 0%, 85%);
+    background-color: ${props => lightenDarkenColor(props.rankColor || '#FFC0CB', 20)};
     box-shadow: 0px -16px 24px 0px rgba(0, 0, 0, 0.1) inset;
   }
 
@@ -624,7 +631,7 @@ export const CardBorder = styled.div`
   &::before {
     content: "";
     pointer-events: none;
-    position: absolute; // Changed from fixed
+    position: absolute;
     z-index: 200;
     top: 50%;
     left: 50%;
@@ -632,7 +639,7 @@ export const CardBorder = styled.div`
     transform-origin: center;
     width: 200%;
     height: 10rem;
-    background-image: linear-gradient( // Cyan gradient
+    background-image: linear-gradient(
       0deg,
       hsla(0, 0%, 100%, 0) 0%,
       hsl(189, 100%, 50%) 40%,
@@ -641,13 +648,13 @@ export const CardBorder = styled.div`
     );
     animation: rotate 8s linear infinite;
 
-    body.light-mode & { // Pink gradient for light mode
+    body.light-mode & {
         background-image: linear-gradient(
           0deg,
-          hsla(328, 100%, 90%, 0) 0%, // Light pink transparent
-          hsl(328, 100%, 54%) 40%, // Deep Pink HSL
-          hsl(328, 100%, 54%) 60%, // Deep Pink HSL
-          hsla(328, 100%, 90%, 0) 100% // Light pink transparent
+          hsla(328, 100%, 90%, 0) 0%,
+          hsl(328, 100%, 54%) 40%,
+          hsl(328, 100%, 54%) 60%,
+          hsla(328, 100%, 90%, 0) 100%
        );
     }
   }
@@ -680,7 +687,7 @@ export const CardTitle = styled.span`
   margin-bottom: 0.7rem;
 
   body.light-mode & {
-      color: var(--light-text-color); // Use text color
+      color: var(--light-text-color);
   }
 
   @media (max-width: 768px) {
@@ -745,7 +752,7 @@ export const StatValue = styled.span`
   text-align: right;
 
   body.light-mode & {
-      color: ${props => props.rankColor || '#C71585'}; // Darker pink default
+      color: ${props => props.rankColor || '#C71585'};
   }
 
    @media (max-width: 768px) {
@@ -813,9 +820,9 @@ export const NavLink = styled.button`
   }
 
   &:hover {
-    background-color: rgba(0, 255, 255, 0.1); // Cyan hover dark
+    background-color: rgba(0, 255, 255, 0.1);
     body.light-mode & {
-      background-color: rgba(255, 20, 147, 0.1); // Pink hover light
+      background-color: rgba(255, 20, 147, 0.1);
     }
   }
 
@@ -824,7 +831,7 @@ export const NavLink = styled.button`
     text-decoration: underline;
     background-color: rgba(0, 255, 255, 0.05);
      body.light-mode & {
-      background-color: rgba(255, 20, 147, 0.05); // Pink active light
+      background-color: rgba(255, 20, 147, 0.05);
     }
   }
 
@@ -841,11 +848,11 @@ export const ProfileImage = styled.img`
   margin-bottom: 30px;
   object-fit: cover;
   border: 3px solid var(--dark-link-color);
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); // Cyan shadow dark
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
 
   body.light-mode & {
     border-color: var(--light-link-color);
-    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5); // Pink shadow light
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
   }
 
   @media (max-width: 768px) {
@@ -864,13 +871,13 @@ export const Username = styled.h2`
   font-size: 1.7rem;
   margin-bottom: 40px;
   color: var(--dark-link-color);
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7); // Cyan shadow dark
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
   animation: none;
   text-align: center;
 
   body.light-mode & {
     color: var(--light-link-color);
-    text-shadow: 0 0 10px rgba(255, 20, 147, 0.7); // Pink shadow light
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.7);
   }
 
   @media (max-width: 768px) {
@@ -930,7 +937,7 @@ export const Glass = styled.a`
     color: var(--light-link-color);
     background: linear-gradient(rgba(0, 0, 0, 0.05), transparent);
     border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.1); // Lighter shadow
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.1);
   }
 
   &::before {
@@ -992,7 +999,7 @@ export const Footer = styled.footer`
   padding: 10px 20px;
 
   body.light-mode & {
-      color: var(--light-nav-text); // Use nav text for better visibility
+      color: var(--light-nav-text);
   }
 
   @media (max-width: 768px) {
@@ -1006,7 +1013,7 @@ export const CopyMessageTop = styled.div`
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0, 255, 255, 0.8); // Cyan dark
+  background-color: rgba(0, 255, 255, 0.8);
   color: #121314;
   padding: 10px 20px;
   border-radius: 8px;
@@ -1015,7 +1022,7 @@ export const CopyMessageTop = styled.div`
   z-index: 1000;
 
   body.light-mode & {
-    background-color: rgba(255, 20, 147, 0.8); // Pink light
+    background-color: rgba(255, 20, 147, 0.8);
     color: #fff;
   }
 
@@ -1041,8 +1048,8 @@ export const RankBadge = styled.span`
   display: inline-block;
 
   body.light-mode & {
-    color: var(--light-button-text); // Ensure good contrast on possibly varied pink BG
-    background-color: ${props => props.$backgroundColor || '#C71585'}; // Use darker pink default
+    color: var(--light-button-text);
+    background-color: ${props => props.$backgroundColor || '#C71585'};
   }
 
    @media (max-width: 768px) {
@@ -1064,7 +1071,7 @@ export const GeneralInfoContainer = styled.div`
 
   body.light-mode & {
       background-color: var(--light-project-bg);
-      box-shadow: 0 2px 4px rgba(255, 20, 147, 0.1); // Pinkish shadow
+      box-shadow: 0 2px 4px rgba(255, 20, 147, 0.1);
   }
 
   @media (max-width: 768px) {
@@ -1229,6 +1236,9 @@ export const RightColumn = styled.div`
   padding: 15px;
   border-radius: 25px;
   flex-grow: 1;
+  margin: auto 1vw;
+  margin-right: 10vw;
+  margin-left: 10vw;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 
   body.light-mode & {
@@ -1243,11 +1253,11 @@ export const RightColumn = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 100%; // Keep 100% width on mobile stack unless parent constrains it
+    width: 100%;
     padding: 10px;
     border-radius: 15px;
     order: 2;
-    box-sizing: border-box; // Include padding in width
+    box-sizing: border-box;
   }
 `;
 
@@ -1287,7 +1297,7 @@ export const BasicInfo = styled.div`
   align-items: center;
 
   body.light-mode & {
-      border-color: ${props => props.$borderColor || 'rgba(255, 20, 147, 0.2)'}; // Subtle pink border
+      border-color: ${props => props.$borderColor || 'rgba(255, 20, 147, 0.2)'};
   }
 
   @media (max-width: 768px) {
@@ -1312,7 +1322,7 @@ export const InfoCard = styled.div`
 
   body.light-mode & {
       background-color: var(--light-project-bg);
-       border-color: ${props => props.$borderColor || 'rgba(255, 20, 147, 0.2)'}; // Subtle pink border
+       border-color: ${props => props.$borderColor || 'rgba(255, 20, 147, 0.2)'};
   }
 
 
@@ -1357,23 +1367,23 @@ export const MinigamesGrid = styled.div`
   display: grid;
   gap: 12px;
   padding: 5px 0 0 0;
-  width: 100%; 
-  max-width: 95%; 
-  margin: 0 auto; 
+  width: 100%;
+  max-width: 95%;
+  margin: 0 auto;
   box-sizing: border-box;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
    @media (max-width: 768px) {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 10px;
       padding: 5px 0 0 0;
-      max-width: 100%; 
+      max-width: 100%;
    }
 
    @media (max-width: 480px) {
        grid-template-columns: 1fr;
        gap: 15px;
-       max-width: 95%; 
+       max-width: 95%;
    }
 `;
 
@@ -1475,8 +1485,8 @@ export const CategoryButton = styled.button`
     box-shadow: 0 0 0 0 black;
 
     body.light-mode & {
-        background-color: var(--light-button-bg); // Dark pink
-        color: var(--light-button-text); // White
+        background-color: var(--light-button-bg);
+        color: var(--light-button-text);
         border-color: var(--light-button-bg);
         box-shadow: 0 0 0 0 var(--light-button-bg);
 
@@ -1568,10 +1578,10 @@ export const LeaderboardPageContainer = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 0 5px; // Reduce padding slightly for centering effect
+    padding: 0 5px;
     gap: 20px;
     margin: 15px auto;
-    align-items: center; // Center items when stacked
+    align-items: center;
   }
 `;
 
@@ -1599,12 +1609,12 @@ export const ModeSidebar = styled.div`
   }
 
   @media (max-width: 768px) {
-     width: 95%; 
+     width: 95%;
      padding: 15px;
      margin-bottom: 0;
      border-radius: 5px;
-     margin-left: auto; 
-     margin-right: auto; 
+     margin-left: auto;
+     margin-right: auto;
 
      h3 {
          font-size: 1rem;
@@ -1631,7 +1641,7 @@ export const LeaderboardDisplayContainer = styled.div`
   background-color: var(--dark-project-bg);
   padding: 25px; border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  width: 100%; 
+  width: 100%;
 
   h2 {
       text-align: center; color: var(--dark-link-color);
@@ -1646,12 +1656,12 @@ export const LeaderboardDisplayContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-      width: 95%; 
+      width: 95%;
       padding: 15px;
       border-radius: 5px;
-      margin-left: auto; 
-      margin-right: auto; 
-      flex-grow: 0; 
+      margin-left: auto;
+      margin-right: auto;
+      flex-grow: 0;
 
       h2 {
           font-size: 1.4rem;
@@ -1709,7 +1719,7 @@ export const LeaderboardTable = styled.table`
       body.light-mode & {
           color: var(--light-text-color); border-color: #eee;
           &:nth-child(even) { background-color: rgba(0,0,0,0.03); }
-          &:hover { background-color: rgba(255, 20, 147, 0.05); } // Pink hover
+          &:hover { background-color: rgba(255, 20, 147, 0.05); }
            td { color: var(--light-text-color); }
            td:first-child { color: var(--light-nav-text); }
       }
@@ -1791,22 +1801,22 @@ export const SortButtonContainer = styled.div`
 export const SortButton = styled.button`
   padding: 8px 15px; font-size: 0.9em; font-weight: bold; border-radius: 6px;
   border: 1px solid var(--dark-nav-bg); cursor: pointer;
-  background-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-project-bg)'}; // Cyan dark active
+  background-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-project-bg)'};
   color: ${props => props.$isActive ? 'var(--dark-button-text)' : 'var(--dark-nav-text)'};
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
   &:hover {
-    border-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-nav-text)'}; // Cyan dark hover
+    border-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-nav-text)'};
     background-color: ${props => props.$isActive ? 'var(--dark-link-color)' : 'var(--dark-section-bg)'};
     color: ${props => props.$isActive ? 'var(--dark-button-text)' : 'var(--dark-text-color)'};
   }
 
    body.light-mode & {
        border-color: var(--light-nav-bg);
-       background-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-project-bg)'}; // Pink light active
+       background-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-project-bg)'};
        color: ${props => props.$isActive ? 'var(--light-button-text)' : 'var(--light-nav-text)'};
        &:hover {
-            border-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-nav-text)'}; // Pink light hover
+            border-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-nav-text)'};
             background-color: ${props => props.$isActive ? 'var(--light-link-color)' : 'var(--light-section-bg)'};
             color: ${props => props.$isActive ? 'var(--light-button-text)' : 'var(--light-text-color)'};
        }
