@@ -31,7 +31,7 @@ function Layout() {
             <Routes>
                 
                 <Route path="/" element={<HomePage />} />
-                <Route path="/perfil/:nick" element={<Perfil />} />
+                <Route path=":profileRoutePrefix/:nickname" element={<Perfil />} />
                 <Route path="/@:username" element={<UserProfilePage />} />
                 <Route path="/login/callback" element={<LoginCallbackPage />} />
                 {/* <Route path="/login/error" element={<LoginErrorPage />} /> */}
