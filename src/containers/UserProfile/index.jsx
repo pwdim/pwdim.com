@@ -1,24 +1,25 @@
+// src/containers/UserProfile/index.jsx
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom'; // Importa useParams
+import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios'; // Ou use fetch
+import axios from 'axios';
 
-// --- Estilos Básicos (Ajuste conforme necessário) ---
+// --- Estilos (mantidos como antes) ---
 const ProfileContainer = styled.div`
   max-width: 700px;
   margin: 50px auto;
   padding: 30px;
-  color: #eee; // Cor base escura
-  background-color: rgba(25, 26, 30, 0.8); // Fundo semi-transparente escuro
+  color: #eee;
+  background-color: rgba(25, 26, 30, 0.8);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  text-align: center; // Centraliza conteúdo do perfil
+  text-align: center;
 
   body.light-mode & {
-      color: #333; // Cor base clara
-      background-color: rgba(255, 255, 255, 0.7); // Fundo semi-transparente claro
+      color: #333;
+      background-color: rgba(255, 255, 255, 0.7);
       border-color: rgba(0, 0, 0, 0.1);
   }
 `;
@@ -57,7 +58,7 @@ const ProfileAvatar = styled.img`
   border-radius: 50%;
   margin-bottom: 15px;
   border: 3px solid rgba(255, 255, 255, 0.2);
-  background-color: #333; // Cor de fundo caso a imagem falhe
+  background-color: #333;
 
   body.light-mode & {
       border-color: rgba(0, 0, 0, 0.1);
@@ -68,11 +69,11 @@ const ProfileAvatar = styled.img`
 const DisplayName = styled.h1`
   font-size: 2.2rem;
   font-weight: 700;
-  color: #0ff; // Exemplo dark
+  color: #0ff;
   margin: 0;
 
   body.light-mode & {
-      color: #C71585; // Exemplo light
+      color: #C71585;
   }
 `;
 
@@ -88,7 +89,7 @@ const BioSection = styled.p`
   line-height: 1.6;
   margin-top: 20px;
   margin-bottom: 30px;
-  white-space: pre-wrap; // Preserva quebras de linha da bio
+  white-space: pre-wrap;
   color: #ddd;
   body.light-mode & { color: #444; }
 `;
@@ -96,37 +97,40 @@ const BioSection = styled.p`
 const SocialLinksSection = styled.div`
   margin-top: 20px;
   a {
-    color: #0ff; // Exemplo dark
+    color: #0ff;
     margin: 0 10px;
     text-decoration: none;
-    font-size: 1.5rem; // Tamanho dos ícones sociais (se usar)
+    font-size: 1.5rem;
     &:hover {
         opacity: 0.8;
     }
-    body.light-mode & { color: #C71585; } // Exemplo light
+    body.light-mode & { color: #C71585; }
   }
-  // Adicione estilos para ícones se for usar (ex: react-icons)
 `;
 // --- Fim dos Estilos ---
 
+
 function UserProfilePage() {
-  const { username } = useParams(); // Pega o :username da URL
+  const { username } = useParams(); // username aqui será "@pwdim"
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      if (!username) return; // Não faz nada se não houver username
+      if (!username) return;
 
       setLoading(true);
       setError(null);
-      setProfileData(null); // Limpa dados antigos
+      setProfileData(null);
+
+      // Remove o @ inicial ANTES de chamar a API (se sua API espera só o nome)
+      // Se sua API espera receber o "@nome", remova esta linha:
+      const apiUsername = username.startsWith('@') ? username.substring(1) : username;
 
       try {
-        // Chame a API pública do seu backend
-        // Ajuste a URL base se necessário (ex: http://localhost:3001)
-        const response = await axios.get(`/api/profile/${username}`);
+        // Chame a API com o nome de usuário sem o @ inicial (ou com @ se for o esperado pela API)
+        const response = await axios.get(`/api/profile/${apiUsername}`);
         if (response.data) {
           setProfileData(response.data);
         } else {
@@ -145,54 +149,49 @@ function UserProfilePage() {
     };
 
     fetchUserProfile();
-  }, [username]); // Re-executa se o username na URL mudar
+  }, [username]);
 
-  // Renderização Condicional
   let content;
   if (loading) {
     content = <LoadingMessage>Carregando perfil...</LoadingMessage>;
   } else if (error) {
     content = <ErrorMessage>{error}</ErrorMessage>;
   } else if (profileData) {
-    // Constrói o link do avatar Discord se disponível
     const avatarUrl = profileData.discordAvatar
-      ? profileData.discordAvatar // Assume que o backend já retorna a URL completa
-      : '/images/default-avatar.png'; // Use um avatar padrão local
+      ? profileData.discordAvatar
+      : '/images/default-avatar.png';
 
     content = (
       <>
         <ProfileHeader>
           <ProfileAvatar src={avatarUrl} alt={`${profileData.displayName || username}'s avatar`} />
           <DisplayName>{profileData.displayName || username}</DisplayName>
-          <UsernameText>@{username}</UsernameText>
-           {/* Você pode adicionar outras informações aqui, como status discord se o backend fornecer */}
+          {/* Exibe o username COMO VEIO DA URL (já inclui o @) */}
+          <UsernameText>{username}</UsernameText>
         </ProfileHeader>
 
         {profileData.bio && <BioSection>{profileData.bio}</BioSection>}
 
-        {/* Exemplo básico de links sociais - Adapte conforme seu schema */}
         {(profileData.socialLinks?.github || profileData.socialLinks?.twitter) && (
             <SocialLinksSection>
               <p>Links:</p>
               {profileData.socialLinks.github && (
                 <a href={`https://github.com/${profileData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" title="GitHub">
-                  {/* Substitua por um ícone se preferir */}
                   GitHub
                 </a>
               )}
               {profileData.socialLinks.twitter && (
                 <a href={`https://twitter.com/${profileData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" title="Twitter">
-                  {/* Substitua por um ícone se preferir */}
                   Twitter
                 </a>
               )}
-              {/* Adicione outros links sociais aqui */}
+
             </SocialLinksSection>
         )}
       </>
     );
   } else {
-      content = <ErrorMessage>Perfil não encontrado.</ErrorMessage>; // Caso final
+      content = <ErrorMessage>Perfil não encontrado.</ErrorMessage>;
   }
 
   return (
