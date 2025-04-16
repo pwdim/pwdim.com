@@ -159,7 +159,7 @@ function UserProfilePage() {
   } else if (profileData) {
     const avatarUrl = profileData.discordAvatar
       ? profileData.discordAvatar
-      : '/images/default-avatar.png';
+      : '/src/assets/logos/logo.png';
 
     content = (
       <>
