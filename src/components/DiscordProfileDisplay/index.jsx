@@ -137,7 +137,10 @@ const DiscordProfileDisplay = ({ userId }) => {
 
        {spotify && (
          <S.SpotifySection>
-             <S.ActivityIcon><FaSpotify color="#1DB954" /></S.ActivityIcon>
+             <S.ActivityIcon> 
+              <img src={spotify.album_art_url}></img>
+          
+              </S.ActivityIcon>
              <S.SongInfo>
                  <strong>{spotify.song}</strong>
                  <span>por {spotify.artist}</span>

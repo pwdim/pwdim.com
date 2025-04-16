@@ -206,7 +206,7 @@ export const ActivityItem = styled.div`
     gap: 10px;
     padding: 8px 12px;
     background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 6px;
+    border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
     box-sizing: border-box;
@@ -217,20 +217,33 @@ export const ActivityItem = styled.div`
     }
 `;
 
+
+
 export const ActivityIcon = styled.div`
-    width: 24px;
-    height: 24px;
+    width: 100px;
+    height: 100px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
     color: #b9bbbe;
+    
+
+
+    img {
+      width: 100%;       
+      height: 100%;      
+      display: block;
+      border-radius: 15px;    
+    }
 
     body.light-mode & {
        color: #4f5660;
     }
 `;
+
+
 
 export const ActivityText = styled.div`
     font-size: 0.875rem;
