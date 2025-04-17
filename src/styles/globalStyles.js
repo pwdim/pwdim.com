@@ -47,7 +47,7 @@ const getClanStyles = (clanName) => {
 
 export const GlobalStyle = createGlobalStyle`
 
-  :root {
+:root {
     --dark-bg-color: linear-gradient(45deg, #121314, #181a1b, #121314);
     --dark-text-color: #fff;
     --dark-link-color: #0ff;
@@ -77,8 +77,6 @@ export const GlobalStyle = createGlobalStyle`
     --light-section-bg:rgb(241, 211, 229);
     --light-project-bg:rgb(255, 248, 252);
     --light-clan-color: #8B008B;
-
-   
   }
 
   body {
@@ -87,12 +85,16 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Belanosima', sans-serif;
     overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
-    background: var(--dark-bg-color); 
+    transition: background 0.5s ease, color 0.5s ease;
+    background: var(--dark-bg-color);
+    background-size: 400% 400%; // Para animar gradiente se necessário
+    animation: gradientAnimation 15s ease infinite; // Exemplo de animação
     font-size: 16px;
 
-    &.is-homepage {
-      background: none; 
+    &.is-homepage,
+    &.profile-page-active {
+      background: none;
+      animation: none; // Remove animação também se tiver
     }
 
     @media (max-width: 768px) {
@@ -102,11 +104,14 @@ export const GlobalStyle = createGlobalStyle`
 
   body.light-mode {
     color: var(--light-text-color);
-    background: var(--light-bg-color); 
+    background: var(--light-bg-color);
+    background-size: 400% 400%; // Para animar gradiente se necessário
+    animation: gradientAnimation 15s ease infinite; // Exemplo de animação
 
-    &.is-homepage {
-       background: none; 
-
+    &.is-homepage,
+    &.profile-page-active {
+       background: none;
+       animation: none; // Remove animação também se tiver
     }
   }
 
@@ -117,6 +122,12 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
         -webkit-overflow-scrolling: touch;
      }
+  }
+
+  @keyframes gradientAnimation { // Exemplo de animação do gradiente
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 `;
 

@@ -26,7 +26,7 @@ function LoginCallbackPage() {
       localStorage.setItem('authToken', token);
 
       const timer = setTimeout(() => {
-        navigate('/'); // Redireciona para a Homepage (/) pois /dashboard não existe
+        navigate('/dashboard');
       }, 1500);
 
       return () => clearTimeout(timer);

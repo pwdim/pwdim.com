@@ -4,7 +4,7 @@ import Perfil from '../../containers/Perfil';
 
 const DynamicTitle = () => {
   const location = useLocation();
-  
+
   const perfilMatch = useMatch('/perfil/:nickname');
 
   useEffect(() => {
@@ -33,6 +33,9 @@ const DynamicTitle = () => {
           break;
         case location.pathname.startsWith('/about'):
           newTitle = 'Sobre Mim';
+          break;
+        case location.pathname.startsWith('/'):
+          newTitle = 'pwdim.com';
           break;
         default:
           newTitle = 'Página não encontrada';

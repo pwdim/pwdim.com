@@ -1,203 +1,130 @@
-// src/containers/UserProfile/index.jsx
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import * as S from './styles';
+import DiscordProfileDisplay from '../../components/DiscordProfileDisplay/index.jsx';
 
-// --- Estilos (mantidos como antes) ---
-const ProfileContainer = styled.div`
-  max-width: 700px;
-  margin: 50px auto;
-  padding: 30px;
-  color: #eee;
-  background-color: rgba(25, 26, 30, 0.8);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  text-align: center;
-
-  body.light-mode & {
-      color: #333;
-      background-color: rgba(255, 255, 255, 0.7);
-      border-color: rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const LoadingMessage = styled.p`
-  font-style: italic;
-  color: #aaa;
-  body.light-mode & { color: #777; }
-`;
-
-const ErrorMessage = styled.p`
-  color: #f8d7da;
-  background-color: rgba(220, 53, 69, 0.6);
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(220, 53, 69, 0.8);
-  text-align: center;
-
-  body.light-mode & {
-      color: #721c24;
-      background-color: rgba(248, 215, 218, 0.8);
-      border-color: #f5c6cb;
-  }
-`;
-
-const ProfileHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 25px;
-`;
-
-const ProfileAvatar = styled.img`
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  background-color: #333;
-
-  body.light-mode & {
-      border-color: rgba(0, 0, 0, 0.1);
-      background-color: #eee;
-  }
-`;
-
-const DisplayName = styled.h1`
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #0ff;
-  margin: 0;
-
-  body.light-mode & {
-      color: #C71585;
-  }
-`;
-
-const UsernameText = styled.p`
-    color: #aaa;
-    font-size: 1rem;
-    margin-top: 5px;
-    body.light-mode & { color: #777; }
-`;
-
-
-const BioSection = styled.p`
-  line-height: 1.6;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  white-space: pre-wrap;
-  color: #ddd;
-  body.light-mode & { color: #444; }
-`;
-
-const SocialLinksSection = styled.div`
-  margin-top: 20px;
-  a {
-    color: #0ff;
-    margin: 0 10px;
-    text-decoration: none;
-    font-size: 1.5rem;
-    &:hover {
-        opacity: 0.8;
-    }
-    body.light-mode & { color: #C71585; }
-  }
-`;
-// --- Fim dos Estilos ---
-
+const defaultLinkIcon = '/images/default-link-icon.png';
+const defaultAvatar = '/images/default-avatar.png';
 
 function UserProfilePage() {
-  const { username } = useParams(); // username aqui será "@pwdim"
+  const { username } = useParams();
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+
+  const resolveBackendUrl = useCallback((relativePath) => {
+    if (!relativePath) return null;
+    if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) {
+      return relativePath;
+    }
+    if (relativePath.startsWith('/uploads/')) {
+        return `${apiBaseUrl}${relativePath}`;
+    }
+    return relativePath;
+  }, [apiBaseUrl]);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       if (!username) return;
-
-      setLoading(true);
-      setError(null);
-      setProfileData(null);
-
-      // Remove o @ inicial ANTES de chamar a API (se sua API espera só o nome)
-      // Se sua API espera receber o "@nome", remova esta linha:
+      setLoading(true); setError(null); setProfileData(null);
       const apiUsername = username.startsWith('@') ? username.substring(1) : username;
-
       try {
-        // Chame a API com o nome de usuário sem o @ inicial (ou com @ se for o esperado pela API)
-        const response = await axios.get(`/api/profile/${apiUsername}`);
+        const apiUrl = `${apiBaseUrl}/api/profile/${apiUsername}`;
+        console.log("UserProfilePage - Buscando perfil em:", apiUrl);
+        const response = await axios.get(apiUrl);
+        console.log('UserProfilePage - Dados Recebidos Pela API:', response.data);
         if (response.data) {
           setProfileData(response.data);
         } else {
           setError('Perfil não encontrado.');
         }
       } catch (err) {
-        console.error("Erro ao buscar perfil público:", err);
-        if (err.response && err.response.status === 404) {
-            setError('Perfil não encontrado.');
-        } else {
-            setError('Falha ao carregar dados do perfil.');
-        }
+        console.error("UserProfilePage - Erro ao buscar perfil público:", err);
+        setError(err.response?.status === 404 ? 'Perfil não encontrado.' : 'Falha ao carregar dados do perfil.');
       } finally {
         setLoading(false);
       }
     };
-
     fetchUserProfile();
-  }, [username]);
+  }, [username, apiBaseUrl]);
 
-  let content;
+  const renderBackground = () => {
+    const rawBackgroundUrl = profileData?.backgroundUrl;
+    if (!rawBackgroundUrl) return null;
+    const resolvedBackgroundUrl = resolveBackendUrl(rawBackgroundUrl);
+    if (!resolvedBackgroundUrl) return null;
+    if (profileData.backgroundType === 'video') {
+      return (
+        <S.PageBackground>
+          <video src={resolvedBackgroundUrl} autoPlay loop muted playsInline key={resolvedBackgroundUrl} />
+        </S.PageBackground>
+      );
+    } else if (profileData.backgroundType === 'image') {
+      return (
+        <S.PageBackground>
+           <img src={resolvedBackgroundUrl} alt="Background" key={resolvedBackgroundUrl} />
+        </S.PageBackground>
+      );
+    }
+    return null;
+  };
+
+  let pageContent;
   if (loading) {
-    content = <LoadingMessage>Carregando perfil...</LoadingMessage>;
+    pageContent = <S.ProfileContainer $applyBlur={true}><S.LoadingMessage>Carregando perfil...</S.LoadingMessage></S.ProfileContainer>;
   } else if (error) {
-    content = <ErrorMessage>{error}</ErrorMessage>;
+    pageContent = <S.ProfileContainer $applyBlur={true}><S.ErrorMessage>{error}</S.ErrorMessage></S.ProfileContainer>;
   } else if (profileData) {
-    const avatarUrl = profileData.discordAvatar
-      ? profileData.discordAvatar
-      : '/src/assets/logos/logo.png';
+    const isSyncedMode = profileData.profileMode === 'SYNC_DISCORD';
+    const hasCustomPageBackground = !!profileData.backgroundUrl;
+    const applyCardBlur = !isSyncedMode && !hasCustomPageBackground;
 
-    content = (
-      <>
-        <ProfileHeader>
-          <ProfileAvatar src={avatarUrl} alt={`${profileData.displayName || username}'s avatar`} />
-          <DisplayName>{profileData.displayName || username}</DisplayName>
-          {/* Exibe o username COMO VEIO DA URL (já inclui o @) */}
-          <UsernameText>{username}</UsernameText>
-        </ProfileHeader>
+    const resolvedAvatarUrl = resolveBackendUrl(profileData.user?.avatarUrl) || defaultAvatar;
+    const userDisplayName = profileData.displayName || profileData.user?.username || username;
 
-        {profileData.bio && <BioSection>{profileData.bio}</BioSection>}
-
-        {(profileData.socialLinks?.github || profileData.socialLinks?.twitter) && (
-            <SocialLinksSection>
-              <p>Links:</p>
-              {profileData.socialLinks.github && (
-                <a href={`https://github.com/${profileData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" title="GitHub">
-                  GitHub
-                </a>
-              )}
-              {profileData.socialLinks.twitter && (
-                <a href={`https://twitter.com/${profileData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" title="Twitter">
-                  Twitter
-                </a>
-              )}
-
-            </SocialLinksSection>
+    pageContent = (
+      <S.ProfileContainer $applyBlur={applyCardBlur}>
+        {isSyncedMode && profileData.user?.discordId ? (
+            <DiscordProfileDisplay userId={profileData.user.discordId} />
+        ) : (
+            <S.ProfileHeader>
+              <S.ProfileAvatar src={resolvedAvatarUrl} alt={`${userDisplayName}'s avatar`} onError={(e) => e.target.src = defaultAvatar}/>
+              <S.DisplayName>{userDisplayName}</S.DisplayName>
+              <S.UsernameText>{username}</S.UsernameText>
+            </S.ProfileHeader>
         )}
-      </>
+        {profileData.bio && <S.BioSection>{profileData.bio}</S.BioSection>}
+        {profileData.customLinks && profileData.customLinks.length > 0 && (
+            <S.LinksSection>
+                 {profileData.customLinks.map((link, index) => {
+                    const resolvedIconUrl = resolveBackendUrl(link.icon) || defaultLinkIcon;
+                    return (
+                        <S.CustomLinkButton
+                            key={link.id || `link-${index}`}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={link.name}
+                        >
+                            <S.CustomLinkIcon src={resolvedIconUrl} alt="" onError={(e) => e.target.src = defaultLinkIcon}/>
+                        </S.CustomLinkButton>
+                    );
+                 })}
+            </S.LinksSection>
+        )}
+      </S.ProfileContainer>
     );
   } else {
-      content = <ErrorMessage>Perfil não encontrado.</ErrorMessage>;
+      pageContent = <S.ProfileContainer $applyBlur={true}><S.ErrorMessage>Perfil não encontrado.</S.ErrorMessage></S.ProfileContainer>;
   }
 
   return (
-    <ProfileContainer>
-      {content}
-    </ProfileContainer>
+    <S.UserProfilePageWrapper>
+      {renderBackground()}
+      {pageContent}
+    </S.UserProfilePageWrapper>
   );
 }
 
