@@ -13,7 +13,7 @@ function LoginPage() {
     }
   }, [navigate]);
 
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://pwdim.com';
   const discordAuthUrl = `${apiBaseUrl}/auth/discord`;
   const googleAuthUrl = `${apiBaseUrl}/auth/google`; 
 
