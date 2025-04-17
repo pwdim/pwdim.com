@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import {
     FaReact, FaPaintBrush, FaGithub, FaTrophy, FaUser, FaInfoCircle, FaLink
 } from 'react-icons/fa';
@@ -12,38 +11,17 @@ import {
     Section,
     SectionTitle,
     Paragraph,
-} from '../../styles/globalStyles'; 
+} from '../../styles/globalStyles';
 
 import DiscordProfileDisplay from '../../components/DiscordProfileDisplay';
+
 
 const AboutPage = () => {
     const YOUR_DISCORD_ID = '386563422055170048';
     const iconStyle = { marginRight: '8px', verticalAlign: 'middle' };
 
-    const pageTitle = "Sobre - pwdim.com";
-    const pageDescription = "Saiba mais sobre o painel pwdim.com, suas funcionalidades e tecnologias utilizadas.";
-    
-    
-    const pageUrl = `${window.location.origin}/about`;
-    const ogImageUrl = 'https://imgur.com/PweVudw.png';
-
     return (
         <Container>
-             <Helmet>
-                <title>{pageTitle}</title>
-                <meta name="description" content={pageDescription.substring(0, 160)} />
-                <link rel="canonical" href={pageUrl} />
-                <meta property="og:title" content={pageTitle} />
-                <meta property="og:description" content={pageDescription.substring(0, 160)} />
-                <meta property="og:url" content={pageUrl} />
-                <meta property="og:image" content={ogImageUrl} />
-                <meta property="og:type" content="website" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={pageTitle} />
-                <meta name="twitter:description" content={pageDescription.substring(0, 160)} />
-                <meta name="twitter:image" content={ogImageUrl} />
-            </Helmet>
-
             <Section></Section>
             <DiscordProfileDisplay userId={YOUR_DISCORD_ID} />
 

@@ -63,20 +63,20 @@ export const GlobalStyle = createGlobalStyle`
     --dark-project-bg: #25262a;
     --dark-clan-color: #aaa;
 
-    --light-bg-color: linear-gradient(45deg,rgb(248, 235, 247),rgb(255, 239, 249),rgb(255, 255, 255));
+    --light-bg-color: linear-gradient(45deg,rgb(255, 255, 255),rgb(235, 235, 235),rgb(219, 219, 219));
     --light-text-color:rgb(80, 80, 80);
-    --light-link-color: #FF1493;
-    --light-button-bg: rgb(139, 0, 139);
+    --light-link-color:rgb(15, 0, 26);
+    --light-button-bg: rgb(22, 0, 22);
     --light-button-text: #fff;
     --light-nav-bg: #f8f0f8;
     --light-nav-text: #504050;
-    --light-nav-hover: #C71585;
-    --light-dropdown-bg: #f8f0f8;
+    --light-nav-hover:rgba(41, 0, 59, 0.44);
+    --light-dropdown-bg:rgb(255, 255, 255);
     --light-dropdown-text: #504050;
-    --light-dropdown-hover: rgba(255, 20, 147, 0.2);
-    --light-section-bg:rgb(241, 211, 229);
+    --light-dropdown-hover: rgba(255, 255, 255, 0.2);
+    --light-section-bg:rgb(255, 247, 252);
     --light-project-bg:rgb(255, 248, 252);
-    --light-clan-color: #8B008B;
+    --light-clan-color: #aaa;
   }
 
   body {
@@ -833,7 +833,7 @@ export const NavLink = styled.button`
   &:hover {
     background-color: rgba(0, 255, 255, 0.1);
     body.light-mode & {
-      background-color: rgba(255, 20, 147, 0.1);
+      background-color: rgba(66, 0, 35, 0.1);
     }
   }
 
