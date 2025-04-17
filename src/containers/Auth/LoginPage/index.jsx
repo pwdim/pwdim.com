@@ -13,7 +13,7 @@ function LoginPage() {
     }
   }, [navigate]);
 
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://pwdim.com';
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://pwdim-api.onrender.com';
   const discordAuthUrl = `${apiBaseUrl}/auth/discord`;
   const googleAuthUrl = `${apiBaseUrl}/auth/google`; 
 
