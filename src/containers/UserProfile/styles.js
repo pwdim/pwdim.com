@@ -36,20 +36,16 @@ export const ProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   color: #e8eaed;
-  background-color: ${props => props.$applyBlur ? 'rgba(50, 51, 56, 0.7)' : 'transparent'};
-  backdrop-filter: ${props => props.$applyBlur ? 'blur(8px)' : 'none'};
-  -webkit-backdrop-filter: ${props => props.$applyBlur ? 'blur(8px)' : 'none'};
+  background-color: rgba(0, 69, 80, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-radius: 15px;
-  padding: 35px 25px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
 
   body.light-mode & {
-      color: #202124;
-      background-color: ${props => props.$applyBlur ? 'rgba(235, 236, 240, 0.75)' : 'transparent'};
-      backdrop-filter: ${props => props.$applyBlur ? 'blur(8px)' : 'none'};
-      -webkit-backdrop-filter: ${props => props.$applyBlur ? 'blur(8px)' : 'none'};
-      border-color: rgba(0, 0, 0, 0.1);
+    color: #202124;
   }
 `;
 
