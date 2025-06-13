@@ -60,7 +60,11 @@ function Layout() {
                 <Route path="/legal/terms" element={<TermsOfServicePage />} />
                 <Route path="/legal/privacy" element={<PrivacyPolicyPage />} />
                 <Route path="/about" element={<AboutPage />} />
-                <Route path="/leaderboard/:modo?" element={<Leaderboard />} />
+                
+                <Route path="/leaderboard/:modo/:tipo?" element={<Leaderboard />} />
+                <Route path="/leaderboard/:modo?" element={<Leaderboard />} /> 
+                <Route path="/leaderboard" element={<Leaderboard />} /> 
+                
                 <Route path="/links" element={<LinksPage />} />
                 <Route element={<ProtectedRoute />}>
                     <Route path="/dashboard" element={<DashboardPage />} />

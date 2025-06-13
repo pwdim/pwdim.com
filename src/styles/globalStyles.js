@@ -36,6 +36,9 @@ const specialClanStyles = {
   'studio': { color: '#ffbf00', fontWeight: 'bold', opacity: 0.9 },
   'tropadom': { color: '#ffbf00', fontWeight: 'bold', opacity: 0.9 },
   'atequealogi': { color: '#ffbf00', fontWeight: 'bold', opacity: 0.9 },
+  'staff': { color: '#ffbf00', fontWeight: 'bold', opacity: 0.9 },
+  'pwdim': { color: '#60dfff', fontWeight: 'bold', opacity: 0.9 },
+  'pudim': { color: '#60dfff', fontWeight: 'bold', opacity: 0.9 },
 };
 
 const getClanStyles = (clanName) => {
