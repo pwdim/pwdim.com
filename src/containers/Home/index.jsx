@@ -5,14 +5,7 @@ import MusicPlayerUI from '../../components/MusicPlayerUI';
 import { FaTrophy, FaInfoCircle, FaGithub, FaDiscord } from 'react-icons/fa';
 import backgroundMusic from '/music/ofeliasdream.mp3';
 import { NavbarContainer } from '../../components/nav/styles';
-import SmokeBackground from '/pwdim.com/src/components/SmokeBackground';
 import ThemeToggle from '../../components/ThemeToggle';
-import {
-    Container,
-    Section,
-    SectionTitle,
-    Paragraph,
-} from '../../styles/globalStyles';
 
 const videoSourceDark = '/videos/background(1).mp4';
 const videoSourceLight = '/videos/totoro.mp4';
