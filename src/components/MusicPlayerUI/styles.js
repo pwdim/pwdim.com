@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const PlayerContainer = styled.div`
   position: fixed;
-  bottom: 20px; /* Mudado de top para bottom */
+  bottom: 20px; 
   left: 20px;
-  background-color: rgba(30, 31, 34, 0.85);
+  background-color: transparent;
   color: #e8eaed;
   padding: 12px;
   border-radius: 8px;
@@ -12,16 +12,16 @@ export const PlayerContainer = styled.div`
   align-items: center;
   gap: 15px;
   z-index: 1000;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   min-width: 300px;
 
   body.light-mode & {
-    background-color: rgba(248, 249, 250, 0.9);
+    background-color: transparent;
     color: #202124;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(0, 0, 0, 0.08);
   }
 `;
@@ -76,7 +76,7 @@ export const ArtistName = styled.div`
   overflow: hidden;
 
    body.light-mode & {
-    color: #5f6368;
+    color: #202124;
   }
 `;
 
@@ -99,7 +99,7 @@ export const LikeButton = styled.button`
   }
 
   body.light-mode & {
-    color: #5f6368;
+    color: #202124;
   }
 `;
 
@@ -124,7 +124,7 @@ export const ProgressBarFill = styled.div`
   transition: width 0.1s linear;
 
   body.light-mode & {
-    background-color: #5f6368;
+    background-color: #202124;
   }
 `;
 
@@ -158,7 +158,7 @@ export const ControlButton = styled.button`
   }
 
   body.light-mode & {
-    color: #5f6368;
+    color: #202124;
   }
 
   &:nth-child(3) {

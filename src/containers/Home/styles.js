@@ -27,7 +27,7 @@ export const HomePageContainer = styled.div`
   background-attachment: fixed;
 
   body.light-mode & {
-    background-color: #eef2f5;
+    background-color: transparent;
     background-image: none;
   }
 `;
@@ -41,6 +41,20 @@ export const BackgroundVideo = styled.video`
   object-fit: cover;
   z-index: -1;
   opacity: 1;
+  
+  &#video-light-mode {
+    display: none;
+  }
+ 
+
+  body.light-mode & {
+    &#video-dark-mode {
+      display: none;
+    }
+    &#video-light-mode {
+      display: block;
+    }
+  }
 `;
 
 
@@ -75,7 +89,7 @@ export const ProfileSection = styled.div`
   max-width: 450px;
 
   body.light-mode & {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: transparent;
     border-color: rgba(0, 0, 0, 0.1);
   }
 `;
@@ -157,7 +171,7 @@ export const FullUsername = styled.span`
 
 
   body.light-mode & {
-     color: #5f6368;
+     color: #adb5bd;
      text-shadow: none;
   }
 `;
@@ -183,7 +197,7 @@ export const StatusSection = styled.div`
 
 
     body.light-mode & {
-       color: #6c757d;
+       color: #adb5bd;
        text-shadow: none;
     }
  `;
@@ -195,8 +209,17 @@ export const ActivitySection = styled.div`
     gap: 10px;
     margin-bottom: 15px;
     width: 100%;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.15);
 
-    background-color: transparent;
+
+    body.light-mode & {
+      background-color:rgba(0, 0, 0, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
 `;
 
 export const ActivityItem = styled.div`
@@ -212,8 +235,9 @@ export const ActivityItem = styled.div`
     box-sizing: border-box;
 
     body.light-mode & {
-      background-color: rgba(255, 255, 255, 0.3);
-      border-color: rgba(0, 0, 0, 0.08);
+      background-color:rgba(0, 0, 0, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      
     }
 `;
 
@@ -239,7 +263,7 @@ export const ActivityIcon = styled.div`
     }
 
     body.light-mode & {
-       color: #4f5660;
+       color: #212121;
     }
 `;
 
@@ -261,7 +285,7 @@ export const ActivityText = styled.div`
         text-overflow: ellipsis;
         overflow: hidden;
 
-        body.light-mode & { color: #4f5660; }
+        body.light-mode & { color: #888888ff; }
     }
     strong {
          color: #ffffff;
@@ -275,7 +299,7 @@ export const ActivityText = styled.div`
     }
 
     body.light-mode & {
-       color: #2e3338;
+       color: #212121;
     }
 `;
 
@@ -306,7 +330,7 @@ export const SongInfo = styled(ActivityText)`
         text-overflow: ellipsis;
         overflow: hidden;
 
-         body.light-mode & { color: #4f5660; }
+         body.light-mode & { color: #888888ff; }
     }
      div { display: none; }
 `;
@@ -330,7 +354,7 @@ export const SongInfo = styled(ActivityText)`
     width: 48px;
     height: 48px;
     background-color: rgba(30, 31, 34, 0.4);
-    color: #b0b3b8;
+    color: #b0b8b8ff;
     text-decoration: none;
     border-radius: 50%;
     transition: all 0.2s ease;
@@ -340,10 +364,10 @@ export const SongInfo = styled(ActivityText)`
     -webkit-backdrop-filter: blur(5px);
 
     &:hover {
-      background-color: rgba(45, 46, 49, 0.6);
-      color: #ffffff;
+      background-color: rgba(248, 249, 250, 0.7);
+      color: #202124;
       transform: scale(1.1);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     &:active {
@@ -351,15 +375,15 @@ export const SongInfo = styled(ActivityText)`
     }
 
     body.light-mode & {
-      background-color: rgba(255, 255, 255, 0.5);
-      color: #5f6368;
-      border-color: rgba(0, 0, 0, 0.1);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+      background-color: rgba(248, 249, 250, 0.7);
+      color: #202124;
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
       &:hover {
-        background-color: rgba(248, 249, 250, 0.7);
-        color: #202124;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: rgba(30, 31, 34, 0.4);
+        color: #b0b8b8ff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       }
     }
  `;
@@ -490,7 +514,7 @@ export const ArtistName = styled.span`
 
 
     body.light-mode & {
-       color: #555555;
+       color: #bdadadff;;
     }
 `;
 

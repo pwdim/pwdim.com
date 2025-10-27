@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useEffect, useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
 const Canvas = styled.canvas`
   position: fixed;
@@ -12,6 +12,10 @@ const Canvas = styled.canvas`
 
 const SmokeBackground = () => {
   const canvasRef = useRef(null);
+  const theme = useContext(ThemeContext); 
+  
+  // O componente lê o objeto de tema completo (darkTheme ou lightTheme)
+  const particleColor = theme?.colors?.smoke || '255, 255, 255'; 
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,7 +38,7 @@ const SmokeBackground = () => {
         this.opacity = Math.random() * 0.6 + 0.1;
         this.speedX = Math.random() * 3 - 1.5;
         this.speedY = Math.random() * 3 - 1.5;
-        this.color = `rgba(20, 21, 22, ${this.opacity})`; 
+        this.color = `rgba(${particleColor}, ${this.opacity})`; 
       }
 
       update() {
@@ -47,6 +51,8 @@ const SmokeBackground = () => {
         if (this.opacity < 0.01 || this.size < 0.1) {
           this.reset();
         }
+
+        this.color = `rgba(${particleColor}, ${this.opacity})`;
       }
 
       draw() {
@@ -101,7 +107,7 @@ const SmokeBackground = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [particleColor]);
 
   return <Canvas ref={canvasRef} />;
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as S from '../../containers/Home/styles'; // Ajuste o caminho se moveu os estilos
 import { FaSpotify, FaPlaystation, FaXbox, FaSteam } from 'react-icons/fa';
-import { VscCode } from "react-icons/vsc";
+import { BiLogoVisualStudio } from "react-icons/bi";
 import { formatDistanceToNowStrict } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -26,10 +26,10 @@ const formatTimestamp = (timestamp) => {
 
 const getActivityIcon = (activityName) => {
     const lowerCaseName = activityName?.toLowerCase() || '';
-    if (lowerCaseName.includes('visual studio code')) return <VscCode />;
-    if (lowerCaseName.includes('playstation')) return <FaPlaystation />;
-    if (lowerCaseName.includes('xbox')) return <FaXbox />;
-    if (lowerCaseName.includes('steam')) return <FaSteam />;
+    if (lowerCaseName.includes('visual studio code')) return <BiLogoVisualStudio color='#007ACC' size={250} />;
+    if (lowerCaseName.includes('playstation')) return <FaPlaystation size={250}/>;
+    if (lowerCaseName.includes('xbox')) return <FaXbox size={250}/>;
+    if (lowerCaseName.includes('steam')) return <FaSteam size={250}/>;
     return null;
 }
 
@@ -84,11 +84,11 @@ const DiscordProfileDisplay = ({ userId }) => {
   };
 
   if (loading) {
-    return <S.ProfileSection><p>Carregando Perfil Discord...</p></S.ProfileSection>;
+    return <S.ProfileSection><p>pwdim</p></S.ProfileSection>;
   }
 
   if (error || !discordData || !discordData.discord_user) {
-    return <S.ProfileSection><S.ErrorMessage>Erro ao carregar perfil: {error || 'Dados não encontrados'}</S.ErrorMessage></S.ProfileSection>;
+    return <S.ProfileSection><S.ErrorMessage>@pwdium {error || 'Dados não encontrados'}</S.ErrorMessage></S.ProfileSection>;
   }
 
   const { discord_user, discord_status, activities, spotify } = discordData;
@@ -108,7 +108,7 @@ const DiscordProfileDisplay = ({ userId }) => {
         {discord_user.display_name || discord_user.username}
       </S.UsernameDisplay>
       <S.FullUsername>
-         {discord_user.username}
+        @{discord_user.username}
          {discord_user.discriminator !== '0' && `#${discord_user.discriminator}`}
       </S.FullUsername>
 
@@ -137,7 +137,7 @@ const DiscordProfileDisplay = ({ userId }) => {
 
        {spotify && (
          <S.SpotifySection>
-             <S.ActivityIcon> 
+             <S.ActivityIcon size={250}> 
               <img src={spotify.album_art_url}></img>
           
               </S.ActivityIcon>

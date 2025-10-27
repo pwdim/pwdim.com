@@ -5,6 +5,7 @@ import {
 import { IoFlash } from 'react-icons/io5';
 import { SiVercel } from 'react-icons/si';
 import { BsStars } from 'react-icons/bs';
+import SmokeBackground from '../../components/SmokeBackground';
 
 import {
     Container,
@@ -22,6 +23,7 @@ const AboutPage = () => {
 
     return (
         <Container>
+            <SmokeBackground />
             <Section></Section>
             <DiscordProfileDisplay userId={YOUR_DISCORD_ID} />
 
@@ -36,39 +38,8 @@ const AboutPage = () => {
                 </Paragraph>
             </Section>
 
-            <Section>
-                <SectionTitle>Integração com o FlameMC</SectionTitle>
-                <Paragraph>
-                    Este website não possui afiliação oficial com o FlameMC.
-                    Utilizamos exclusivamente a API disponibilizada pela plataforma;
-                    todos os dados apresentados são obtidos através de requisições a essa API e exibidos em nossa interface.
-                </Paragraph>
-            </Section>
 
-            <Section>
-                <SectionTitle>Páginas</SectionTitle>
-                <Paragraph style={{ marginTop: '15px' }}>
-                    Ao navegar pelo website, o usuário encontrará as seguintes seções principais:
-                    <ul style={{ marginTop: '10px', paddingLeft: '20px', listStyle: 'none' }}>
-                        <li style={{ marginBottom: '8px' }}>
-                            <FaTrophy style={iconStyle} />
-                            <strong>Leaderboards:</strong> Classificações dos jogadores da <strong>temporada</strong> atual por modo de jogo, com opções de ordenação segundo diversas estatísticas.
-                        </li>
-                        <li style={{ marginBottom: '8px' }}>
-                            <FaUser style={iconStyle} />
-                            <strong>Perfis:</strong> Páginas detalhadas para cada jogador, exibindo informações da conta, histórico de atividades e estatísticas completas.
-                        </li>
-                        <li style={{ marginBottom: '8px' }}>
-                            <FaLink style={iconStyle} />
-                            <strong>Links:</strong> Formas de entrar em contato comigo.
-                        </li>
-                        <li style={{ marginBottom: '8px' }}>
-                            <FaInfoCircle style={iconStyle} />
-                            <strong>Legal:</strong> Documentos que regem a utilização do website, os quais o usuário aceita ao navegar: <strong><a href="/legal/privacy">Política de Privacidade</a></strong> e <strong><a href='/legal/terms'>Termos de Serviço</a></strong>.
-                        </li>
-                    </ul>
-                </Paragraph>
-            </Section>
+            
 
             <Section>
                 <SectionTitle>Tecnologias Utilizadas</SectionTitle>

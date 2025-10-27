@@ -28,9 +28,6 @@ const DynamicTitle = () => {
         case location.pathname === '/links':
           newTitle = 'Links';
           break;
-        case location.pathname.startsWith('/leaderboard/'):
-          newTitle = 'Leaderboard';
-          break;
         case location.pathname.startsWith('/about'):
           newTitle = 'Sobre Mim';
           break;

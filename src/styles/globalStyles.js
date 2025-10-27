@@ -907,6 +907,7 @@ export const LinksWrapper = styled.div`
   flex-wrap: wrap;
   margin-top: 20px;
   gap: 10px;
+  
 
   @media (max-width: 768px) {
     margin-top: 15px;

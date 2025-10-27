@@ -52,7 +52,7 @@ const Footer = () => {
           <S.Title>pwdim.com</S.Title>
           <S.LinkList>
             <li><a href="/">Inicio</a></li>
-            <li><a href="/sobre" target="_blank" rel="noopener noreferrer">Sobre</a></li>
+            <li><a href="/about" target="_blank" rel="noopener noreferrer">Sobre</a></li>
             <li><a href="/links  " target="_blank" rel="noopener noreferrer">Links</a></li>
           </S.LinkList>
         </S.LabyrinthSection>

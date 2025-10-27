@@ -28,7 +28,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { RoutePrefixContext } from '../../contexts/RoutePrefixContext';
-import ThemeToggle from '../ThemeToggle'; // Importar o ThemeToggle real
+import ThemeToggle from '../ThemeToggle'; 
 
 
 const NavigationBar = () => {
@@ -93,7 +93,7 @@ const NavigationBar = () => {
   const navLinks = [
     { to: "/about", icon: faInfoCircle, text: "Sobre" },
     { to: "/links", icon: faEnvelope, text: "Contato" },
-    { to: "/leaderboard/hg", icon: faList, text: "Leaderboard" },
+    //{ to: "/leaderboard/hg", icon: faList, text: "Leaderboard" },
   ];
 
   return (
@@ -101,7 +101,7 @@ const NavigationBar = () => {
       <NavContent>
         <StyledRouterLink to="/" onClick={closeMobileMenu} title="Página Inicial">
           <LogoLink>
-            <Logo src="https://imgur.com/PweVudw.png" alt="Logo" />
+            <Logo src="https://imgur.com/MRrA1Nk.png" alt="Logo" />
           </LogoLink>
         </StyledRouterLink>
 
@@ -129,7 +129,7 @@ const NavigationBar = () => {
         </NavLinksContainerDesktop>
 
         <RightSection>
-          <SearchForm onSubmit={handleSearchSubmitNav}>
+          {/* <SearchForm onSubmit={handleSearchSubmitNav}>
             <SearchInput
               type="text"
               placeholder="Pesquisar Perfil"
@@ -139,7 +139,7 @@ const NavigationBar = () => {
             <SearchButton type="submit" aria-label="Pesquisar">
               <FontAwesomeIcon icon={faSearch} />
             </SearchButton>
-          </SearchForm>
+          </SearchForm> */}
 
           <ThemeToggle />
 
@@ -175,9 +175,9 @@ const NavigationBar = () => {
         </MobileMenuContainer>
       )}
 
-      {emptySearchMessageVisible && (
+      {/* {emptySearchMessageVisible && (
         <EmptySearchMessage>Por favor, digite um nick.</EmptySearchMessage>
-      )}
+      )} */}
     </NavbarContainer>
   );
 };

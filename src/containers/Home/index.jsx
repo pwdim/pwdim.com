@@ -2,10 +2,25 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as S from './styles';
 import DiscordProfileDisplay from '../../components/DiscordProfileDisplay';
 import MusicPlayerUI from '../../components/MusicPlayerUI';
-// Remova FaCube e FaLink se não forem mais usados em outros lugares
 import { FaTrophy, FaInfoCircle, FaGithub, FaDiscord } from 'react-icons/fa';
 import backgroundMusic from '/music/ofeliasdream.mp3';
-const videoSource = '/videos/background.mp4';
+import { NavbarContainer } from '../../components/nav/styles';
+import SmokeBackground from '/pwdim.com/src/components/SmokeBackground';
+import ThemeToggle from '../../components/ThemeToggle';
+import {
+    Container,
+    Section,
+    SectionTitle,
+    Paragraph,
+} from '../../styles/globalStyles';
+
+const videoSourceDark = '/videos/background(1).mp4';
+const videoSourceLight = '/videos/totoro.mp4';
+export const Namemc = (props) => (
+      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>
+    <path fill="#575858ff" d="M0 0v24h24V0Zm4.8 4.8H16V8h3.2v11.2H16V8H8v11.2H4.8V8Z"></path>
+</svg>
+    )
 
 const HomePage = () => {
   const DISCORD_ID = '386563422055170048';
@@ -39,42 +54,42 @@ const HomePage = () => {
   }, [DISCORD_ID]);
 
   const profileData = {
-      links: [
-        { name: 'Leaderboards', url: '/leaderboard/hg', icon: FaTrophy, isInternal: true },
-        { name: 'Sobre', url: '/about', icon: FaInfoCircle, isInternal: true },
-        { name: 'GitHub', url: 'https://git.pwdim.com', icon: FaGithub, isInternal: false },
-        { name: 'Discord', url: 'https://dc.pwdim.com/', icon: FaDiscord, isInternal: false },
-        { name: 'NameMC', url: 'https://pt.namemc.com/search?q=fc883f59-f929-40b6-832c-95d1ee20e138', icon: 'https://s.namemc.com/img/favicon-30.png', isInternal: false }, // Ajuste o path se necessário
-        { name: 'Laby.net', url: 'https://laby.net/@pwdim', icon: 'https://www.labymod.net/page/tpl/assets/images/white_wolf.png', isInternal: false }, // Ajuste o path se necessário
-      ]
+    links: [
+      // { name: 'Leaderboards', url: '/leaderboard/hg', icon: FaTrophy, isInternal: true },
+      { name: 'Sobre', url: '/about', icon: FaInfoCircle, isInternal: true },
+      { name: 'GitHub', url: 'https://git.pwdim.com', icon: FaGithub, isInternal: false },
+      { name: 'Discord', url: 'https://dc.pwdim.com/', icon: FaDiscord, isInternal: false },
+      { name: 'NameMC', url: 'https://pt.namemc.com/search?q=fc883f59-f929-40b6-832c-95d1ee20e138', icon: Namemc, isInternal: false }, 
+      { name: 'Laby.net', url: 'https://laby.net/@pwdim', icon: 'https://www.labymod.net/page/tpl/assets/images/white_wolf.png', isInternal: false }, 
+    ]
   };
 
   const renderLinkButton = (link) => {
-      let iconContent = null;
+    let iconContent = null;
 
-      
-      if (typeof link.icon === 'string') {
-          iconContent = <S.IconImage src={link.icon} alt={`${link.name} icon`} />;
-      } else if (link.icon) {
-          const IconComponent = link.icon;
-          iconContent = <IconComponent />;
-      }
 
-      const content = (
-        <>
-          {iconContent && <S.IconWrapper>{iconContent}</S.IconWrapper>}
-        </>
+    if (typeof link.icon === 'string') {
+      iconContent = <S.IconImage src={link.icon} alt={`${link.name} icon`} />;
+    } else if (link.icon) {
+      const IconComponent = link.icon;
+      iconContent = <IconComponent />;
+    }
+
+    const content = (
+      <>
+        {iconContent && <S.IconWrapper>{iconContent}</S.IconWrapper>}
+      </>
+    );
+
+    if (link.isInternal) {
+      return <S.LinkButton key={link.name} href={link.url} title={link.name}>{content}</S.LinkButton>;
+    } else {
+      return (
+        <S.LinkButton key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" title={link.name}>
+          {content}
+        </S.LinkButton>
       );
-
-      if (link.isInternal) {
-         return <S.LinkButton key={link.name} href={link.url} title={link.name}>{content}</S.LinkButton>;
-      } else {
-        return (
-          <S.LinkButton key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" title={link.name}>
-            {content}
-          </S.LinkButton>
-        );
-      }
+    }
   };
 
   const togglePlayPause = () => {
@@ -90,55 +105,76 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-       if (audioRef.current) { audioRef.current.volume = 0.3; }
-   }, []);
+    if (audioRef.current) { audioRef.current.volume = 0.3; }
+  }, []);
 
- const currentTrack = {
-     title: "Ofelia's dream",
-     artist: "Benjamin Tissot",
-     albumArt: "https://cdn.bensound.com/image/cover/ofeliasdream.webp"
- };
+  const currentTrack = {
+    title: "Ofelia's dream",
+    artist: "Benjamin Tissot",
+    albumArt: "https://cdn.bensound.com/image/cover/ofeliasdream.webp"
+  };
 
- return (
-   <S.HomePageContainer>
-       <S.BackgroundVideo autoPlay loop muted playsInline key={videoSource}>
-           <source src={videoSource} type="video/mp4" />
-           <source src="/videos/background.webm" type="video/webm" />
-           Seu navegador não suporta a tag de vídeo.
-       </S.BackgroundVideo>
+  return (
+    <S.HomePageContainer>
+      
 
-       <audio ref={audioRef} src={backgroundMusic} loop />
+      <S.BackgroundVideo
+        id="video-dark-mode"
+        autoPlay loop muted playsInline
+        key={videoSourceDark}
+      >
+      
+        <source src={videoSourceDark} type="video/mp4" />
+        <source src="/videos/background(1).webm" type="video/webm" />
+      </S.BackgroundVideo>
 
-       <MusicPlayerUI
-           style={{ position: 'relative', zIndex: 2 }}
-           isPlaying={isPlaying}
-           togglePlayPause={togglePlayPause}
-           songTitle={currentTrack.title}
-           artistName={currentTrack.artist}
-           albumArtUrl={currentTrack.albumArt}
-       />
+      
+      <S.BackgroundVideo
+        id="video-light-mode"
+        autoPlay loop muted playsInline
+        key={videoSourceLight}
+      >
+        <source src={videoSourceLight} type="video/mp4" />
+        <source src="/videos/totoro2.webm" type="video/webm" />
+
+      </S.BackgroundVideo>
 
 
-     <S.MainContent>
+      <audio ref={audioRef} src={backgroundMusic} loop />
 
-         <S.ProfileSection>
-             {loading && <p>Carregando...</p>}
-             {error && <S.ErrorMessage>Erro: {error}</S.ErrorMessage>}
-             {!loading && !error && discordData && (
-                 <DiscordProfileDisplay userId={DISCORD_ID} />
-             )}
-             {!loading && !error && !discordData && !loading && (
-                 <p>Não foi possível carregar os dados do perfil.</p>
-             )}
+      <MusicPlayerUI
+        style={{ position: 'relative', zIndex: 2 }}
+        isPlaying={isPlaying}
+        togglePlayPause={togglePlayPause}
+        songTitle={currentTrack.title}
+        artistName={currentTrack.artist}
+        albumArtUrl={currentTrack.albumArt}
+      />
+
+
+      <S.MainContent>
+        
+
+        <S.ProfileSection>
+          {loading && <p>Carregando...</p>}
+          {error && <S.ErrorMessage>Erro: {error}</S.ErrorMessage>}
+          {!loading && !error && discordData && (
+            <DiscordProfileDisplay userId={DISCORD_ID} />
+          )}
+          {!loading && !error && !discordData && !loading && (
+            <p>pwdim</p>
+          )}
+
+          <ThemeToggle />
         </S.ProfileSection>
 
-       <S.LinksSection>
-         {profileData.links.map(renderLinkButton)}
-       </S.LinksSection>
+        <S.LinksSection>
+          {profileData.links.map(renderLinkButton)}
+        </S.LinksSection>
 
-     </S.MainContent>
-   </S.HomePageContainer>
- );
+      </S.MainContent>
+    </S.HomePageContainer>
+  );
 };
 
 export default HomePage;

@@ -1,87 +1,171 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const HomePageContainer = styled.div`
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
+const borderAnimation = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow: hidden; 
+  z-index: 1;
+`;
+
+export const CopyMessageTop = styled.p`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(50, 200, 50, 0.8);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+
+  body.light-mode & {
+    background-color: rgba(50, 180, 50, 0.9);
+    color: #000;
+  }
+`;
+
+export const LinksWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 20px;
+  
+  @media (max-width: 768px) {
+    margin-top: 15px;
+    gap: 15px;
+  }
+`;
+
+export const GlassContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const StyledGlassContainer = styled(GlassContainer)``;
+
+
+export const Glass = styled.a`
+  position: relative;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px 20px;
-  text-align: center;
+  overflow: hidden;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  
+  /* AJUSTE DE TAMANHO: Deixando o botão maior */
+  width: 150px; 
+  height: 65px;
+  padding: 0;
+  min-width: 150px; 
+  
+  border-radius: 9999px; 
+  
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  z-index: 1;
 
-  body.light-mode & {
-    /* Sem background-color aqui também */
+  background: ${({ theme }) => theme.mode === 'dark' ? '#1c1c1c' : '#ffffff'};
+  color: ${({ theme }) => theme.mode === 'dark' ? '#ffffff' : '#1c1c1c'};
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    
+    background: conic-gradient(
+      #ff0080, #ff8c00, #40e0d0, #004d40, 
+      #ff0080, #ff8c00, #40e0d0, #004d40
+    );
+    
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: ${borderAnimation} 6s linear infinite;
+    
+    border-radius: 9999px; 
   }
-`;
 
-export const BackgroundVideo = styled.video`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -1; /* Agora é o elemento mais ao fundo */
-  transform: translateX(-50%) translateY(-50%);
-  object-fit: cover;
-  /* Removido filter: brightness */
-`;
-
-/* export const VideoOverlay = styled.div`...` Removido */
-
-export const MainContent = styled.div`
-  position: relative;
-  z-index: 1; /* Acima do vídeo */
-  width: 100%;
-  max-width: 680px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--dark-text-color, #e8eaed);
-
-  body.light-mode & {
-    /* Cor do texto precisa contrastar com o vídeo no modo claro */
-    color: var(--light-text-color, #202124);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    
+    border-radius: 9999px;
+    
+    z-index: 1;
+    
+    background: ${({ theme }) => theme.mode === 'dark' ? '#1c1c1c' : '#ffffff'};
+    transition: background 0.3s ease;
   }
-`;
 
-export const ProfileSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const UsernameDisplay = styled.h1`
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #ffffff;
-  /* Sombra mais forte para garantir legibilidade sobre o vídeo */
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
-  margin: 0;
-
-  body.light-mode & {
-    /* Cor clara pode precisar de sombra clara ou escura dependendo do vídeo */
-    color: var(--light-heading-color, #ffffff); /* Manter branco pode ser melhor */
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7); /* Sombra escura ajuda */
+  & svg {
+    vertical-align: middle;
+    /* MUDANÇA: Remove margin-right para centralizar o ícone */
+    margin-right: 0;
+    /* Aumenta o tamanho do ícone para preencher mais o botão */
+    font-size: 2em; 
+    z-index: 2;
+    fill: ${({ theme }) => theme.mode === 'dark' ? '#ffffff' : '#1c1c1c'};
+    transition: fill 0.3s ease;
   }
-`;
 
-export const ErrorMessage = styled.p`
-  margin-top: 10px;
-  color: #f8d7da; /* Vermelho claro */
-  background-color: rgba(220, 53, 69, 0.6); /* Fundo vermelho semi-transparente */
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+  &[data-text]::after {
+    content: none;
+  }
 
-  body.light-mode & {
-    color: #721c24; /* Texto escuro */
-    background-color: rgba(248, 215, 218, 0.8); /* Fundo claro */
-    text-shadow: none;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  &:hover::after {
+    background: ${({ theme }) => theme.mode === 'dark' ? '#1a1a1a' : '#f0f0f0'}; 
+  }
+
+  @media (max-width: 768px) {
+    /* Ajuste responsivo */
+    width: 120px;
+    height: 55px;
+    min-width: 120px;
+    padding: 0;
+    margin: 0;
+    transform: none;
+    
+    & svg {
+      font-size: 1.8em;
+    }
+
+    &:hover {
+      transform: none;
+    }
   }
 `;
