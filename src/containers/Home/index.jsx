@@ -7,7 +7,7 @@ import backgroundMusic from '/music/ofeliasdream.mp3';
 import { NavbarContainer } from '../../components/nav/styles';
 import ThemeToggle from '../../components/ThemeToggle';
 
-const videoSourceDark = '/videos/background(1).mp4';
+const videoSourceDark = '/videos/storm.mp4';
 const videoSourceLight = '/videos/totoro.mp4';
 export const Namemc = (props) => (
       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>
@@ -118,7 +118,7 @@ const HomePage = () => {
       >
       
         <source src={videoSourceDark} type="video/mp4" />
-        <source src="/videos/background(1).webm" type="video/webm" />
+        <source src="/videos/storm.webm" type="video/webm" />
       </S.BackgroundVideo>
 
       
