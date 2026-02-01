@@ -101,7 +101,7 @@ const NavigationBar = () => {
       <NavContent>
         <StyledRouterLink to="/" onClick={closeMobileMenu} title="Página Inicial">
           <LogoLink>
-            <Logo src="/src/assets/logos/favicon-16x16.png" alt="Logo" />
+            <Logo src="https://imgur.com/ZB6H5Zq.png" alt="Logo" />
           </LogoLink>
         </StyledRouterLink>
 
