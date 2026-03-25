@@ -58,20 +58,23 @@ const HomePage = () => {
                       <DiscordProfileDisplay userId={DISCORD_ID} />
           <S.AboutSection>
             <h3>Sobre mim</h3>
-            <p>
-              Me chamo Pedro (Pwdim), tenho 20 anos e sou estudante de ADS.
-              Atualmente focado em me aprofundar no ecossistema <strong>Java</strong> e arquiteturas de BackEnd.
+            <p alignItems="center" justifyContent="center">
+              Me chamo Pedro, tenho 20 anos e estou cursando Análise e Desenvolvimento de Sistemas. <br />
+              Sou um amante de tecnologia, atualmente me aprofundando em Java, Python e JavaScript. <br />
+              Tenho experiência com hardware, manutenção de sistemas e desenvolvimento de software. <br />
+              Atualmente busco minha primeira oportunidade profissional como Desenvolvedor BackEnd. <br />
+              
             </p>
           </S.AboutSection>
 
-          <div>
-            <S.LinksSection>
+          <S.LinksDiv>
+                      <S.LinksSection>
             <S.LinkButton href="https://git.pwdim.com" target="_blank"><FaGithub /></S.LinkButton>
             <S.LinkButton href="https://dc.pwdim.com/" target="_blank"><FaDiscord /></S.LinkButton>
             <S.LinkButton href="mailto:contact@pwdim.com"><FaEnvelope /></S.LinkButton>
             <S.LinkButton href="/about"><FaInfoCircle /></S.LinkButton>
           </S.LinksSection>
-          </div>
+          </S.LinksDiv>
           </S.ContentCard>
         </S.ContentCard>
 

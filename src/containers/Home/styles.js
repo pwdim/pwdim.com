@@ -125,7 +125,7 @@ export const ContentCard = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   padding: 35px;
-  height: 100%;
+  height: 90%;
   transition: transform 0.3s ease, background 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -854,14 +854,19 @@ border-radius: 12px;
 
 `;
 
+export const LinksDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
 
 export const LinksSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20px;
-  width: 100%;
-  margin-top: 0px;
+  gap: 10px;
+  width: 80%;
   flex-wrap: wrap;
 
   @media (max-width: 480px) {

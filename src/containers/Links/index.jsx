@@ -13,7 +13,11 @@ const TechIcons = [
   { name: 'React', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg' },
   { name: 'MongoDB', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg' },
   { name: 'MySQL', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg' },
-  { name: 'Linux', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg' },
+  { name: 'MariaDB', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mariadb/mariadb-original.svg' },
+  { name: 'Debian', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/debian/debian-original.svg' },
+  { name: 'Windows', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/windows/windows.svg' },
+  { name: 'Spigot', url: 'https://avatars.githubusercontent.com/u/4350249?s=200&v=4' },
+  { name: 'InteliJ', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/intellij/intellij-original.svg' },
 ];
 
 const LinksPage = () => {
@@ -40,13 +44,6 @@ const LinksPage = () => {
         <S.LeftColumn>
           <S.ContentCard>
             <DiscordProfileDisplay userId={YOUR_DISCORD_ID} />
-            <S.AboutSection>
-              <h3>Sobre mim</h3>
-              <p>
-                Me chamo Pedro (Pwdim), tenho 20 anos e sou estudante de ADS. 
-                Atualmente focado em me aprofundar no ecossistema <strong>Java</strong> e arquiteturas de BackEnd.
-              </p>
-            </S.AboutSection>
             
             <S.SocialRow>
               <S.Glass href="https://github.com/pwdim" target="_blank" rel="noopener noreferrer"><FaGithub /></S.Glass>
@@ -71,10 +68,7 @@ const LinksPage = () => {
               ))}
             </S.TechGrid>
           </S.ContentCard>
-          
-          <S.StatsCard>
-             <img src="https://github-readme-stats-eta-sage-69.vercel.app/api/top-langs?username=pwdim&show_icons=true&locale=pt-br&layout=compact&theme=dracula&hide_border=true&title_color=ff79c6&text_color=bd93f9" alt="Stats" />
-          </S.StatsCard>
+        
         </S.RightColumn>
       </S.MainGrid>
     </Container>

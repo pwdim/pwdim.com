@@ -30,14 +30,9 @@ const AboutPage = () => {
             <Section>
                 <SectionTitle>Sobre Mim</SectionTitle>
                 <Paragraph>
-                     Meu nome é Pedro, mas também sou chamado de pwdim, atualmente sou discente em Análise e Desenvolvimento de Sistemas e possuo uma 
-                     trajetória de mais de décadas anos de imersão no ecossistema tecnológico, tendo iniciado o contato com a computação desde muito cedo. 
-                     Ao longo dessa jornada, desenvolvi um perfil híbrido e autodidata, com sólido domínio em
-                     hardware — atuando na montagem, diagnóstico e manutenção de sistemas — e em software, com foco
-                     em lógica de programação e no desenvolvimento de projetos autorais, como o ecossistema desse website. 
-                     Atualmente, dedico-me ao aprimoramento de sistemas próprios e à exploração de linguagens como Java, Python e JavaScript. 
-                     Com uma base técnica madura e visão analítica, busco minha primeira oportunidade profissional para aplicar essa bagagem em desafios de mercado, 
-                     visando contribuir com soluções inovadoras e elevar continuamente meu rigor técnico.
+Olá, sou Pedro (pwdim). Discente em Análise e Desenvolvimento de Sistemas com mais de uma década de imersão no ecossistema tecnológico. Minha trajetória começou cedo, o que me permitiu desenvolver um perfil híbrido e autodidata, unindo um sólido domínio de hardware — diagnóstico e manutenção de sistemas — a uma base robusta em desenvolvimento de software.
+
+Atualmente, foco na evolução de projetos autorais e no aprimoramento em Java, Python e JavaScript. Com uma visão analítica e rigor técnico, busco minha primeira oportunidade profissional para aplicar essa bagagem em desafios reais de mercado, contribuindo com soluções inovadoras e escaláveis.
                     </Paragraph>
             </Section>
 
