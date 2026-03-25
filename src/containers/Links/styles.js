@@ -25,12 +25,13 @@ export const Container = styled.div`
 export const MainGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 1px;
   width: 100%;
   max-width: 1100px;
   z-index: 2;
   padding: 20px;
   animation: ${fadeIn} 0.8s ease-out forwards;
+  margin-bottom: -200px;
 
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
@@ -55,6 +56,9 @@ export const ContentCard = styled.div`
 export const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 300px;
   gap: 20px;
   animation: ${fadeIn} 1s ease-out forwards;
 `;
@@ -62,7 +66,10 @@ export const LeftColumn = styled.div`
 export const RightColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  margin-bottom: 300px;
+  margin-right: 0;
+  padding: 20px;
+  gap: 50px;
   animation: ${fadeIn} 1.2s ease-out forwards;
 `;
 
@@ -95,8 +102,7 @@ export const SocialRow = styled.div`
 `;
 
 export const TechGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  justify-items: center;
   gap: 25px;
   margin-top: 25px;
 `;
@@ -134,7 +140,7 @@ export const TechHeader = styled.div`
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 15px;
-  color: #ff79c6;
+  color: #60dfff;
 
   svg {
     font-size: 1.5rem;
