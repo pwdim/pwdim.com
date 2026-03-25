@@ -88,7 +88,7 @@ const DiscordProfileDisplay = ({ userId }) => {
   }
 
   if (error || !discordData || !discordData.discord_user) {
-    return <S.ProfileSection><S.ErrorMessage>@pwdium {error || 'Dados não encontrados'}</S.ErrorMessage></S.ProfileSection>;
+    return <S.ProfileSection><S.ErrorMessage> {error || ''}</S.ErrorMessage></S.ProfileSection>;
   }
 
   const { discord_user, discord_status, activities, spotify } = discordData;
@@ -104,13 +104,9 @@ const DiscordProfileDisplay = ({ userId }) => {
         <S.StatusIndicator $status={discord_status} $borderColor={'#101114'} />
       </S.AvatarContainer>
 
-      <S.UsernameDisplay>
-        {discord_user.display_name || discord_user.username}
+      <S.UsernameDisplay $color={statusColor} >
+        <h7>@{discord_user.display_name || discord_user.username}</h7>
       </S.UsernameDisplay>
-      <S.FullUsername>
-        @{discord_user.username}
-         {discord_user.discriminator !== '0' && `#${discord_user.discriminator}`}
-      </S.FullUsername>
 
       {customStatus?.state && (
          <S.StatusSection>

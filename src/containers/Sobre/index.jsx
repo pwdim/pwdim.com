@@ -30,12 +30,15 @@ const AboutPage = () => {
             <Section>
                 <SectionTitle>Sobre Mim</SectionTitle>
                 <Paragraph>
-                    Sou o <strong>@pwdim</strong> responsável por este painel.
-                    Atualmente, sou estudante do Bacharelado Interdisciplinar em Ciência e Tecnologia (BICT), curso que serve como base para diversas engenharias.
-                    Embora minha formação não seja estritamente focada em programação, possuo grande interesse em aprofundar meus conhecimentos nesta área.
-                    Não me considero um programador profissional; dedico-me ao estudo autodidata de tópicos de meu interesse,
-                    tais como as limitações da Inteligência Artificial, a estruturação de websites utilizando React, a requisição de APIs e a criação de bancos de dados, entre outros.
-                </Paragraph>
+                     Meu nome é Pedro, mas também sou chamado de pwdim, atualmente sou discente em Análise e Desenvolvimento de Sistemas e possuo uma 
+                     trajetória de mais de décadas anos de imersão no ecossistema tecnológico, tendo iniciado o contato com a computação desde muito cedo. 
+                     Ao longo dessa jornada, desenvolvi um perfil híbrido e autodidata, com sólido domínio em
+                     hardware — atuando na montagem, diagnóstico e manutenção de sistemas — e em software, com foco
+                     em lógica de programação e no desenvolvimento de projetos autorais, como o ecossistema desse website. 
+                     Atualmente, dedico-me ao aprimoramento de sistemas próprios e à exploração de linguagens como Java, Python e JavaScript. 
+                     Com uma base técnica madura e visão analítica, busco minha primeira oportunidade profissional para aplicar essa bagagem em desafios de mercado, 
+                     visando contribuir com soluções inovadoras e elevar continuamente meu rigor técnico.
+                    </Paragraph>
             </Section>
 
 

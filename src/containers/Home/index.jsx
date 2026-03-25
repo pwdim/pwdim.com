@@ -2,170 +2,120 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as S from './styles';
 import DiscordProfileDisplay from '../../components/DiscordProfileDisplay';
 import MusicPlayerUI from '../../components/MusicPlayerUI';
-import { FaTrophy, FaInfoCircle, FaGithub, FaDiscord } from 'react-icons/fa';
+import { FaEnvelope, FaInfoCircle, FaGithub, FaDiscord, FaCode } from 'react-icons/fa';
 import backgroundMusic from '/music/ofeliasdream.mp3';
-import { NavbarContainer } from '../../components/nav/styles';
 import ThemeToggle from '../../components/ThemeToggle';
 
-const videoSourceDark = '/videos/storm.mp4';
-const videoSourceLight = '/videos/totoro.mp4';
-export const Namemc = (props) => (
-      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}>
-    <path fill="#575858ff" d="M0 0v24h24V0Zm4.8 4.8H16V8h3.2v11.2H16V8H8v11.2H4.8V8Z"></path>
-</svg>
-    )
+const TechIcons = [
+  { name: 'Java', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg' },
+  { name: 'JS', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg' },
+  { name: 'Python', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' },
+  { name: 'React', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg' },
+  { name: 'MongoDB', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original.svg' },
+  { name: 'MySQL', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg' },
+  { name: 'MariaDB', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/mariadb/mariadb-original.svg' },
+    { name: 'Debian', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/debian/debian-original.svg' },
+  { name: 'InteliJ', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/intellij/intellij-original.svg' },
+];
 
 const HomePage = () => {
   const DISCORD_ID = '386563422055170048';
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const [discordData, setDiscordData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-    setDiscordData(null);
-    fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
-      .then(response => response.ok ? response.json() : Promise.reject(new Error('Network response was not ok')))
-      .then(data => {
-        if (data.success) {
-          setDiscordData(data.data);
-        } else {
-          throw new Error('Lanyard API returned success: false');
-        }
-      })
-      .catch(err => {
-        console.error("Erro Lanyard:", err);
-        setError(err.message || 'Falha ao buscar dados');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [DISCORD_ID]);
-
-  const profileData = {
-    links: [
-      // { name: 'Leaderboards', url: '/leaderboard/hg', icon: FaTrophy, isInternal: true },
-      { name: 'Sobre', url: '/about', icon: FaInfoCircle, isInternal: true },
-      { name: 'GitHub', url: 'https://git.pwdim.com', icon: FaGithub, isInternal: false },
-      { name: 'Discord', url: 'https://dc.pwdim.com/', icon: FaDiscord, isInternal: false },
-      { name: 'NameMC', url: 'https://pt.namemc.com/search?q=fc883f59-f929-40b6-832c-95d1ee20e138', icon: Namemc, isInternal: false }, 
-      { name: 'Laby.net', url: 'https://laby.net/@pwdim', icon: 'https://www.labymod.net/page/tpl/assets/images/white_wolf.png', isInternal: false }, 
-    ]
-  };
-
-  const renderLinkButton = (link) => {
-    let iconContent = null;
-
-
-    if (typeof link.icon === 'string') {
-      iconContent = <S.IconImage src={link.icon} alt={`${link.name} icon`} />;
-    } else if (link.icon) {
-      const IconComponent = link.icon;
-      iconContent = <IconComponent />;
-    }
-
-    const content = (
-      <>
-        {iconContent && <S.IconWrapper>{iconContent}</S.IconWrapper>}
-      </>
-    );
-
-    if (link.isInternal) {
-      return <S.LinkButton key={link.name} href={link.url} title={link.name}>{content}</S.LinkButton>;
-    } else {
-      return (
-        <S.LinkButton key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" title={link.name}>
-          {content}
-        </S.LinkButton>
-      );
-    }
-  };
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const togglePlayPause = () => {
     if (!audioRef.current) return;
-    const audio = audioRef.current;
-    const shouldPlay = !isPlaying;
-    if (shouldPlay) {
-      audio.play().then(() => { setIsPlaying(true); }).catch(playError => { console.error("Audio Play Error:", playError); setIsPlaying(false); });
+
+    if (isPlaying) {
+      audioRef.current.pause();
     } else {
-      audio.pause();
-      setIsPlaying(false);
+      audioRef.current.play().catch(err => console.error(err));
     }
-  };
-
-  useEffect(() => {
-    if (audioRef.current) { audioRef.current.volume = 0.3; }
-  }, []);
-
-  const currentTrack = {
-    title: "Ofelia's dream",
-    artist: "Benjamin Tissot",
-    albumArt: "https://cdn.bensound.com/image/cover/ofeliasdream.webp"
+    setIsPlaying(!isPlaying);
   };
 
   return (
     <S.HomePageContainer>
-      
-
-      <S.BackgroundVideo
-        id="video-dark-mode"
-        autoPlay loop muted playsInline
-        key={videoSourceDark}
-      >
-      
-        <source src={videoSourceDark} type="video/mp4" />
-        <source src="/videos/storm.webm" type="video/webm" />
+      <S.BackgroundVideo id="video-light-mode" autoPlay loop muted playsInline>
+        <source src="/videos/totoro.mp4" type="video/mp4" />
       </S.BackgroundVideo>
-
-      
-      <S.BackgroundVideo
-        id="video-light-mode"
-        autoPlay loop muted playsInline
-        key={videoSourceLight}
-      >
-        <source src={videoSourceLight} type="video/mp4" />
-        <source src="/videos/totoro2.webm" type="video/webm" />
-
-      </S.BackgroundVideo>
-
 
       <audio ref={audioRef} src={backgroundMusic} loop />
 
-      <MusicPlayerUI
-        style={{ position: 'relative', zIndex: 2 }}
-        isPlaying={isPlaying}
-        togglePlayPause={togglePlayPause}
-        songTitle={currentTrack.title}
-        artistName={currentTrack.artist}
-        albumArtUrl={currentTrack.albumArt}
-      />
-
+      <div style={{ position: 'fixed', top: '20px', right: '20px', zIndex: 10 }}>
+        <ThemeToggle />
+      </div>
 
       <S.MainContent>
-        
+        <S.ContentCard>
+          <S.ContentCard>
+                      <DiscordProfileDisplay userId={DISCORD_ID} />
+          <S.AboutSection>
+            <h3>Sobre mim</h3>
+            <p>
+              Me chamo Pedro (Pwdim), tenho 20 anos e sou estudante de ADS.
+              Atualmente focado em me aprofundar no ecossistema <strong>Java</strong> e arquiteturas de BackEnd.
+            </p>
+          </S.AboutSection>
 
-        <S.ProfileSection>
-          {loading && <p>Carregando...</p>}
-          {error && <S.ErrorMessage>Erro: {error}</S.ErrorMessage>}
-          {!loading && !error && discordData && (
-            <DiscordProfileDisplay userId={DISCORD_ID} />
-          )}
-          {!loading && !error && !discordData && !loading && (
-            <p>pwdim</p>
-          )}
+          <div>
+            <S.LinksSection>
+            <S.LinkButton href="https://git.pwdim.com" target="_blank"><FaGithub /></S.LinkButton>
+            <S.LinkButton href="https://dc.pwdim.com/" target="_blank"><FaDiscord /></S.LinkButton>
+            <S.LinkButton href="mailto:contact@pwdim.com"><FaEnvelope /></S.LinkButton>
+            <S.LinkButton href="/about"><FaInfoCircle /></S.LinkButton>
+          </S.LinksSection>
+          </div>
+          </S.ContentCard>
+        </S.ContentCard>
 
-          <ThemeToggle />
-        </S.ProfileSection>
 
-        <S.LinksSection>
-          {profileData.links.map(renderLinkButton)}
-        </S.LinksSection>
+        <S.ContentCard>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+          <S.ContentCard>
+            <S.TechHeader>
+              <FaCode />
+              <h3>Tecnologias</h3>
+            </S.TechHeader>
 
+            <S.TechGrid>
+              {TechIcons.map((tech) => (
+                <S.TechItem key={tech.name}>
+                  <S.TechIconCircle>
+                    <img src={tech.url} alt={tech.name} />
+                  </S.TechIconCircle>
+                  <S.TechName>
+                    <p>{tech.name}</p>
+                  </S.TechName>
+                </S.TechItem>
+              ))}
+            </S.TechGrid>
+          </S.ContentCard>
+
+          <S.ContentCard style={{ padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img
+              src="https://github-readme-stats-eta-sage-69.vercel.app/api/top-langs?username=pwdim&show_icons=true&locale=pt-br&layout=compact&theme=dracula&hide_border=true&title_color=ff79c6&text_color=bd93f9"
+              alt="Stats"
+              style={{ width: '100%', borderRadius: '12px' }}
+            />
+          </S.ContentCard>
+        </div>
+        </S.ContentCard>
       </S.MainContent>
+
+      <MusicPlayerUI
+        isPlaying={isPlaying}
+        togglePlayPause={togglePlayPause}
+        songTitle="Ofelia's dream"
+        artistName="Benjamin Tissot"
+        albumArtUrl="https://cdn2.bensound.com/image/cover/ofeliasdream.webp"
+      />
     </S.HomePageContainer>
   );
 };

@@ -14,7 +14,6 @@ const SmokeBackground = () => {
   const canvasRef = useRef(null);
   const theme = useContext(ThemeContext); 
   
-  // O componente lê o objeto de tema completo (darkTheme ou lightTheme)
   const particleColor = theme?.colors?.smoke || '255, 255, 255'; 
 
   useEffect(() => {

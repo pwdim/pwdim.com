@@ -8,9 +8,8 @@ const ThemeToggle = () => {
   return (
     <S.Switch>
       <S.SwitchInput
-        id="theme-toggle-input"
         type="checkbox"
-        checked={theme === 'dark'}
+        checked={theme === 'light'}
         onChange={toggleTheme}
         aria-label="Alternar tema"
       />
