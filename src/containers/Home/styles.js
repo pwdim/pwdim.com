@@ -124,7 +124,7 @@ export const ContentCard = styled.div`
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
-  padding: 35px;
+  padding: 50px;
   height: 90%;
   transition: transform 0.3s ease, background 0.3s ease;
   display: flex;
@@ -199,11 +199,13 @@ export const ProfileImage = styled.img`
 
 display: block;
 
+right: 2px;
+
 width: 100%;
 
 height: 100%;
 
-border-radius: 50%;
+border-radius: 100%;
 
 position: relative;
 
@@ -254,15 +256,15 @@ export const StatusIndicator = styled.span`
 
 position: absolute;
 
-bottom: 4px;
+bottom: 2px;
 
-right: 4px;
+right: 30px;
 
-width: 24px;
+width: 20px;
 
-height: 24px;
+height: 20px;
 
-border-radius: 50%;
+border-radius: 100%;
 
 border: 4px solid rgba(25, 26, 30, 0.9);
 

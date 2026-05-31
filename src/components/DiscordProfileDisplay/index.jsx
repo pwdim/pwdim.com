@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as S from '../../containers/Home/styles'; // Ajuste o caminho se moveu os estilos
+import * as S from '../../containers/Home/styles'; 
 import { FaSpotify, FaPlaystation, FaXbox, FaSteam } from 'react-icons/fa';
 import { BiLogoVisualStudio } from "react-icons/bi";
 import { formatDistanceToNowStrict } from 'date-fns';
