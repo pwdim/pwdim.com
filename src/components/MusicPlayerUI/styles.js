@@ -3,20 +3,20 @@ import styled from 'styled-components';
 export const PlayerContainer = styled.div`
   position: fixed;
   bottom: 20px; 
-  left: 20px;
+  left: 10px;
   background-color: transparent;
   color: #e8eaed;
   padding: 12px;
   border-radius: 8px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   z-index: 1000;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  min-width: 300px;
+  min-width: 200px;
 
   body.light-mode & {
     background-color: transparent;

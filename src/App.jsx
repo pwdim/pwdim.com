@@ -13,6 +13,10 @@ import PrivacyPolicyPage from './containers/Legal/Privacy/index.jsx';
 import NotFoundPage from './containers/NotFoundPage/index.jsx';
 import LinksPage from './containers/Links/index.jsx';
 import AboutPage from './containers/Sobre/index.jsx';
+import ProjectsPage from './containers/Projetos/index.jsx';
+import PortfolioPlugins from './containers/Projetos/plugins/index.jsx';
+import PortfolioWebsites from './containers/Projetos/websites/index.jsx';
+import PortfolioBots from './containers/Projetos/bots/index.jsx';
 // import Leaderboard from './containers/Leaderboard/index.jsx';
 // import DashboardPage from './containers/Dashboard/index.jsx';
 // import UserProfilePage from './containers/UserProfile/index.jsx';
@@ -45,7 +49,7 @@ function Layout() {
 
     return (
         <>
-            {!shouldHideDefaultLayout && <NavigationBar />}
+            <NavigationBar />
 
             <Routes>
                 <Route path="/" element={<HomePage />} />
@@ -53,8 +57,11 @@ function Layout() {
                 <Route path="/legal/privacy" element={<PrivacyPolicyPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 
-                
+                <Route path="/portfolio" element={<ProjectsPage />} />  
                 <Route path="/links" element={<LinksPage />} />
+                <Route path="/portfolio/plugins" element={<PortfolioPlugins />} />
+                <Route path="/portfolio/websites" element={<PortfolioWebsites />} />
+                <Route path="/portfolio/bots" element={<PortfolioBots />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
 

@@ -1,87 +1,204 @@
-import React, { useState } from 'react';
-import * as S from '../Links/styles';
-import SmokeBackground from '/src/components/SmokeBackground';
-import { FaGithub, FaDiscord, FaEnvelope, FaCode } from 'react-icons/fa';
-import DiscordProfileDisplay from '../../components/DiscordProfileDisplay';
-import { Container } from '../../styles/globalStyles';
+import React, { useState } from "react";
+import * as S from "./styles";
 
-const TechIcons = [
-  { name: 'Java', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
-  { name: 'JavaScript', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-  { name: 'Python', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-  { name: 'Node.js', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-  { name: 'React', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-  { name: 'MongoDB', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
-  { name: 'MySQL', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-  { name: 'MariaDB', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mariadb/mariadb-original.svg' },
-  { name: 'Linux', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' },
-  { name: 'Debian', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/debian/debian-original.svg' },
-  { name: 'Cloud', url: 'https://img.icons8.com/fluency/96/cloud.png' },
-  { name: 'Grafana', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg' },
-  { name: 'Postman', url: 'https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg' },
-  { name: 'Jira', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg' },
-  { name: 'IntelliJ', url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-original.svg' },
-  { name: 'Spigot', url: 'https://avatars.githubusercontent.com/u/4350249?s=200&v=4' },
-  { name: 'Bukkit', url: 'https://media.forgecdn.net/avatars/thumbnails/65/443/48/48/636162895990633284.png' },
-];
+import SmokeBackground from "../../components/SmokeBackground";
+import DiscordProfileDisplay from "../../components/DiscordProfileDisplay";
+
+import {
+    FaGithub,
+    FaDiscord,
+    FaEnvelope,
+    FaCode
+} from "react-icons/fa";
 
 const LinksPage = () => {
-  const YOUR_DISCORD_ID = '386563422055170048';
-  const [copyMessage, setCopyMessage] = useState('');
-  const [isCopyMessageVisible, setIsCopyMessageVisible] = useState(false);
 
-  const handleEmailClick = (e) => {
-    e.preventDefault();
-    navigator.clipboard.writeText('contact@pwdim.com').then(() => {
-      setCopyMessage('Email copiado!');
-      setIsCopyMessageVisible(true);
-      setTimeout(() => setIsCopyMessageVisible(false), 3000);
-    });
-  };
+    const YOUR_DISCORD_ID = "386563422055170048";
 
-  return (
-    <Container>
-      <SmokeBackground />
-      {isCopyMessageVisible && <S.CopyMessageTop>{copyMessage}</S.CopyMessageTop>}
+    const [copyMessage, setCopyMessage] = useState("");
+    const [isCopyMessageVisible, setIsCopyMessageVisible] = useState(false);
 
-      <S.MainGrid>
-        <S.LeftColumn>
-          <S.ContentCard>
-            <DiscordProfileDisplay userId={YOUR_DISCORD_ID} />
+    const handleEmailClick = async (e) => {
 
-            <S.SocialRow>
-              <S.Glass href="https://github.com/pwdim" target="_blank" rel="noopener noreferrer"><FaGithub /></S.Glass>
-              <S.Glass href="https://dc.pwdim.com" target="_blank" rel="noopener noreferrer"><FaDiscord /></S.Glass>
-              <S.Glass href="#copy" onClick={handleEmailClick}><FaEnvelope /></S.Glass>
-            </S.SocialRow>
-          </S.ContentCard>
-        </S.LeftColumn>
+        e.preventDefault();
 
-        <S.RightColumn>
-          <S.ContentCard>
-            <S.TechHeader>
-              <FaCode /> <h3>Contato</h3>
-            </S.TechHeader>
-            <S.TechGrid>
-              <p>
-                Interessado em impulsionar novos projetos? Estou disponível para parcerias e oportunidades de mercado.
-                Sinta-se à vontade para enviar uma mensagem: <br />
-                <strong>contact@pwdim.com</strong>
-              </p>
-              <p>
-                Conecte-se comigo diretamente pelo meu Discord, onde sou mais ativo: <br />
-                <strong>@pwdium</strong>.
-              </p>
-              <p>
-                Acompanhe a atualização dos meus projetos, incluindo esse site, através do GitHub: <br></br>
-                <strong>github.com/pwdim</strong>
-              </p>
-            </S.TechGrid>
-          </S.ContentCard>
-        </S.RightColumn>
-      </S.MainGrid>
-    </Container>
-  );
+        try {
+
+            await navigator.clipboard.writeText("contact@pwdim.com");
+
+            setCopyMessage("Email copiado com sucesso!");
+            setIsCopyMessageVisible(true);
+
+            setTimeout(() => {
+                setIsCopyMessageVisible(false);
+            }, 3000);
+
+        } catch {
+
+            setCopyMessage("Não foi possível copiar o email.");
+            setIsCopyMessageVisible(true);
+
+            setTimeout(() => {
+                setIsCopyMessageVisible(false);
+            }, 3000);
+
+        }
+
+    };
+
+    return (
+
+        <S.Container>
+
+            <SmokeBackground />
+
+            <S.Section>
+
+                <DiscordProfileDisplay
+                    userId={YOUR_DISCORD_ID}
+                />
+
+                <S.SocialRow>
+
+                    <S.Glass
+                        href="https://github.com/pwdim"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="GitHub"
+                    >
+                        <FaGithub />
+                    </S.Glass>
+
+                    <S.Glass
+                        href="https://dc.pwdim.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Discord"
+                    >
+                        <FaDiscord />
+                    </S.Glass>
+
+                    <S.Glass
+                        href="#"
+                        onClick={handleEmailClick}
+                        title="Copiar Email"
+                    >
+                        <FaEnvelope />
+                    </S.Glass>
+
+                </S.SocialRow>
+
+                {isCopyMessageVisible && (
+                    <S.CopyMessage>
+                        {copyMessage}
+                    </S.CopyMessage>
+                )}
+
+            </S.Section>
+                        <S.Section>
+
+                <S.SectionTitle>
+                    <FaCode />
+                    Contato
+                </S.SectionTitle>
+
+                <S.Paragraph>
+
+                    <p>
+                        Sou apaixonado por tecnologia e sempre aberto a novos
+                        desafios. Caso tenha interesse em desenvolver um projeto,
+                        realizar uma parceria ou conversar sobre oportunidades
+                        profissionais, ficarei feliz em conversar.
+                    </p>
+
+                </S.Paragraph>
+
+                <S.ContactCard>
+
+                    <S.ContactTitle>
+                        Email
+                    </S.ContactTitle>
+
+                    <S.ContactText>
+                        Entre em contato através do endereço abaixo.
+                    </S.ContactText>
+
+                    <S.Badge>
+                        contact@pwdim.com
+                    </S.Badge>
+
+                </S.ContactCard>
+
+                <S.ContactCard>
+
+                    <S.ContactTitle>
+                        Discord
+                    </S.ContactTitle>
+
+                    <S.ContactText>
+                        Estou online praticamente todos os dias e respondo o
+                        mais rápido possível.
+                    </S.ContactText>
+
+                    <S.Badge>
+                        @pwdium
+                    </S.Badge>
+
+                </S.ContactCard>
+
+                <S.ContactCard>
+
+                    <S.ContactTitle>
+                        GitHub
+                    </S.ContactTitle>
+
+                    <S.ContactText>
+                        Todos os meus projetos públicos, estudos e contribuições
+                        encontram-se disponíveis no GitHub.
+                    </S.ContactText>
+
+                    <S.Badge>
+                        github.com/pwdim
+                    </S.Badge>
+
+                </S.ContactCard>
+
+            </S.Section>
+
+            <S.Section>
+
+                <S.SectionTitle>
+                    Vamos construir algo incrível
+                </S.SectionTitle>
+
+                <S.Paragraph>
+
+                    <p>
+                        Estou sempre em busca de novos desafios envolvendo
+                        <strong> Java</strong>,
+                        <strong> React</strong>,
+                        <strong> JavaScript</strong>,
+                        <strong> Python</strong> e desenvolvimento de soluções
+                        para Minecraft, aplicações web e automações.
+                    </p>
+
+                    <S.Divider />
+
+                    <p>
+                        Se você possui uma ideia, um projeto ou busca alguém
+                        para colaborar no desenvolvimento de uma aplicação,
+                        plugin ou sistema, entre em contato através de qualquer
+                        um dos canais disponíveis acima.
+                    </p>
+
+                </S.Paragraph>
+
+            </S.Section>
+
+        </S.Container>
+
+    );
+
 };
 
 export default LinksPage;

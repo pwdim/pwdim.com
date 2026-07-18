@@ -28,7 +28,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { RoutePrefixContext } from '../../contexts/RoutePrefixContext';
-import ThemeToggle from '../ThemeToggle'; 
+import ThemeToggle from '../ThemeToggle';
 
 
 const NavigationBar = () => {
@@ -91,22 +91,31 @@ const NavigationBar = () => {
 
 
   const navLinks = [
-    { to: "/about", icon: faInfoCircle, text: "Sobre" },
+    { to: "/portfolio", icon: faList, text: "Projetos" },
     { to: "/links", icon: faEnvelope, text: "Contato" },
+    { to: "/about", icon: faInfoCircle, text: "Sobre" },
     //{ to: "/leaderboard/hg", icon: faList, text: "Leaderboard" },
   ];
+
+  const logoStyle = {
+    borderRadius: '1%',
+
+
+    filter: 'drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.3))',
+
+  };
 
   return (
     <NavbarContainer>
       <NavContent>
         <StyledRouterLink to="/" onClick={closeMobileMenu} title="Página Inicial">
           <LogoLink>
-            <Logo src="https://imgur.com/xUAfiZO.png" alt="Logo" />
+            <Logo src="https://imgur.com/xUAfiZO.png" alt="Logo" style={logoStyle} />
           </LogoLink>
         </StyledRouterLink>
 
         <NavLinksContainerDesktop>
-          <NavLinksList>
+          <NavLinksList style={logoStyle}>
             {navLinks.map((link) => (
               <NavItem key={link.to}>
                 {link.external ? (

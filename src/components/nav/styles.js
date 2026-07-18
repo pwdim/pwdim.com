@@ -15,7 +15,7 @@ const breathe = keyframes`
 export const NavbarContainer = styled.nav`
   color: #a0a0a0;
   width: 100%;
-  background-color: #101114; /* Cor sólida escura */
+  background-color: transparent; 
   position: sticky;
   top: 0;
   left: 0;
@@ -24,9 +24,9 @@ export const NavbarContainer = styled.nav`
   padding: 10px 0; /* Padding vertical na barra */
 
   body.light-mode & {
-     background-color: #ffffff; /* Cor sólida clara */
+    background-color: transparent; 
      border-bottom-color: rgba(0, 0, 0, 0.1);
-     color: #333; /* Ajuste cor padrão do texto */
+     color: #333; 
   }
 `;
 
@@ -38,10 +38,10 @@ export const NavContent = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px; /* Padding horizontal dentro do conteúdo centralizado */
+  padding: 0 20px; 
   box-sizing: border-box;
-  position: relative; /* Necessário para posicionar os links */
-  height: 60px; /* Definir altura fixa para ajudar no posicionamento absoluto dos links */
+  position: relative; 
+  height: 60px; 
 
   @media (min-width: 1024px) {
     padding: 0 40px;

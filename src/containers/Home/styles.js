@@ -1,18 +1,44 @@
 import styled, { keyframes } from 'styled-components';
 
 const borderAnimation = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+0%{transform:rotate(0)}
+100%{transform:rotate(360deg)}
 `;
 
 const fadeIn = keyframes`
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
 `;
 
+const fadeUp = keyframes`
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+`;
 
-const getStatusColor = (status) => {
-  switch (status) {
+const float = keyframes`
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-8px)}
+`;
+
+const pulse = keyframes`
+0% { transform: scale(1); }
+50% { transform: scale(1.04); }
+100% { transform: scale(1); }
+`;
+
+const rotateBorder = keyframes`
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+`;
+
+const glow = keyframes`
+0% { box-shadow: 0 0 0 rgba(96,223,255,0); }
+50% { box-shadow: 0 0 25px rgba(96,223,255,.18), 0 0 50px rgba(96,223,255,.12); }
+100% { box-shadow: 0 0 0 rgba(96,223,255,0); }
+`;
+
+const getStatusColor = status => {
+  switch(status){
     case 'online': return '#43b581';
     case 'idle': return '#faa61a';
     case 'dnd': return '#f04747';
@@ -20,1181 +46,842 @@ const getStatusColor = (status) => {
   }
 };
 
-
 export const HomePageContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   padding: 20px;
   position: relative;
-  overflow-x: hidden;
-  z-index: 1;
+  overflow: hidden;
 `;
-
 
 export const Background = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 1;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -3;
+  transition: 0.5s;
 
-  &#background-light-mode {
-    display: none;
-  }
+  &#background-light-mode { display: none; }
 
   body.light-mode & {
-    &#background-dark-mode {
-      display: none;
-    }
-    &#background-light-mode {
-      display: block;
-    }
+    &#background-dark-mode { display: none; }
+    &#background-light-mode { display: block; }
   }
 `;
 
-export const BackgroundVideo = styled.video`
-
-position: fixed;
-
-top: 0;
-
-left: 0;
-
-width: 100%;
-
-height: 100%;
-
-object-fit: cover;
-
-z-index: -1;
-
-opacity: 1;
-
-&#video-light-mode {
-
-display: none;
-
-}
-
-body.light-mode & {
-
-&#video-dark-mode {
-
-display: none;
-
-}
-
-&#video-light-mode {
-
-display: block;
-
-}
-
-}
-
+export const ThemeContainer = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
 `;
-
 
 export const MainContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  grid-template-columns: 360px minmax(500px, 1fr);
+  gap: 25px;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1300px;
+  max-height: 90vh;
+  align-items: stretch;
   z-index: 2;
-  padding: 20px;
-  animation: ${fadeIn} 0.8s ease-out forwards;
+  animation: ${fadeUp} 0.7s ease;
 
-  @media (max-width: 968px) {
+  @media (max-width: 1024px) {
     grid-template-columns: 1fr;
-    padding: 10px;
+    overflow-y: auto;
+    max-height: 100vh;
   }
 `;
 
-
-export const ContentCard = styled.div`
-  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.03)'};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 50px;
-  height: 90%;
-  transition: transform 0.3s ease, background 0.3s ease;
+export const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
+  gap: 20px;
+`;
+
+export const RightColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 70%;
+`;
+
+export const ContentCard = styled.div`
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: 0.45s;
+
+  background: ${({ theme }) => theme.title === 'dark' 
+    ? 'rgba(20, 24, 35, 0.45)' 
+    : 'rgba(255, 255, 255, 0.45)'};
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid ${({ theme }) => theme.title === 'dark' 
+    ? 'rgba(255, 255, 255, 0.08)' 
+    : 'rgba(0, 0, 0, 0.08)'};
+
+  box-shadow: ${({ theme }) => theme.title === 'dark' 
+    ? '0 25px 70px rgba(0, 0, 0, 0.45)' 
+    : '0 25px 60px rgba(0, 0, 0, 0.08)'};
+
+  animation: ${fadeUp} 0.8s ease;
 
   &:hover {
     transform: translateY(-5px);
-  }
-
-  body.light-mode & {
-    background: rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    animation: ${glow} 2s infinite;
   }
 `;
 
+export const GlassCard = styled(ContentCard)``;
 
-export const LeftColumn = styled.div`
-
-display: flex;
-
-flex-direction: column;
-
-gap: 20px;
-
-animation: ${fadeIn} 1s ease-out forwards;
-
+export const CardBody = styled.div`
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
-
-export const RightColumn = styled.div`
-
-display: flex;
-
-flex-direction: column;
-
-gap: 20px;
-
-animation: ${fadeIn} 1.2s ease-out forwards;
-
+export const FloatingGlow = styled.div`
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96,223,255,.22), transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+  animation: ${pulse} 6s ease-in-out infinite;
+  top: -60px;
+  right: -60px;
+  z-index: 0;
 `;
 
-
-export const ProfileSection = styled.div`
-
-margin-bottom: 20px;
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-width: 100%;
-
+export const BottomGlow = styled(FloatingGlow)`
+  top: auto;
+  right: auto;
+  left: -60px;
+  bottom: -60px;
+  background: radial-gradient(circle, rgba(141,15,255,.18), transparent 70%);
+  animation-delay: 2s;
 `;
 
-
-export const AvatarContainer = styled.div`
-
-position: relative;
-
-width: 120px;
-
-height: 120px;
-
-margin-bottom: 20px;
-
+export const HeroTitle = styled.h1`
+  margin: 10px 0 2px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#1d1d1d'};
 `;
 
-
-export const ProfileImage = styled.img`
-
-display: block;
-
-right: 2px;
-
-width: 100%;
-
-height: 100%;
-
-border-radius: 100%;
-
-position: relative;
-
-z-index: 1;
-
-border: 3px solid ${props => props.$statusColor || 'rgba(255, 255, 255, 0.1)'};
-
-box-shadow: 0 0 20px 0px ${props => props.$statusColor || 'rgba(0, 0, 0, 0.3)'};
-
-transition: all 0.3s ease;
-
-
-body.light-mode & {
-
-border-color: ${props => props.$statusColor || 'rgba(0, 0, 0, 0.1)'};
-
-box-shadow: 0 0 15px 0px ${props => props.$statusColor || 'rgba(0, 0, 0, 0.1)'};
-
-}
-
+export const HeroSubtitle = styled.h2`
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.6)' : '#666'};
 `;
 
-
-export const AvatarDecoration = styled.img`
-
-position: absolute;
-
-top: 50%;
-
-left: 50%;
-
-transform: translate(-50%, -50%);
-
-width: 144%;
-
-height: auto;
-
-max-height: 144%;
-
-pointer-events: none;
-
-z-index: 2;
-
+export const InfoGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 15px 0;
 `;
 
+export const InfoItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.8)' : '#444'};
 
-export const StatusIndicator = styled.span`
-
-position: absolute;
-
-bottom: 2px;
-
-right: 30px;
-
-width: 20px;
-
-height: 20px;
-
-border-radius: 100%;
-
-border: 4px solid rgba(25, 26, 30, 0.9);
-
-background-color: ${props => getStatusColor(props.$status)};
-
-z-index: 3;
-
-box-sizing: border-box;
-
-box-shadow: 0 0 10px 1px ${props => getStatusColor(props.$status)};
-
-
-body.light-mode & {
-
-border: 4px solid rgba(255, 255, 255, 0.9);
-
-}
-
+  svg {
+    font-size: 1rem;
+    color: #60dfff;
+  }
 `;
-
-
-export const UsernameDisplay = styled.h1`
-
-font-size: 2.2rem;
-
-font-weight: 800;
-
-color: #ffffff;
-
-margin-bottom: 5px;
-
-letter-spacing: -0.5px;
-
-text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-
-
-body.light-mode & {
-
-color: #1a1a1b;
-
-text-shadow: none;
-
-}
-
-`;
-
-
-export const FullUsername = styled.span`
-
-font-size: 0.95rem;
-
-color: rgba(255, 255, 255, 0.6);
-
-line-height: 1.2;
-
-margin-bottom: 15px;
-
-font-weight: 500;
-
-
-body.light-mode & {
-
-color: #5c6370;
-
-}
-
-`;
-
-
-export const StatusSection = styled.div`
-
-margin-bottom: 20px;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-background: rgba(0, 0, 0, 0.2);
-
-padding: 6px 16px;
-
-border-radius: 20px;
-
-backdrop-filter: blur(5px);
-
-
-body.light-mode & {
-
-background: rgba(0, 0, 0, 0.05);
-
-}
-
-`;
-
-
-export const StatusEmoji = styled.span`
-
-margin-right: 8px;
-
-font-size: 1.1rem;
-
-`;
-
-
-export const StatusText = styled.p`
-
-font-size: 0.95rem;
-
-font-weight: 500;
-
-color: #dcddde;
-
-margin: 0;
-
-line-height: 1.4;
-
-
-body.light-mode & {
-
-color: #4f5660;
-
-}
-
-`;
-
 
 export const AboutSection = styled.div`
-  margin-top: 25px;
-  text-align: left;
-  color: ${({ theme }) => theme.title === 'dark' ? '#ccc' : '#fff'};
-
+  margin-top: auto;
+  
   h3 {
-    margin-bottom: 12px;
-    font-size: 1.5rem;
-    color: ${({ theme }) => theme.title === 'dark' ? '#000' : '#fff'};
+    margin: 0 0 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#171717'};
   }
 
   p {
-    line-height: 1.7;
-    font-size: 1rem;
-
-    strong {
-      color: ${({ theme }) => theme.title === 'dark' ? '#8ab4f8' : '#1a73e8'};
-    }
+    margin: 0 0 6px;
+    line-height: 1.5;
+    font-size: 0.85rem;
+    color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.82)' : '#424242'};
   }
 `;
 
-
-export const ActivitySection = styled.div`
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-gap: 12px;
-
-margin-bottom: 20px;
-
-width: 100%;
-
-box-sizing: border-box;
-
-`;
-
-
-export const ActivityItem = styled.div`
-
-display: flex;
-
-align-items: center;
-
-justify-content: flex-start;
-
-gap: 15px;
-
-padding: 12px 18px;
-
-background-color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.03)'};
-
-border-radius: 18px;
-
-border: 1px solid rgba(255, 255, 255, 0.05);
-
-width: 100%;
-
-box-sizing: border-box;
-
-transition: transform 0.2s ease;
-
-
-&:hover {
-
-transform: scale(1.01);
-
-background-color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.05)'};
-
-}
-
-
-body.light-mode & {
-
-border-color: rgba(0, 0, 0, 0.05);
-
-}
-
-`;
-
-
-export const ActivityIcon = styled.div`
-
-width: 64px;
-
-height: 64px;
-
-flex-shrink: 0;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-position: relative;
-
-
-img {
-
-width: 100%;
-
-height: 100%;
-
-display: block;
-
-border-radius: 12px;
-
-object-fit: cover;
-
-}
-
-`;
-
-
-export const ActivityText = styled.div`
-
-font-size: 0.9rem;
-
-line-height: 1.4;
-
-overflow: hidden;
-
-text-align: left;
-
-flex-grow: 1;
-
-color: #dcddde;
-
-
-div {
-
-font-size: 0.8rem;
-
-color: rgba(255, 255, 255, 0.5);
-
-white-space: nowrap;
-
-text-overflow: ellipsis;
-
-overflow: hidden;
-
-
-body.light-mode & { color: #5c6370; }
-
-}
-
-
-strong {
-
-color: #ffffff;
-
-font-weight: 600;
-
-display: block;
-
-white-space: nowrap;
-
-text-overflow: ellipsis;
-
-overflow: hidden;
-
-
-body.light-mode & { color: #1a1a1b; }
-
-}
-
-
-body.light-mode & {
-
-color: #2e3338;
-
-}
-
-`;
-
-
-export const SpotifySection = styled(ActivityItem)`
-
-border-left: 4px solid #1db954;
-
-`;
-
-
-export const AlbumArt = styled.img`
-
-width: 48px;
-
-height: 48px;
-
-border-radius: 8px;
-
-flex-shrink: 0;
-
-object-fit: cover;
-
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-`;
-
-
-export const SongInfo = styled(ActivityText)`
-
-strong {
-
-font-size: 0.95rem;
-
-margin-bottom: 2px;
-
-color: #1db954;
-
-
-body.light-mode & { color: #169c46; }
-
-}
-
-span {
-
-display: block;
-
-font-size: 0.85rem;
-
-color: rgba(255, 255, 255, 0.7);
-
-white-space: nowrap;
-
-text-overflow: ellipsis;
-
-overflow: hidden;
-
-
-body.light-mode & { color: #4f5660; }
-
-}
-
-div { display: none; }
-
-`;
-
-
 export const SocialRow = styled.div`
-
-display: flex;
-
-gap: 15px;
-
-margin-top: 30px;
-
-justify-content: flex-start;
-
-flex-wrap: wrap;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
 `;
-
 
 export const Glass = styled.a`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.45s;
+  transform-style: preserve-3d;
+  background: ${({ theme }) => theme.title === 'dark' ? '#181c27' : '#fff'};
+  border: 1px solid ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.08)'};
+  box-shadow: ${({ theme }) => theme.title === 'dark' ? '0 8px 20px rgba(0,0,0,.45)' : '0 8px 20px rgba(0,0,0,.12)'};
 
-position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 220%;
+    height: 220%;
+    background: conic-gradient(from 0deg, #60dfff, #3b82f6, #8d0fff, #60dfff);
+    animation: ${rotateBorder} 4s linear infinite;
+    opacity: 0;
+    transition: 0.4s;
+  }
 
-display: flex;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.title === 'dark' ? '#181c27' : '#fff'};
+    z-index: 1;
+  }
 
-align-items: center;
+  svg {
+    position: relative;
+    z-index: 2;
+    font-size: 20px;
+    color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#222'};
+    transition: 0.35s;
+  }
 
-justify-content: center;
+  &:hover {
+    transform: translateY(-5px) scale(1.08) rotate(8deg);
+    box-shadow: 0 15px 30px rgba(96,223,255,.35);
+  }
 
-overflow: hidden;
-
-text-decoration: none;
-
-cursor: pointer;
-
-width: 65px;
-
-height: 65px;
-
-border-radius: 50%;
-
-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-z-index: 1;
-
-
-background: ${({ theme }) => theme.title === 'dark' ? '#1c1c1c' : '#ffffff'};
-
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-
-
-&::before {
-
-content: '';
-
-position: absolute;
-
-width: 200%;
-
-height: 200%;
-
-background: conic-gradient(
-
-#ff0080, #ff8c00, #40e0d0, #004d40, #ff0080
-
-);
-
-top: -50%;
-
-left: -50%;
-
-z-index: -1;
-
-opacity: 0;
-
-transition: opacity 0.4s ease;
-
-animation: ${borderAnimation} 4s linear infinite;
-
-}
-
-
-&::after {
-
-content: '';
-
-position: absolute;
-
-inset: 3px;
-
-border-radius: 50%;
-
-z-index: 1;
-
-background: ${({ theme }) => theme.title === 'dark' ? '#1c1c1c' : '#ffffff'};
-
-transition: background 0.3s ease;
-
-}
-
-
-& svg {
-
-font-size: 1.8rem;
-
-z-index: 2;
-
-fill: ${({ theme }) => theme.title === 'dark' ? '#ffffff' : '#1c1c1c'};
-
-transition: all 0.3s ease;
-
-}
-
-
-&:hover {
-
-transform: scale(1.1) rotate(5deg);
-
-&::before { opacity: 1; }
-
-& svg { fill: #ff79c6; }
-
-}
-
+  &:hover::before { opacity: 1; }
+  &:hover svg {
+    color: #60dfff;
+    transform: scale(1.15);
+  }
 `;
-
 
 export const TechHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-  /* Cor do ícone FaCode e do container */
-  color: ${({ theme }) => (theme.title === 'dark' ? '#8ab4f8' : '#1a73e8')};
-
-  h3 {
-    margin: 0; 
-    font-size: 1.5rem;
-    /* Dark: Branco | Light: Preto/Cinza Escuro */
-    color: ${({ theme }) => (theme.title === 'dark' ? '#ffffff' : '#fff')};
-  }
+  margin-bottom: 20px;
 
   svg {
-    font-size: 1.5rem;
+    font-size: 24px;
+    color: #60dfff;
+  }
+
+  h2, h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#202124'};
+  }
+  
+  span {
+    font-size: 0.85rem;
+    color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.6)' : '#666'};
   }
 `;
 
 export const TechGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  gap: 25px;
-  margin-top: 25px;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  gap: 15px;
 `;
 
 export const TechItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  gap: 8px;
+  transition: 0.35s;
 
   img {
-    width: 48px;
-    height: 48px;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,.2));
+    transition: 0.35s;
+  }
+
+  span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#333'};
+    opacity: 0.8;
+    transition: 0.35s;
   }
 
   &:hover {
-    transform: scale(1.15) translateY(-5px);
+    transform: translateY(-5px) scale(1.08);
+  }
+
+  &:hover img {
+    transform: rotate(-8deg) scale(1.15);
+    filter: drop-shadow(0 10px 20px rgba(96,223,255,.35));
+  }
+
+  &:hover span {
+    opacity: 1;
+    color: #60dfff;
   }
 `;
 
-export const TechName = styled.span`
-  font-weight: 600;
-  opacity: 0.9;
-
-  p {
-    margin: 0;
-    font-size: 0.9rem;
-    /* Dark: Branco | Light: Cinza Escuro */
-    color: ${({ theme }) => (theme.title === 'dark' ? '#ffffff' : '#ffffff')};
-  }
+export const SectionTitle = styled.h3`
+  margin: 0 0 15px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#171717'};
 `;
 
-export const TechIconCircle = styled.div`
-  width: 60px;
-  height: 60px;
-  /* Fundo levemente visível em ambos os temas */
-  background: ${({ theme }) => (theme.title === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)')};
-  border-radius: 50%;
+export const StatsContainer = styled.div`
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  border: 1px solid ${({ theme }) => (theme.title === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)')};
-`;
+  align-items: center;
+  height: 100%;
 
-export const StatsCard = styled(ContentCard)`
-
-padding: 20px;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-margin-top: 20px;
-
-img {
-
-max-width: 100%;
-
-height: auto;
-
-border-radius: 12px;
-
-}
-
+  img {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    border-radius: 14px;
+    transition: 0.4s;
+  }
+  
+  img:hover {
+    transform: scale(1.03);
+  }
 `;
 
 export const LinksDiv = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 34px;
 `;
-
 
 export const LinksSection = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-  width: 80%;
+  gap: 18px;
   flex-wrap: wrap;
-
-  @media (max-width: 480px) {
-    justify-content: center;
-  }
+  justify-content: center;
 `;
-
 
 export const LinkButton = styled.a`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   overflow: hidden;
   text-decoration: none;
-  cursor: pointer;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 1;
-
-  background: ${({ theme }) => theme.title === 'dark' ? '#1c1c1c' : '#1c1c1c'};
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: .45s;
+  background: ${({ theme }) => theme.title === 'dark' ? '#181b24' : '#fff'};
+  box-shadow: 0 10px 25px rgba(0,0,0,.15);
 
   &::before {
     content: '';
     position: absolute;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(#ff0080, #ff8c00, #40e0d0, #004d40, #ff0080);
-    top: -50%;
-    left: -50%;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    width: 220%;
+    height: 220%;
+    top: -60%;
+    left: -60%;
+    background: conic-gradient(#60dfff, #8d0fff, #60dfff);
     animation: ${borderAnimation} 4s linear infinite;
+    opacity: 0;
+    transition: .4s;
   }
 
   &::after {
     content: '';
     position: absolute;
-    inset: 2px; /* Reduzi um pouco para o brilho ficar mais fino */
+    inset: 2px;
     border-radius: 50%;
+    background: ${({ theme }) => theme.title === 'dark' ? '#181b24' : '#fff'};
     z-index: 1;
-    background: ${({ theme }) => theme.title === 'dark' ? '#1c1c1c' : '#1c1c1c'};
   }
 
-  & svg {
-    font-size: 1.5rem;
+  svg {
+    position: relative;
     z-index: 2;
-    fill: ${({ theme }) => theme.title === 'dark' ? '#ffffff' : '#fff'};
-    transition: all 0.3s ease;
+    font-size: 1.45rem;
+    color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#222'};
+    transition: .35s;
   }
 
   &:hover {
-    transform: scale(1.1) rotate(5deg);
-    &::before { opacity: 1; }
-    & svg { fill: #60dfff; }
+    transform: translateY(-6px) scale(1.08);
   }
 
-  body.light-mode & {
-      background: #ffffff;
-    &::after { background: #ffffff; }
-    & svg { fill: #1c1c1c; }
-      &:hover {
-       transform: scale(1.1) rotate(5deg);
-       &::before { opacity: 1; }
-       & svg { fill: #60dfff; }
+  &:hover::before {
+    opacity: 1;
   }
+
+  &:hover svg {
+    color: #60dfff;
   }
 `;
 
+export const TechIconCircle = styled.div`
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.04)' : 'rgba(255,255,255,.45)'};
+  border: 1px solid ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.05)'};
+  backdrop-filter: blur(18px);
+  transition: .35s;
+`;
+
+export const TechName = styled.span`
+  font-size: .9rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.9)' : '#2b2b2b'};
+  p { margin: 0; }
+`;
+
+export const StatsCard = styled(ContentCard)`
+  padding: 25px;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    border-radius: 18px;
+    transition: .35s;
+  }
+
+  img:hover {
+    transform: scale(1.02);
+  }
+`;
+
+export const ProfileSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const AvatarContainer = styled.div`
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 22px;
+  animation: ${float} 5s ease-in-out infinite;
+`;
+
+export const ProfileImage = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid ${({ $statusColor }) => $statusColor};
+  box-shadow: 0 0 30px ${({ $statusColor }) => $statusColor};
+  transition: .35s;
+`;
+
+export const AvatarDecoration = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -50%);
+  width: 135%;
+  pointer-events: none;
+`;
+
+export const StatusIndicator = styled.span`
+  position: absolute;
+  left: 80px;
+  top: 80px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: ${p => getStatusColor(p.$status)};
+  border: 4px solid ${({ theme }) => theme.title === 'dark' ? '#171a22' : '#fff'};
+  box-shadow: 0 0 15px ${p => getStatusColor(p.$status)};
+`;
+
+export const UsernameDisplay = styled.h1`
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#1d1d1d'};
+`;
+
+export const FullUsername = styled.span`
+  margin-top: 5px;
+  font-size: .95rem;
+  color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.55)' : '#666'};
+`;
+
+export const StatusSection = styled.div`
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.05)' : 'rgba(255,255,255,.55)'};
+  backdrop-filter: blur(12px);
+`;
+
+export const StatusEmoji = styled.span`
+  font-size: 1rem;
+`;
+
+export const StatusText = styled.p`
+  margin: 0;
+  font-size: .92rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.title === 'dark' ? '#ddd' : '#444'};
+`;
 
 export const IconWrapper = styled.span`
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-font-size: 1.8rem;
-
-body.light-mode & {
-
-color: #2e3338;
-
-}
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#222'};
 `;
-
 
 export const IconImage = styled.img`
-
-width: 28px;
-
-height: 28px;
-
-display: block;
-
-object-fit: contain;
-
-filter: ${({ theme }) => theme.title === 'dark' ? 'brightness(0) invert(1)' : 'none'};
-
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: ${({ theme }) => theme.title === 'dark' ? 'brightness(0) invert(1)' : 'none'};
 `;
 
+export const ActivitySection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 24px;
+`;
+
+export const ActivityItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 22px;
+  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.03)' : 'rgba(255,255,255,.42)'};
+  border: 1px solid ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.05)'};
+  backdrop-filter: blur(18px);
+  transition: .35s;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96,223,255,.35);
+    box-shadow: 0 10px 30px rgba(96,223,255,.12);
+  }
+`;
+
+export const ActivityIcon = styled.div`
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+`;
+
+export const ActivityText = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex: 1;
+
+  strong {
+    font-size: 1rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#222'};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  div {
+    margin-top: 2px;
+    font-size: .82rem;
+    color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.55)' : '#777'};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span {
+    margin-top: 5px;
+    font-size: .9rem;
+    color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.75)' : '#555'};
+  }
+`;
+
+export const SpotifySection = styled(ActivityItem)`
+  border-left: 4px solid #1db954;
+`;
+
+export const AlbumArt = styled.img`
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+`;
+
+export const SongInfo = styled(ActivityText)`
+  strong { color: #1db954; }
+  span { color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.75)' : '#555'}; }
+`;
 
 export const MusicPlayerWrapper = styled.div`
-
-position: relative;
-
-z-index: 2;
-
-padding: 20px;
-
-margin-top: 20px;
-
-background-color: ${({ theme }) => theme.title === 'dark' ? 'rgba(30, 31, 34, 0.6)' : 'rgba(255, 255, 255, 0.7)'};
-
-backdrop-filter: blur(20px);
-
-border-radius: 20px;
-
-border: 1px solid rgba(255, 255, 255, 0.1);
-
+  padding: 22px;
+  border-radius: 24px;
+  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(20,24,34,.45)' : 'rgba(255,255,255,.4)'};
+  backdrop-filter: blur(22px);
+  border: 1px solid ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.08)' : 'rgba(255,255,255,.6)'};
 `;
-
-
-export const ErrorMessage = styled.p`
-
-margin-top: 15px;
-
-color: #ff8383;
-
-background-color: rgba(220, 53, 69, 0.15);
-
-padding: 12px 20px;
-
-border-radius: 12px;
-
-font-size: 0.9rem;
-
-font-weight: 600;
-
-border: 1px solid rgba(220, 53, 69, 0.2);
-
-display: flex;
-
-align-items: center;
-
-gap: 8px;
-
-`;
-
 
 export const MusicControlButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: .3s;
 
-cursor: pointer;
-
-border: none;
-
-background: none;
-
-transition: transform 0.2s ease;
-
-display: flex;
-
-align-items: center;
-
-justify-content: center;
-
-
-&:hover {
-
-transform: scale(1.1);
-
-}
-
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
+export const ErrorMessage = styled.p`
+  padding: 14px 18px;
+  margin-top: 18px;
+  border-radius: 14px;
+  background: rgba(255,0,0,.12);
+  border: 1px solid rgba(255,0,0,.15);
+  color: #ff6d6d;
+  font-weight: 600;
+`;
 
 export const NowPlayingDisplay = styled.div`
-
-position: fixed;
-
-bottom: 30px;
-
-left: 30px;
-
-background-color: ${({ theme }) => theme.title === 'dark' ? 'rgba(18, 18, 18, 0.8)' : 'rgba(255, 255, 255, 0.8)'};
-
-color: ${({ theme }) => theme.title === 'dark' ? '#ffffff' : '#1a1a1b'};
-
-padding: 12px 16px;
-
-border-radius: 14px;
-
-display: flex;
-
-align-items: center;
-
-gap: 14px;
-
-z-index: 1000;
-
-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-
-font-size: 0.9rem;
-
-backdrop-filter: blur(12px);
-
--webkit-backdrop-filter: blur(12px);
-
-border: 1px solid rgba(255, 255, 255, 0.1);
-
-animation: ${fadeIn} 0.5s ease-out;
-
-
-body.light-mode & {
-
-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-
-border: 1px solid rgba(0, 0, 0, 0.05);
-
-}
-
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 20px;
+  z-index: 1000;
+  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(20,24,34,.55)' : 'rgba(255,255,255,.45)'};
+  backdrop-filter: blur(20px);
+  border: 1px solid ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.08)' : 'rgba(255,255,255,.6)'};
+  box-shadow: 0 20px 45px rgba(0,0,0,.18);
+  animation: ${fadeIn} .5s ease;
 `;
-
 
 export const NowPlayingAlbumArt = styled.img`
-
-width: 44px;
-
-height: 44px;
-
-border-radius: 8px;
-
-flex-shrink: 0;
-
-object-fit: cover;
-
-box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 8px 18px rgba(0,0,0,.2);
 `;
-
 
 export const SongInfoWrapper = styled.div`
-
-display: flex;
-
-flex-direction: column;
-
-align-items: flex-start;
-
-line-height: 1.4;
-
-overflow: hidden;
-
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
-
 
 export const SongTitle = styled.span`
-
-font-weight: 700;
-
-color: inherit;
-
-white-space: nowrap;
-
-text-overflow: ellipsis;
-
-overflow: hidden;
-
-width: 100%;
-
-max-width: 200px;
-
-font-size: 0.95rem;
-
+  font-size: .95rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#202020'};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
 `;
-
 
 export const ArtistName = styled.span`
-
-font-size: 0.8rem;
-
-color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.5)'};
-
-white-space: nowrap;
-
-text-overflow: ellipsis;
-
-overflow: hidden;
-
-width: 100%;
-
-max-width: 200px;
-
+  margin-top: 2px;
+  font-size: .82rem;
+  color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.6)' : '#666'};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
 `;
 
-
 export const CopyMessageTop = styled.p`
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #60dfff, #8d0fff);
+  color: #fff;
+  font-weight: 700;
+  z-index: 99999;
+  box-shadow: 0 15px 40px rgba(96,223,255,.35);
+  animation: ${fadeIn} .35s ease;
+`;
 
-position: fixed;
+// --- NOVOS ESTILOS PARA O GRID DE PROJETOS ---
 
-top: 25px;
+export const PortfolioGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards lado a lado */
+  gap: 20px;
+  width: 100%;
+`;
 
-left: 50%;
+export const PortfolioCard = styled.div`
+  position: relative;
+  height: 240px; /* Ajustado para caber melhor na RightColumn */
+  border-radius: 28px;
+  overflow: hidden;
+  text-decoration: none;
+  transform-style: preserve-3d;
+  transition: all 0.45s ease;
+  cursor: pointer;
 
-transform: translateX(-50%);
+  background:
+    radial-gradient(circle at top right, rgba(96, 223, 255, 0.35), transparent 55%),
+    radial-gradient(circle at bottom left, rgba(141, 15, 255, 0.30), transparent 60%),
+    linear-gradient(135deg, #111214, #1d2330);
 
-background-color: #4BB543;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 
-color: #fff;
+  &:hover {
+    transform: perspective(1000px) rotateX(8deg) rotateY(-8deg) translateY(-10px);
+    box-shadow: 0 30px 70px rgba(96, 223, 255, 0.25), 0 0 35px rgba(96, 223, 255, 0.15);
+  }
+`;
 
-padding: 12px 24px;
+export const CardImage = styled.img`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.28;
+  transition: transform 0.45s ease;
 
-border-radius: 12px;
+  ${PortfolioCard}:hover & {
+    transform: scale(1.08);
+  }
+`;
 
-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+export const GlassEffect = styled.div`
+  position: absolute;
+  inset: 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+`;
 
-font-weight: 600;
+export const CardContent = styled.div`
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 60px;
+  z-index: 2;
+  color: #fff;
 
-z-index: 9999;
+  .icon {
+    font-size: 1.5rem;
+    color: #60dfff;
+    margin-bottom: 8px;
+  }
 
-animation: ${fadeIn} 0.3s ease-out;
+  h2 {
+    margin: 0 0 5px;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
 
-`; 
+  p {
+    margin: 0;
+    color: #d5d5d5;
+    line-height: 1.4;
+    font-size: 0.85rem;
+  }
+`;
+
+export const CardFooter = styled.div`
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #60dfff;
+  font-weight: 700;
+  font-size: 0.9rem;
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  ${PortfolioCard}:hover & svg {
+    transform: translateX(8px);
+  }
+`;

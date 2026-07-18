@@ -84,7 +84,7 @@ const DiscordProfileDisplay = ({ userId }) => {
   };
 
   if (loading) {
-    return <S.ProfileSection><p>pwdim</p></S.ProfileSection>;
+    return <S.ProfileSection><p style={{ color: '#60dfff' }}>pwdim</p></S.ProfileSection>;
   }
 
   if (error || !discordData || !discordData.discord_user) {
@@ -105,7 +105,7 @@ const DiscordProfileDisplay = ({ userId }) => {
       </S.AvatarContainer>
 
       <S.UsernameDisplay $color={statusColor} >
-        <h7>@{discord_user.display_name || discord_user.username}</h7>
+        <h7 style={{ color: '#60dfff' }}>@{discord_user.display_name || discord_user.username}</h7>
       </S.UsernameDisplay>
 
       {customStatus?.state && (

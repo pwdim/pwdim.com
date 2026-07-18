@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { Link } from "react-router-dom";
 
 const fadeUp = keyframes`
 from{
@@ -26,16 +27,6 @@ const glow = keyframes`
     0 20px 50px rgba(0,0,0,.45);
 }
 `;
-
-const rotateBorder = keyframes`
-from{
-    transform:rotate(0deg);
-}
-to{
-    transform:rotate(360deg);
-}
-`;
-
 
 export const Container = styled.div`
     position:relative;
@@ -178,7 +169,7 @@ export const SectionTitle = styled.h2`
     position:relative;
     z-index:2;
 
-    margin:0 0 20px;
+    margin:0;
 
     font-size:2rem;
     font-weight:700;
@@ -216,141 +207,187 @@ export const SectionTitle = styled.h2`
     }
 `;
 
-
-export const SocialRow = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
-gap:18px;
-margin-top:30px;
-flex-wrap:wrap;
-`;
-
-
-
-export const Glass = styled.a`
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-width:62px;
-height:62px;
-border-radius:50%;
-overflow:hidden;
-cursor:pointer;
-text-decoration:none;
-transition:.45s;
-transform-style:preserve-3d;
-background:${({ theme }) => theme.mode === "dark" ? "#181c27" : "#fff"};
-border:1px solid ${({ theme }) => theme.mode === "dark" ? "rgba(255,255,255,.08)" : "rgba(0,0,0,.08)"};
-box-shadow:${({ theme }) => theme.mode === "dark" ? "0 12px 30px rgba(0,0,0,.45)" : "0 12px 30px rgba(0,0,0,.12)"};
-
-&::before{
-content:"";
-position:absolute;
-width:220%;
-height:220%;
-background:conic-gradient(from 0deg,#60dfff,#3b82f6,#8d0fff,#60dfff);
-animation:${rotateBorder} 4s linear infinite;
-opacity:0;
-transition:.4s;
-}
-
-&::after{
-content:"";
-position:absolute;
-inset:2px;
-border-radius:50%;
-background:${({ theme }) => theme.mode === "dark" ? "#181c27" : "#fff"};
-z-index:1;
-}
-
-svg{
-position:relative;
-z-index:2;
-font-size:26px;
-color:${({ theme }) => theme.mode === "dark" ? "#fff" : "#222"};
-transition:.35s;
-}
-
-&:hover{
-transform:translateY(-8px) scale(1.08) rotate(8deg);
-box-shadow:0 20px 50px rgba(96,223,255,.35);
-}
-
-&:hover::before{
-opacity:1;
-}
-
-&:hover svg{
-color:#60dfff;
-transform:scale(1.15);
-}
-`;
-
-export const Paragraph = styled.div`
+export const PortfolioGrid = styled.div`
     position:relative;
     z-index:2;
 
-    color:${({ theme }) =>
-        theme.mode === "dark"
-            ? "#d8e4ff"
-            : "#404960"
-    };
+    width:100%;
 
-    font-size:1.05rem;
-    line-height:1.9;
+    display:grid;
 
-    ul{
+    grid-template-columns:
+        repeat(auto-fit,minmax(320px,1fr));
 
-        margin-top:20px;
-        padding:0;
+    gap:35px;
 
-        list-style:none;
+    margin-top:35px;
 
-    }
+    @media(max-width:768px){
 
-    li{
-
-        display:flex;
-        align-items:flex-start;
-        gap:12px;
-
-        padding:14px 0;
-
-        border-bottom:1px solid rgba(255,255,255,.06);
-
-        svg{
-
-            color:#60dfff;
-            font-size:1.2rem;
-            flex-shrink:0;
-
-        }
+        grid-template-columns:1fr;
 
     }
+`;
 
-    strong{
+export const PortfolioCard = styled(Link)`
+    position:relative;
+
+    height:360px;
+
+    overflow:hidden;
+
+    border-radius:34px;
+
+    text-decoration:none;
+
+    transform-style:preserve-3d;
+
+    transition:.45s;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(96,223,255,.28),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(141,15,255,.22),
+            transparent 60%
+        ),
+        linear-gradient(
+            145deg,
+            #161b26,
+            #11151f
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.45);
+
+    &:hover{
+
+        transform:
+            perspective(1000px)
+            rotateX(8deg)
+            rotateY(-8deg)
+            translateY(-10px);
+
+        box-shadow:
+            0 30px 70px rgba(96,223,255,.18),
+            0 0 25px rgba(141,15,255,.12);
+
+    }
+`;
+
+export const CardImage = styled.img`
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    opacity:.28;
+
+    transition:.45s;
+
+    ${PortfolioCard}:hover &{
+
+        transform:scale(1.08);
+
+    }
+`;
+
+export const Glass = styled.div`
+    position:absolute;
+
+    inset:10px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.05);
+
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    z-index:1;
+`;
+
+export const CardContent = styled.div`
+    position:absolute;
+
+    left:28px;
+    right:28px;
+    bottom:78px;
+
+    z-index:2;
+
+    color:#fff;
+
+    .icon{
+
+        font-size:2rem;
 
         color:#60dfff;
 
+        margin-bottom:16px;
+
     }
 
-    @media(max-width:768px){
+    h2{
+
+        margin:0 0 10px;
+
+        font-size:2rem;
+
+        font-weight:700;
+
+    }
+
+    p{
+
+        margin:0;
+
+        color:#d7dce8;
+
+        line-height:1.7;
 
         font-size:.95rem;
 
     }
 `;
 
-export const CopyMessage = styled.div`
-    margin-top:20px;
-    text-align:center;
+export const CardFooter = styled.div`
+    position:absolute;
+
+    left:28px;
+    right:28px;
+    bottom:26px;
+
+    z-index:2;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
     color:#60dfff;
 
-    font-size:.95rem;
-    font-weight:600;
+    font-weight:700;
 
-    animation:${fadeUp} .35s ease;
+    svg{
+
+        transition:.35s;
+
+    }
+
+    ${PortfolioCard}:hover & svg{
+
+        transform:translateX(8px);
+
+    }
 `;

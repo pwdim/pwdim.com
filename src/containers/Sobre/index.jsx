@@ -1,75 +1,283 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
-    FaReact, FaPaintBrush, FaGithub, FaTrophy, FaUser, FaInfoCircle, FaLink
-} from 'react-icons/fa';
-import { IoFlash } from 'react-icons/io5';
-import { SiVercel } from 'react-icons/si';
-import { BsStars } from 'react-icons/bs';
-import SmokeBackground from '../../components/SmokeBackground';
+    FaReact,
+    FaPaintBrush,
+    FaGithub,
+    FaDiscord,
+    FaEnvelope
+} from "react-icons/fa";
+import { IoFlash } from "react-icons/io5";
+import { SiVercel } from "react-icons/si";
+import { BsStars } from "react-icons/bs";
+
+import SmokeBackground from "../../components/SmokeBackground";
+import DiscordProfileDisplay from "../../components/DiscordProfileDisplay";
 
 import {
     Container,
     Section,
     SectionTitle,
     Paragraph,
-} from '../../styles/globalStyles';
-
-import DiscordProfileDisplay from '../../components/DiscordProfileDisplay';
-
+    SocialRow,
+    Glass,
+    CopyMessage
+} from "./styles";
 
 const AboutPage = () => {
-    const YOUR_DISCORD_ID = '386563422055170048';
-    const iconStyle = { marginRight: '8px', verticalAlign: 'middle' };
+    const YOUR_DISCORD_ID = "386563422055170048";
+
+    const [copyMessage, setCopyMessage] = useState("");
+    const [isCopyMessageVisible, setIsCopyMessageVisible] = useState(false);
+
+    const iconStyle = {
+        marginRight: "8px",
+        verticalAlign: "middle"
+    };
+
+    const handleEmailClick = async (e) => {
+        e.preventDefault();
+
+        try {
+            await navigator.clipboard.writeText("contact@pwdim.com");
+
+            setCopyMessage("Email copiado com sucesso!");
+            setIsCopyMessageVisible(true);
+
+            setTimeout(() => {
+                setIsCopyMessageVisible(false);
+            }, 3000);
+        } catch (err) {
+            setCopyMessage("Não foi possível copiar o email.");
+            setIsCopyMessageVisible(true);
+
+            setTimeout(() => {
+                setIsCopyMessageVisible(false);
+            }, 3000);
+        }
+    };
 
     return (
         <Container>
             <SmokeBackground />
-            <Section></Section>
-            <DiscordProfileDisplay userId={YOUR_DISCORD_ID} />
 
             <Section>
-                <SectionTitle>Sobre Mim</SectionTitle>
-                <Paragraph>
-Olá, sou Pedro (pwdim). Discente em Análise e Desenvolvimento de Sistemas com mais de uma década de imersão no ecossistema tecnológico. Minha trajetória começou cedo, o que me permitiu desenvolver um perfil híbrido e autodidata, unindo um sólido domínio de hardware — diagnóstico e manutenção de sistemas — a uma base robusta em desenvolvimento de software.
 
-Atualmente, foco na evolução de projetos autorais e no aprimoramento em Java, Python e JavaScript. Com uma visão analítica e rigor técnico, busco minha primeira oportunidade profissional para aplicar essa bagagem em desafios reais de mercado, contribuindo com soluções inovadoras e escaláveis.
-                    </Paragraph>
+                <DiscordProfileDisplay
+                    userId={YOUR_DISCORD_ID}
+                />
+
+                <SocialRow>
+
+                    <Glass
+                        href="https://github.com/pwdim"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="GitHub"
+                    >
+                        <FaGithub />
+                    </Glass>
+
+                    <Glass
+                        href="https://dc.pwdim.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Discord"
+                    >
+                        <FaDiscord />
+                    </Glass>
+
+                    <Glass
+                        href="#"
+                        onClick={handleEmailClick}
+                        title="Copiar Email"
+                    >
+                        <FaEnvelope />
+                    </Glass>
+
+                </SocialRow>
+
+                {isCopyMessageVisible && (
+                    <CopyMessage>
+                        {copyMessage}
+                    </CopyMessage>
+                )}
+
             </Section>
 
+            <Section>
 
-            
+                <SectionTitle>
+                    Sobre Mim
+                </SectionTitle>
+
+                <Paragraph>
+
+                    Olá, sou Pedro (pwdim).
+
+                    Discente em Análise e Desenvolvimento de Sistemas, com mais
+                    de uma década de imersão no ecossistema tecnológico.
+
+                    Minha trajetória começou cedo, permitindo desenvolver um
+                    perfil híbrido e autodidata, unindo sólido conhecimento em
+                    hardware (diagnóstico, manutenção e infraestrutura) com
+                    desenvolvimento de software.
+
+                    Atualmente concentro meus estudos em Java, Python e
+                    JavaScript, desenvolvendo projetos próprios focados em
+                    desempenho, arquitetura e boas práticas.
+
+                    Tenho interesse em desenvolvimento backend, aplicações web,
+                    automações e plugins para Minecraft, buscando constantemente
+                    criar soluções escaláveis, organizadas e modernas.
+
+                    Estou em busca da minha primeira oportunidade profissional,
+                    onde possa aplicar meus conhecimentos técnicos, aprender
+                    continuamente e contribuir para projetos relevantes.
+
+                </Paragraph>
+
+            </Section>
 
             <Section>
-                <SectionTitle>Tecnologias Utilizadas</SectionTitle>
+
+                <SectionTitle>
+                    Tecnologias Utilizadas
+                </SectionTitle>
+
                 <Paragraph>
-                    Este website foi desenvolvido utilizando as seguintes ferramentas e tecnologias, visando garantir performance e uma ótima experiência ao usuário:
-                    <ul style={{ marginTop: '10px', paddingLeft: '20px', listStyle: 'none' }}>
-                        <li style={{ marginBottom: '8px' }}>
+
+                    Este website foi desenvolvido utilizando tecnologias
+                    modernas, priorizando desempenho, organização do código e
+                    experiência do usuário.
+
+                    <ul>
+
+                        <li>
+
                             <FaReact style={iconStyle} />
-                            <strong>React JS:</strong> Biblioteca utilizada para a construção da interface de usuário dinâmica e componentizada (frontend).
+
+                            <div>
+
+                                <strong>
+                                    React JS
+                                </strong>
+
+                                <br />
+
+                                Biblioteca responsável pela construção de toda a
+                                interface do projeto utilizando componentes
+                                reutilizáveis.
+
+                            </div>
+
                         </li>
-                        <li style={{ marginBottom: '8px' }}>
+
+                        <li>
+
                             <FaPaintBrush style={iconStyle} />
-                            <strong>Styled Components:</strong> Empregado para a estilização via CSS-in-JS, permitindo estilos encapsulados e coesos com os componentes.
+
+                            <div>
+
+                                <strong>
+                                    Styled Components
+                                </strong>
+
+                                <br />
+
+                                Utilizado para criar toda a estilização através
+                                de CSS-in-JS, mantendo os estilos organizados,
+                                reutilizáveis e desacoplados.
+
+                            </div>
+
                         </li>
-                        <li style={{ marginBottom: '8px' }}>
+
+                        <li>
+
                             <IoFlash style={iconStyle} />
-                            <strong>Vite:</strong> Ferramenta de build responsável por agilizar o desenvolvimento e otimizar a compilação para produção.
+
+                            <div>
+
+                                <strong>
+                                    Vite
+                                </strong>
+
+                                <br />
+
+                                Responsável pelo ambiente de desenvolvimento e
+                                build da aplicação, oferecendo inicialização
+                                extremamente rápida e excelente otimização para
+                                produção.
+
+                            </div>
+
                         </li>
-                        <li style={{ marginBottom: '8px' }}>
+
+                        <li>
+
                             <FaGithub style={iconStyle} />
-                            <strong>GitHub:</strong> Plataforma utilizada para o controle de versão do código-fonte e integração com o serviço de hospedagem.
+
+                            <div>
+
+                                <strong>
+                                    GitHub
+                                </strong>
+
+                                <br />
+
+                                Utilizado para versionamento do código,
+                                gerenciamento do projeto e integração com o
+                                deploy automático.
+
+                            </div>
+
                         </li>
-                        <li style={{ marginBottom: '8px' }}>
+
+                        <li>
+
                             <SiVercel style={iconStyle} />
-                            <strong>Vercel:</strong> Plataforma de hospedagem e deploy contínuo (CI/CD), assegurando a distribuição global e atualizações constantes do website.
+
+                            <div>
+
+                                <strong>
+                                    Vercel
+                                </strong>
+
+                                <br />
+
+                                Plataforma responsável pela hospedagem,
+                                distribuição global e deploy contínuo da
+                                aplicação.
+
+                            </div>
+
                         </li>
-                        <li style={{ marginBottom: '8px' }}>
+
+                        <li>
+
                             <BsStars style={iconStyle} />
-                            <strong>IA Gemini:</strong> Inteligência Artificial utilizada como ferramenta de apoio em diversas etapas do desenvolvimento, auxiliando na criação e otimização do projeto.
+
+                            <div>
+
+                                <strong>
+                                    IA Gemini
+                                </strong>
+
+                                <br />
+
+                                Utilizada como ferramenta de apoio durante o
+                                desenvolvimento, auxiliando em ideias,
+                                otimizações e validações técnicas ao longo do
+                                projeto.
+
+                            </div>
+
                         </li>
+
                     </ul>
+
                 </Paragraph>
+
             </Section>
 
         </Container>
