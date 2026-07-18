@@ -65,7 +65,7 @@ function Layout() {
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
 
-            {!shouldHideDefaultLayout && <Footer />}
+            
 
         </>
     );

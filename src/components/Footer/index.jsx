@@ -21,7 +21,7 @@ const Footer = () => {
             <a href="https://git.pwdim.com/" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faGithub} /> 
             </a>
-            <a href="https://dc.pwdim.com/" target="_blank" rel="noopener noreferrer">
+            <a href="https://discord.pwdim.com/" target="_blank" rel="noopener noreferrer">
               <FontAwesomeIcon icon={faDiscord} />
             </a>
             <a href="mailto:contato@pwdim.com" target="_blank" rel="noopener noreferrer">

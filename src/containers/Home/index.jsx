@@ -74,11 +74,11 @@ const HomePage = () => {
               <S.AboutSection>
                 <S.SectionTitle>Sobre mim</S.SectionTitle>
                 <p>Me chamo <strong>Pedro</strong>, 20 anos, curso Análise e Desenvolvimento de Sistemas.</p>
-                <p>Atuo com Java, Python e JavaScript. Para projetos, entre em contato clicando no botão abaixo.</p>
+                <p>Atuo com Java, Python e JavaScript. Para projetos, entre em contato clicando abaixo.</p>
               </S.AboutSection>
               <S.SocialRow>
                 <S.Glass href="https://git.pwdim.com" target="_blank" title="GitHub"><FaGithub /></S.Glass>
-                <S.Glass href="https://dc.pwdim.com" target="_blank" title="Discord"><FaDiscord /></S.Glass>
+                <S.Glass href="https://discord.pwdim.com" target="_blank" title="Discord"><FaDiscord /></S.Glass>
                 <S.Glass href="mailto:contact@pwdim.com" title="Email"><FaEnvelope /></S.Glass>
                 <S.Glass href="/about" title="Sobre"><FaInfoCircle /></S.Glass>
               </S.SocialRow>

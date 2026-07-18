@@ -70,7 +70,7 @@ const LinksPage = () => {
                     </S.Glass>
 
                     <S.Glass
-                        href="https://dc.pwdim.com"
+                        href="https://discord.pwdim.com"
                         target="_blank"
                         rel="noopener noreferrer"
                         title="Discord"
