@@ -53,10 +53,6 @@ const HomePage = () => {
 
       <audio ref={audioRef} src={backgroundMusic} loop />
 
-      <S.ThemeContainer>
-        <ThemeToggle />
-      </S.ThemeContainer>
-
       <S.MainContent>
         <S.LeftColumn>
           <S.GlassCard>

@@ -47,13 +47,15 @@ const getStatusColor = status => {
 };
 
 export const HomePageContainer = styled.div`
+  width: 100%;
+  min-height: 100dvh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 20px;
+  align-items: flex-start;
+  padding: clamp(76px, 8vh, 110px) clamp(12px, 3vw, 32px) 120px;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  box-sizing: border-box;
 `;
 
 export const Background = styled.div`
@@ -78,46 +80,53 @@ export const ThemeContainer = styled.div`
   top: 20px;
   right: 20px;
   z-index: 100;
+
+  @media (max-width: 600px) {
+    top: 12px;
+    right: 12px;
+  }
 `;
 
 export const MainContent = styled.div`
   display: grid;
-  grid-template-columns: 360px minmax(500px, 1fr);
-  gap: 25px;
-  width: 100%;
-  max-width: 1300px;
-  max-height: 90vh;
-  align-items: stretch;
+  grid-template-columns: minmax(290px, 360px) minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 25px);
+  width: min(100%, 1300px);
+  align-items: start;
   z-index: 2;
   animation: ${fadeUp} 0.7s ease;
+  min-width: 0;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1100px) {
+    grid-template-columns: minmax(280px, 330px) minmax(0, 1fr);
+  }
+
+  @media (max-width: 900px) {
     grid-template-columns: 1fr;
-    overflow-y: auto;
-    max-height: 100vh;
   }
 `;
 
 export const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   gap: 20px;
+  min-width: 0;
 `;
 
 export const RightColumn = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  height: 70%;
+  gap: clamp(16px, 2vw, 22px);
+  min-width: 0;
 `;
 
 export const ContentCard = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 28px;
-  padding: 25px;
-  height: 100%;
+  padding: clamp(18px, 2.2vw, 25px);
+  min-width: 0;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   transition: 0.45s;
@@ -152,7 +161,7 @@ export const CardBody = styled.div`
   z-index: 2;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-width: 0;
 `;
 
 export const FloatingGlow = styled.div`
@@ -502,6 +511,8 @@ export const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  min-width: 0;
 `;
 
 export const AvatarContainer = styled.div`
@@ -543,12 +554,21 @@ export const StatusIndicator = styled.span`
   border: 4px solid ${({ theme }) => theme.title === 'dark' ? '#171a22' : '#fff'};
   box-shadow: 0 0 15px ${p => getStatusColor(p.$status)};
 `;
-
 export const UsernameDisplay = styled.h1`
-  margin: 0;
-  font-size: 2.25rem;
+  width: 100%;
+  margin: 50px 0 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
   font-weight: 800;
-  color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#1d1d1d'};
+
+  color: ${({ theme }) =>
+    theme.title === 'dark' ? '#fff' : '#1d1d1d'};
 `;
 
 export const FullUsername = styled.span`
@@ -559,12 +579,21 @@ export const FullUsername = styled.span`
 
 export const StatusSection = styled.div`
   margin-top: 18px;
+
   display: flex;
   align-items: center;
+
   gap: 10px;
+
   padding: 8px 18px;
+
   border-radius: 999px;
-  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.05)' : 'rgba(255,255,255,.55)'};
+
+  background: ${({ theme }) =>
+    theme.title === 'dark'
+      ? 'rgba(255,255,255,.05)'
+      : 'rgba(255,255,255,.55)'};
+
   backdrop-filter: blur(12px);
 `;
 
@@ -593,43 +622,88 @@ export const IconImage = styled.img`
   object-fit: contain;
   filter: ${({ theme }) => theme.title === 'dark' ? 'brightness(0) invert(1)' : 'none'};
 `;
-
 export const ActivitySection = styled.div`
+  width: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  margin-top: 24px;
+
+  gap: 16px;
+
+  margin-top: 28px;
+
+  min-width: 0;
 `;
 
 export const ActivityItem = styled.div`
+  width: 100%;
+
+  box-sizing: border-box;
+
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 18px;
+
+  gap: 12px;
+
+  padding: 12px;
+
   border-radius: 22px;
-  background: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.03)' : 'rgba(255,255,255,.42)'};
-  border: 1px solid ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.05)'};
+
+  background: ${({ theme }) =>
+    theme.title === 'dark'
+      ? 'rgba(255,255,255,.03)'
+      : 'rgba(255,255,255,.42)'};
+
+  border: 1px solid
+    ${({ theme }) =>
+      theme.title === 'dark'
+        ? 'rgba(255,255,255,.08)'
+        : 'rgba(0,0,0,.05)'};
+
   backdrop-filter: blur(18px);
-  transition: .35s;
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 
   &:hover {
     transform: translateY(-4px);
+
     border-color: rgba(96,223,255,.35);
-    box-shadow: 0 10px 30px rgba(96,223,255,.12);
+
+    box-shadow:
+      0 10px 30px rgba(96,223,255,.12);
   }
 `;
 
 export const ActivityIcon = styled.div`
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  overflow: hidden;
+  width: 56px;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   flex-shrink: 0;
+
+  font-size: 1.65rem;
+
+  color: ${({ theme }) =>
+    theme.title === 'dark'
+      ? '#fff'
+      : '#222'};
+
+  border-radius: 16px;
+
+  overflow: hidden;
 
   img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
+
     display: block;
   }
 `;
@@ -637,41 +711,78 @@ export const ActivityIcon = styled.div`
 export const ActivityText = styled.div`
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+
   flex: 1;
+
+  min-width: 0;
+
+  overflow: hidden;
 
   strong {
     font-size: 1rem;
     font-weight: 700;
-    color: ${({ theme }) => theme.title === 'dark' ? '#fff' : '#222'};
+
+    color: ${({ theme }) =>
+      theme.title === 'dark'
+        ? '#fff'
+        : '#222'};
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   div {
-    margin-top: 2px;
+    margin-top: 3px;
+
     font-size: .82rem;
-    color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.55)' : '#777'};
+
+    color: ${({ theme }) =>
+      theme.title === 'dark'
+        ? 'rgba(255,255,255,.55)'
+        : '#777'};
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   span {
-    margin-top: 5px;
+    margin-top: 6px;
+
     font-size: .9rem;
-    color: ${({ theme }) => theme.title === 'dark' ? 'rgba(255,255,255,.75)' : '#555'};
+
+    color: ${({ theme }) =>
+      theme.title === 'dark'
+        ? 'rgba(255,255,255,.75)'
+        : '#555'};
+
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 420px) {
+    strong,
+    div {
+      white-space: normal;
+
+      overflow: visible;
+
+      text-overflow: clip;
+
+      overflow-wrap: anywhere;
+    }
   }
 `;
 
 export const SpotifySection = styled(ActivityItem)`
+  margin-top: 2px;
+
   border-left: 4px solid #1db954;
 `;
 
 export const AlbumArt = styled.img`
-  width: 58px;
-  height: 58px;
+  width: 56px;
+  height: 56px;
   border-radius: 14px;
   object-fit: cover;
   box-shadow: 0 8px 18px rgba(0,0,0,.25);
@@ -716,8 +827,11 @@ export const ErrorMessage = styled.p`
 
 export const NowPlayingDisplay = styled.div`
   position: fixed;
-  left: 30px;
-  bottom: 30px;
+  left: clamp(12px, 2vw, 30px);
+  bottom: max(12px, env(safe-area-inset-bottom));
+  width: min(420px, calc(100vw - 24px));
+  box-sizing: border-box;
+  max-width: calc(100vw - 24px);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -742,6 +856,7 @@ export const NowPlayingAlbumArt = styled.img`
 export const SongInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 0;
   overflow: hidden;
 `;
 
@@ -784,13 +899,23 @@ export const CopyMessageTop = styled.p`
 
 export const PortfolioGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards lado a lado */
-  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.5vw, 20px);
   width: 100%;
+  min-width: 0;
+
+  @media (min-width: 701px) and (max-width: 1050px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const PortfolioCard = styled.div`
   position: relative;
+  min-width: 0;
   height: 240px; /* Ajustado para caber melhor na RightColumn */
   border-radius: 28px;
   overflow: hidden;
@@ -813,6 +938,7 @@ export const PortfolioCard = styled.div`
 `;
 
 export const CardImage = styled.img`
+  min-width: 0;
   position: absolute;
   inset: 0;
   width: 100%;
@@ -884,4 +1010,9 @@ export const CardFooter = styled.div`
   ${PortfolioCard}:hover & svg {
     transform: translateX(8px);
   }
+`;
+
+export const ResponsiveText = styled.span`
+  min-width: 0;
+  overflow-wrap: anywhere;
 `;

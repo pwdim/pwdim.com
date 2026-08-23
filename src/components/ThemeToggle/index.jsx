@@ -13,6 +13,7 @@ const ThemeToggle = () => {
         onChange={toggleTheme}
         aria-label="Alternar tema"
       />
+
       <S.Slider />
     </S.Switch>
   );

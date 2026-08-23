@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
+
 import {
   NavbarContainer,
   NavContent,
@@ -17,7 +18,9 @@ import {
   RightSection,
   StyledRouterLink,
 } from './styles';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {
   faInfoCircle,
   faEnvelope,
@@ -26,19 +29,25 @@ import {
   faSearch,
   faList,
 } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { RoutePrefixContext } from '../../contexts/RoutePrefixContext';
-import ThemeToggle from '../ThemeToggle';
-import logoImage from '../../assets/logos/logo.webp';
 
+import { useNavigate, useLocation } from 'react-router-dom';
+
+import { RoutePrefixContext } from '../../contexts/RoutePrefixContext';
+
+import ThemeToggle from '../ThemeToggle';
+
+import logoImage from '../../assets/logos/logo.webp';
 
 const NavigationBar = () => {
   const [searchNickNav, setSearchNickNav] = useState('');
   const [emptySearchMessageVisible, setEmptySearchMessageVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
+
   const { profileRoutePrefix } = useContext(RoutePrefixContext);
+
   const mobileMenuRef = useRef(null);
 
   const handleSearchChangeNav = (event) => {
@@ -47,13 +56,16 @@ const NavigationBar = () => {
 
   const handleSearchSubmitNav = (event) => {
     event.preventDefault();
+
     if (searchNickNav.trim()) {
       navigate(`/${profileRoutePrefix}/${searchNickNav}`);
+
       setSearchNickNav('');
       setIsMobileMenuOpen(false);
       setEmptySearchMessageVisible(false);
     } else {
       setEmptySearchMessageVisible(true);
+
       setTimeout(() => {
         setEmptySearchMessageVisible(false);
       }, 2000);
@@ -61,7 +73,7 @@ const NavigationBar = () => {
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((previous) => !previous);
   };
 
   const closeMobileMenu = () => {
@@ -70,17 +82,19 @@ const NavigationBar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
-        if (!event.target.closest('#hamburger-button')) {
-          closeMobileMenu();
-        }
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        !event.target.closest('#hamburger-button')
+      ) {
+        closeMobileMenu();
       }
     };
+
     if (isMobileMenuOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
     }
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -90,73 +104,126 @@ const NavigationBar = () => {
     closeMobileMenu();
   }, [location]);
 
-
   const navLinks = [
-    { to: "/portfolio", icon: faList, text: "Projetos" },
-    { to: "/links", icon: faEnvelope, text: "Contato" },
-    { to: "/about", icon: faInfoCircle, text: "Sobre" },
-    //{ to: "/leaderboard/hg", icon: faList, text: "Leaderboard" },
+    {
+      to: '/portfolio',
+      icon: faList,
+      text: 'Projetos',
+    },
+    {
+      to: '/links',
+      icon: faEnvelope,
+      text: 'Contato',
+    },
+    {
+      to: '/about',
+      icon: faInfoCircle,
+      text: 'Sobre',
+    },
+    // {
+    //   to: '/leaderboard/hg',
+    //   icon: faList,
+    //   text: 'Leaderboard',
+    // },
   ];
 
   const logoStyle = {
     borderRadius: '1%',
-
-
     filter: 'drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.3))',
-
   };
 
   return (
     <NavbarContainer>
       <NavContent>
-        <StyledRouterLink to="/" onClick={closeMobileMenu} title="Página Inicial">
+
+        <StyledRouterLink
+          to="/"
+          onClick={closeMobileMenu}
+          title="Página Inicial"
+        >
           <LogoLink>
-            <Logo src={logoImage}
-             alt="Logo" style={logoStyle} />
+            <Logo
+              src={logoImage}
+              alt="Logo"
+              style={logoStyle}
+            />
           </LogoLink>
         </StyledRouterLink>
 
         <NavLinksContainerDesktop>
-          <NavLinksList style={logoStyle}>
+          <NavLinksList>
             {navLinks.map((link) => (
               <NavItem key={link.to}>
                 {link.external ? (
-                  <a href={link.to} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={link.to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <NavLinkStyled>
-                      {link.icon && <FontAwesomeIcon icon={link.icon} />} {link.text}
+                      {link.icon && (
+                        <FontAwesomeIcon icon={link.icon} />
+                      )}
+                      {link.text}
                     </NavLinkStyled>
                   </a>
                 ) : (
                   <StyledRouterLink to={link.to}>
                     <NavLinkStyled>
-                      {link.icon && <FontAwesomeIcon icon={link.icon} />} {link.text}
+                      {link.icon && (
+                        <FontAwesomeIcon icon={link.icon} />
+                      )}
+                      {link.text}
                     </NavLinkStyled>
                   </StyledRouterLink>
                 )}
-
               </NavItem>
             ))}
           </NavLinksList>
         </NavLinksContainerDesktop>
 
         <RightSection>
-          {/* <SearchForm onSubmit={handleSearchSubmitNav}>
+
+          {/* Busca de perfil desativada.
+          <SearchForm onSubmit={handleSearchSubmitNav}>
             <SearchInput
               type="text"
               placeholder="Pesquisar Perfil"
               value={searchNickNav}
               onChange={handleSearchChangeNav}
             />
-            <SearchButton type="submit" aria-label="Pesquisar">
+
+            <SearchButton
+              type="submit"
+              aria-label="Pesquisar"
+            >
               <FontAwesomeIcon icon={faSearch} />
             </SearchButton>
-          </SearchForm> */}
+          </SearchForm>
+          */}
 
           <ThemeToggle />
 
-          <HamburgerButton onClick={toggleMobileMenu} id="hamburger-button" aria-label="Toggle menu" aria-expanded={isMobileMenuOpen}>
-            <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
+          <HamburgerButton
+            onClick={toggleMobileMenu}
+            id="hamburger-button"
+            type="button"
+            aria-label={
+              isMobileMenuOpen
+                ? 'Fechar menu'
+                : 'Abrir menu'
+            }
+            aria-expanded={isMobileMenuOpen}
+          >
+            <FontAwesomeIcon
+              icon={
+                isMobileMenuOpen
+                  ? faTimes
+                  : faBars
+              }
+            />
           </HamburgerButton>
+
         </RightSection>
 
       </NavContent>
@@ -164,18 +231,33 @@ const NavigationBar = () => {
       {isMobileMenuOpen && (
         <MobileMenuContainer ref={mobileMenuRef}>
           <NavLinksList>
+
             {navLinks.map((link) => (
               <NavItem key={link.to}>
                 {link.external ? (
-                  <a href={link.to} target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>
+                  <a
+                    href={link.to}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMobileMenu}
+                  >
                     <NavLinkStyled>
-                      {link.icon && <FontAwesomeIcon icon={link.icon} />} {link.text}
+                      {link.icon && (
+                        <FontAwesomeIcon icon={link.icon} />
+                      )}
+                      {link.text}
                     </NavLinkStyled>
                   </a>
                 ) : (
-                  <StyledRouterLink to={link.to} onClick={closeMobileMenu}>
+                  <StyledRouterLink
+                    to={link.to}
+                    onClick={closeMobileMenu}
+                  >
                     <NavLinkStyled>
-                      {link.icon && <FontAwesomeIcon icon={link.icon} />} {link.text}
+                      {link.icon && (
+                        <FontAwesomeIcon icon={link.icon} />
+                      )}
+                      {link.text}
                     </NavLinkStyled>
                   </StyledRouterLink>
                 )}
@@ -186,9 +268,12 @@ const NavigationBar = () => {
         </MobileMenuContainer>
       )}
 
-      {/* {emptySearchMessageVisible && (
-        <EmptySearchMessage>Por favor, digite um nick.</EmptySearchMessage>
-      )} */}
+      {emptySearchMessageVisible && (
+        <EmptySearchMessage>
+          Por favor, digite um nick.
+        </EmptySearchMessage>
+      )}
+
     </NavbarContainer>
   );
 };

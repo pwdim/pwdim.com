@@ -26,10 +26,10 @@ const formatTimestamp = (timestamp) => {
 
 const getActivityIcon = (activityName) => {
     const lowerCaseName = activityName?.toLowerCase() || '';
-    if (lowerCaseName.includes('visual studio code')) return <BiLogoVisualStudio color='#007ACC' size={250} />;
-    if (lowerCaseName.includes('playstation')) return <FaPlaystation size={250}/>;
-    if (lowerCaseName.includes('xbox')) return <FaXbox size={250}/>;
-    if (lowerCaseName.includes('steam')) return <FaSteam size={250}/>;
+    if (lowerCaseName.includes('visual studio code')) return <BiLogoVisualStudio color='#007ACC' />;
+    if (lowerCaseName.includes('playstation')) return <FaPlaystation />;
+    if (lowerCaseName.includes('xbox')) return <FaXbox />;
+    if (lowerCaseName.includes('steam')) return <FaSteam />;
     return null;
 }
 
@@ -105,7 +105,7 @@ const DiscordProfileDisplay = ({ userId }) => {
       </S.AvatarContainer>
 
       <S.UsernameDisplay $color={statusColor} >
-        <h7 style={{ color: '#60dfff' }}>@{discord_user.display_name || discord_user.username}</h7>
+        <span style={{ color: '#60dfff' }}>@{discord_user.display_name || discord_user.username}</span>
       </S.UsernameDisplay>
 
       {customStatus?.state && (
@@ -133,10 +133,9 @@ const DiscordProfileDisplay = ({ userId }) => {
 
        {spotify && (
          <S.SpotifySection>
-             <S.ActivityIcon size={250}> 
-              <img src={spotify.album_art_url}></img>
-          
-              </S.ActivityIcon>
+             <S.ActivityIcon>
+              <S.AlbumArt src={spotify.album_art_url} alt={`${spotify.song} - ${spotify.artist}`} />
+          </S.ActivityIcon>
              <S.SongInfo>
                  <strong>{spotify.song}</strong>
                  <span>por {spotify.artist}</span>
