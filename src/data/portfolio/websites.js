@@ -1,5 +1,5 @@
-import pwdimImage from "../../assets/portfolio/websites/pwdim.png";
-import botPwdimImage from "../../assets/portfolio/websites/bot-pwdim.png";
+import pwdimImage from "../../assets/portfolio/websites/pwdim.webp";
+import botPwdimImage from "../../assets/portfolio/websites/bot-pwdim.webp";
 
 const websites = [
 

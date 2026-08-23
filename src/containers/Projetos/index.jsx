@@ -19,9 +19,9 @@ import {
     CardFooter
 } from "./styles";
 
-import pluginsImg from "../../assets/portfolio/plugins.png";
-import websitesImg from "../../assets/portfolio/websites.png";
-import botsImg from "../../assets/portfolio/bots.png";
+import pluginsImg from "../../assets/portfolio/plugins.webp";
+import websitesImg from "../../assets/portfolio/websites.webp";
+import botsImg from "../../assets/portfolio/bots.webp";
 
 const items = [
     {

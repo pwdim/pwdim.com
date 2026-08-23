@@ -29,6 +29,7 @@ import {
 import { useNavigate, useLocation } from 'react-router-dom';
 import { RoutePrefixContext } from '../../contexts/RoutePrefixContext';
 import ThemeToggle from '../ThemeToggle';
+import logoImage from '../../assets/logos/logo.webp';
 
 
 const NavigationBar = () => {
@@ -110,7 +111,8 @@ const NavigationBar = () => {
       <NavContent>
         <StyledRouterLink to="/" onClick={closeMobileMenu} title="Página Inicial">
           <LogoLink>
-            <Logo src="https://imgur.com/xUAfiZO.png" alt="Logo" style={logoStyle} />
+            <Logo src={logoImage}
+             alt="Logo" style={logoStyle} />
           </LogoLink>
         </StyledRouterLink>
 

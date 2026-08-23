@@ -1,7 +1,7 @@
-import goldImage from "../../assets/portfolio/plugins/gold.png";
-import monetImage from "../../assets/portfolio/plugins/monet.png";
-import lunaImage from "../../assets/portfolio/plugins/luna.png";
-import himmelImage from "../../assets/portfolio/plugins/himmel.png";
+import goldImage from "../../assets/portfolio/plugins/gold.webp";
+import monetImage from "../../assets/portfolio/plugins/monet.webp";
+import lunaImage from "../../assets/portfolio/plugins/luna.webp";
+import himmelImage from "../../assets/portfolio/plugins/himmel.webp";
 
 const plugins = [
 

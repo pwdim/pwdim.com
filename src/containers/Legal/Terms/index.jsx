@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container, Title, SectionTitle, Paragraph, Section } from '../../../styles/globalStyles';
 import { Link } from 'react-router-dom';
-import Logo from '../../../assets/logos/logo.png';
+import Logo from '../../../assets/logos/logo.webp';
 import Footer from '../../../components/Footer';
 import NavigationBar from '../../../components/nav'; 
 

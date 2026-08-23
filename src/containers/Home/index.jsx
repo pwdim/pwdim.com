@@ -12,9 +12,9 @@ import {
   FaLaptopCode, FaJava, FaServer, FaArrowRight, FaGlobe, FaRobot
 } from 'react-icons/fa';
 
-import pluginsImg from '../../assets/portfolio/plugins.png';
-import websitesImg from '../../assets/portfolio/websites.png';
-import botsImg from '../../assets/portfolio/bots.png';
+import pluginsImg from '../../assets/portfolio/plugins.webp';
+import websitesImg from '../../assets/portfolio/websites.webp';
+import botsImg from '../../assets/portfolio/bots.webp';
 
 const TechIcons = [
   { name: 'Java', url: 'https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg' },
@@ -48,8 +48,8 @@ const HomePage = () => {
 
   return (
     <S.HomePageContainer>
-      <S.Background id="background-dark-mode" style={{ backgroundImage: "url('/images/dark_background.jpeg')" }} />
-      <S.Background id="background-light-mode" style={{ backgroundImage: "url('/images/light_background.png')" }} />
+      <S.Background id="background-dark-mode" style={{ backgroundImage: "url('/images/dark_background.webp')" }} />
+      <S.Background id="background-light-mode" style={{ backgroundImage: "url('/images/light_background.webp')" }} />
 
       <audio ref={audioRef} src={backgroundMusic} loop />
 

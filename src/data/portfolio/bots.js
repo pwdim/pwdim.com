@@ -1,4 +1,4 @@
-import flameStatsImage from "../../assets/portfolio/bots/flame-stats.png";
+import flameStatsImage from "../../assets/portfolio/bots/flame-stats.webp";
 
 const bots = [
 
